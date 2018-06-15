@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | Jabin&#39;s Blog</title>
+  <title>SQL-ORDER BY | Jabin&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Description">
+  <meta name="description" content="SQL-排序检索数据排序数据 语法示例   123SELECT prod_nameFROM ProductsORDER BY prod_name;  Tips &amp;amp; Case  使用ORDER BY子句时，应该保证它是SELECT语句中最后一条子句。 通常ORDER BY子句中使用的列将是为显示而选择的列，但是使用非检索的列排序数据也是完全合法的。    按多个列排序 语法示例  123SE">
 <meta name="keywords" content="keywords">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jabin&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL-ORDER BY">
+<meta property="og:url" content="http://yoursite.com/2018/06/15/SQL-ORDER-BY/index.html">
 <meta property="og:site_name" content="Jabin&#39;s Blog">
-<meta property="og:description" content="Description">
+<meta property="og:description" content="SQL-排序检索数据排序数据 语法示例   123SELECT prod_nameFROM ProductsORDER BY prod_name;  Tips &amp;amp; Case  使用ORDER BY子句时，应该保证它是SELECT语句中最后一条子句。 通常ORDER BY子句中使用的列将是为显示而选择的列，但是使用非检索的列排序数据也是完全合法的。    按多个列排序 语法示例  123SE">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-06-15T07:53:07.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jabin&#39;s Blog">
-<meta name="twitter:description" content="Description">
+<meta name="twitter:title" content="SQL-ORDER BY">
+<meta name="twitter:description" content="SQL-排序检索数据排序数据 语法示例   123SELECT prod_nameFROM ProductsORDER BY prod_name;  Tips &amp;amp; Case  使用ORDER BY子句时，应该保证它是SELECT语句中最后一条子句。 通常ORDER BY子句中使用的列将是为显示而选择的列，但是使用非检索的列排序数据也是完全合法的。    按多个列排序 语法示例  123SE">
   
     <link rel="alternative" href="/atom.xml" title="Jabin&#39;s Blog" type="application/atom+xml">
   
@@ -154,130 +155,193 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-SQL-ORDER-BY" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      SQL-ORDER BY
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/15/SQL-ORDER-BY/" class="archive-article-date">
+
+        
+        <a href="/2018/06/15/SQL-ORDER-BY/" class="archive-article-date">
   	<time datetime="2018-06-15T07:47:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-15</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/15/SQL-ORDER-BY/">SQL-ORDER BY</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="SQL-排序检索数据"><a href="#SQL-排序检索数据" class="headerlink" title="SQL-排序检索数据"></a>SQL-排序检索数据</h2><h3 id="排序数据"><a href="#排序数据" class="headerlink" title="排序数据"></a>排序数据</h3><ul>
+<li><p>语法示例</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_name;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Tips &amp; Case</p>
+<ul>
+<li>使用ORDER BY子句时，应该保证它是SELECT语句中最后一条子句。</li>
+<li>通常ORDER BY子句中使用的列将是为显示而选择的列，但是使用非检索的列排序数据也是完全合法的。</li>
+</ul>
+</li>
+</ul>
+<h3 id="按多个列排序"><a href="#按多个列排序" class="headerlink" title="按多个列排序"></a>按多个列排序</h3><ul>
+<li><p>语法示例</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id, prod_price, prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_price, prod_name;</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="Tips-amp-Case"><a href="#Tips-amp-Case" class="headerlink" title="Tips &amp; Case"></a>Tips &amp; Case</h4><ul>
+<li>仅在多个行具有相同的prod_price值时才对产品按prod_name进行排序。如果prod_price列中所有的值都是唯一的，则不会按prod_name排序。</li>
+</ul>
+</li>
+</ul>
+<h3 id="按列位置排序"><a href="#按列位置排序" class="headerlink" title="按列位置排序"></a>按列位置排序</h3><ul>
+<li><h4 id="语法示例"><a href="#语法示例" class="headerlink" title="语法示例"></a>语法示例</h4>  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id, prod_price, prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="number">2</span>, <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="Tips-amp-Case-1"><a href="#Tips-amp-Case-1" class="headerlink" title="Tips &amp; Case"></a>Tips &amp; Case</h4><ul>
+<li>根据不出现在SELECT清单中的列进行排序时，不能使用该方法。</li>
+</ul>
+</li>
+</ul>
+<h3 id="指定排序方向"><a href="#指定排序方向" class="headerlink" title="指定排序方向"></a>指定排序方向</h3><ul>
+<li><h4 id="语法示例-1"><a href="#语法示例-1" class="headerlink" title="语法示例"></a>语法示例</h4>  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id, prod_price, prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_price <span class="keyword">DESC</span>, prod_name;</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="Tips-amp-Case-2"><a href="#Tips-amp-Case-2" class="headerlink" title="Tips &amp; Case"></a>Tips &amp; Case</h4><ul>
+<li>使用DESC关键字对数据进行降序排序</li>
+<li>DESC关键字只应用到直接位于其前面的列名，比如上例中只对prod_price进行降序排序而对prod_name列仍然进行标准的生序排序</li>
+<li>如果想在多个列上进行排序，必须对没一列指定DESC关键字</li>
+</ul>
+</li>
+</ul>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/06/15/SQL-ORDER-BY/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/13/SQL-SELECT/" class="archive-article-date">
-  	<time datetime="2018-06-13T03:06:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-13</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/06/13/SQL-SELECT/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SQL-SELECT</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/13/SQL-SELECT/">SQL-SELECT</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/09/二维数组转化为JSON串/" class="archive-article-date">
-  	<time datetime="2018-04-09T06:58:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/09/二维数组转化为JSON串/">二维数组转化为JSON串</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/27/hello-world/" class="archive-article-date">
-  	<time datetime="2018-03-27T07:02:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/27/hello-world/">Hello World</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -300,8 +364,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
