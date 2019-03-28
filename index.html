@@ -156,6 +156,99 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Lumen根据环境加载不同的配置文件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/28/Lumen根据环境加载不同的配置文件/">Lumen根据环境加载不同的配置文件</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/28/Lumen根据环境加载不同的配置文件/" class="archive-article-date">
+  	<time datetime="2019-03-28T09:48:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Lumen通过Dotenv管理配置文件。因为开发过程中，我们需要根据不同的环境进行加载不同的配置文件。比如在开发环境我们希望加载 .env.local 测试环境我们希望加载 .env.staging 而在线上我们希望加载 .env.production。但是如何可以简单的通过一些配置来加载不同的配置文件呐？本文是通过配置Nginx来实现根据不同的环境加载不同的配置文件。</p>
+<blockquote>
+<p>####项目环境<br>Lumen : 5.8</p>
+</blockquote>
+<h3 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h3><p>首先创建多个.env文件，根据不同的环境进行不同的配置。然后在Nginx中设置环境。最后在Lumen中bootstrap/app.php中执行加载.env文件</p>
+<h3 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h3><ul>
+<li>新建.env文件</li>
+</ul>
+<p>根据系统自带的.env.example复制几份不同的.env文件，本文暂定需要 开发环境、测试环境和线上环境。依次创建<br>.env.local  .env.staging  .env.production 并设置不同的APP_ENV</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* .env.local</span><br><span class="line">*/</span><br><span class="line">APP_ENV=local</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* .env.staging</span><br><span class="line">*/</span><br><span class="line">APP_ENV=staging</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* .env.production</span><br><span class="line">*/</span><br><span class="line">APP_ENV=production</span><br></pre></td></tr></table></figure>
+<ul>
+<li>修改Nginx配置</li>
+</ul>
+<p>将环境设置为staging</p>
+<p><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/lumenEnv/nginx.png" alt=""></p>
+<p>修改nginx配置，需要重启nginx。</p>
+<ul>
+<li>修改bootstrap/app.php</li>
+</ul>
+<p>取消默认的加载配置文件方式，添加以下代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">require_once __DIR__.&apos;/../vendor/autoload.php&apos;;</span><br><span class="line"></span><br><span class="line">$env = getenv(&apos;APP_ENV&apos;);</span><br><span class="line"></span><br><span class="line">if(php_sapi_name() == &apos;cli&apos;)&#123;</span><br><span class="line">    if(($input = new \Symfony\Component\Console\Input\ArgvInput)-&gt;hasParameterOption(&apos;--env&apos;))&#123;</span><br><span class="line">        $env = !empty($input-&gt;getParameterOption(&apos;--env&apos;))</span><br><span class="line">            ? &apos;.env.&apos;.$input-&gt;getParameterOption(&apos;--env&apos;)</span><br><span class="line">            : &apos;.env&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    $env = !empty($env) ? &apos;.env.&apos;.$env : &apos;.env&apos;;</span><br><span class="line">&#125;</span><br><span class="line">if(!file_exists(__DIR__.&apos;/../&apos;.$env))&#123;</span><br><span class="line">    exit(&apos;no env file!&apos;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">try &#123;</span><br><span class="line">	Dotenv\Dotenv::create(__DIR__.&apos;/../&apos;,$env)-&gt;overload();</span><br><span class="line">&#125; catch (Dotenv\Exception\InvalidPathException $e) &#123;</span><br><span class="line">    echo $e-&gt;getMessage();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>验证配置是否成功</li>
+</ul>
+<p>可以通过以下三种方式取.env中的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">echo getenv(&apos;APP_ENV&apos;).&quot;&lt;br/&gt;&quot;;</span><br><span class="line">echo $_ENV[&apos;APP_ENV&apos;].&quot;&lt;br/&gt;&quot;;</span><br><span class="line">echo $_SERVER[&apos;APP_ENV&apos;].&quot;&lt;br/&gt;&quot;;</span><br><span class="line">die();</span><br></pre></td></tr></table></figure>
+<p>输出结果如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* 输出如下</span><br><span class="line">*/</span><br><span class="line">staging</span><br><span class="line">staging</span><br><span class="line">staging</span><br></pre></td></tr></table></figure>
+<p>Done，测试完毕！</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/28/Lumen根据环境加载不同的配置文件/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-unsplash-images-crawler" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -996,7 +1089,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 Jabin
+    		&copy; 2019 Jabin
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten

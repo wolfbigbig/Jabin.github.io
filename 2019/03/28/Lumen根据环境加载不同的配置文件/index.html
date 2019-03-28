@@ -6,20 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>SQL-WHERE | Jabin&#39;s Blog</title>
+  <title>Lumen根据环境加载不同的配置文件 | Jabin&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="通过WHERE关键字对数据进行筛选，选取符合WHERE条件的数据。 SQL-筛选数据WHERE 子句 语法示例   1234SELECT prod_nameFROM ProductsWHERE prod_price = 3.49ORDER BY prod_name;  Tips &amp;amp; Case  同时使用ORDER BY和WHERE子句时，应该让ORDER BY位于WHERE之后。    W">
+  <meta name="description" content="Lumen通过Dotenv管理配置文件。因为开发过程中，我们需要根据不同的环境进行加载不同的配置文件。比如在开发环境我们希望加载 .env.local 测试环境我们希望加载 .env.staging 而在线上我们希望加载 .env.production。但是如何可以简单的通过一些配置来加载不同的配置文件呐？本文是通过配置Nginx来实现根据不同的环境加载不同的配置文件。  ####项目环境Lume">
 <meta name="keywords" content="keywords">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL-WHERE">
-<meta property="og:url" content="http://yoursite.com/2018/06/20/SQL-WHERE/index.html">
+<meta property="og:title" content="Lumen根据环境加载不同的配置文件">
+<meta property="og:url" content="http://yoursite.com/2019/03/28/Lumen根据环境加载不同的配置文件/index.html">
 <meta property="og:site_name" content="Jabin&#39;s Blog">
-<meta property="og:description" content="通过WHERE关键字对数据进行筛选，选取符合WHERE条件的数据。 SQL-筛选数据WHERE 子句 语法示例   1234SELECT prod_nameFROM ProductsWHERE prod_price = 3.49ORDER BY prod_name;  Tips &amp;amp; Case  同时使用ORDER BY和WHERE子句时，应该让ORDER BY位于WHERE之后。    W">
+<meta property="og:description" content="Lumen通过Dotenv管理配置文件。因为开发过程中，我们需要根据不同的环境进行加载不同的配置文件。比如在开发环境我们希望加载 .env.local 测试环境我们希望加载 .env.staging 而在线上我们希望加载 .env.production。但是如何可以简单的通过一些配置来加载不同的配置文件呐？本文是通过配置Nginx来实现根据不同的环境加载不同的配置文件。  ####项目环境Lume">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-06-20T03:20:41.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/lumenEnv/nginx.png">
+<meta property="og:updated_time" content="2019-03-28T10:34:41.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SQL-WHERE">
-<meta name="twitter:description" content="通过WHERE关键字对数据进行筛选，选取符合WHERE条件的数据。 SQL-筛选数据WHERE 子句 语法示例   1234SELECT prod_nameFROM ProductsWHERE prod_price = 3.49ORDER BY prod_name;  Tips &amp;amp; Case  同时使用ORDER BY和WHERE子句时，应该让ORDER BY位于WHERE之后。    W">
+<meta name="twitter:title" content="Lumen根据环境加载不同的配置文件">
+<meta name="twitter:description" content="Lumen通过Dotenv管理配置文件。因为开发过程中，我们需要根据不同的环境进行加载不同的配置文件。比如在开发环境我们希望加载 .env.local 测试环境我们希望加载 .env.staging 而在线上我们希望加载 .env.production。但是如何可以简单的通过一些配置来加载不同的配置文件呐？本文是通过配置Nginx来实现根据不同的环境加载不同的配置文件。  ####项目环境Lume">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/lumenEnv/nginx.png">
   
     <link rel="alternative" href="/atom.xml" title="Jabin&#39;s Blog" type="application/atom+xml">
   
@@ -155,131 +157,57 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-SQL-WHERE" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Lumen根据环境加载不同的配置文件" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      SQL-WHERE
+      Lumen根据环境加载不同的配置文件
     </h1>
   
 
         
-        <a href="/2018/06/20/SQL-WHERE/" class="archive-article-date">
-  	<time datetime="2018-06-20T03:17:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-20</time>
+        <a href="/2019/03/28/Lumen根据环境加载不同的配置文件/" class="archive-article-date">
+  	<time datetime="2019-03-28T09:48:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>通过WHERE关键字对数据进行筛选，选取符合WHERE条件的数据。</p>
-<h2 id="SQL-筛选数据"><a href="#SQL-筛选数据" class="headerlink" title="SQL-筛选数据"></a>SQL-筛选数据</h2><h3 id="WHERE-子句"><a href="#WHERE-子句" class="headerlink" title="WHERE 子句"></a>WHERE 子句</h3><ul>
-<li><p>语法示例</p>
-  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> prod_price = <span class="number">3.49</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_name;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Tips &amp; Case</p>
+        <p>Lumen通过Dotenv管理配置文件。因为开发过程中，我们需要根据不同的环境进行加载不同的配置文件。比如在开发环境我们希望加载 .env.local 测试环境我们希望加载 .env.staging 而在线上我们希望加载 .env.production。但是如何可以简单的通过一些配置来加载不同的配置文件呐？本文是通过配置Nginx来实现根据不同的环境加载不同的配置文件。</p>
+<blockquote>
+<p>####项目环境<br>Lumen : 5.8</p>
+</blockquote>
+<h3 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h3><p>首先创建多个.env文件，根据不同的环境进行不同的配置。然后在Nginx中设置环境。最后在Lumen中bootstrap/app.php中执行加载.env文件</p>
+<h3 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h3><ul>
+<li>新建.env文件</li>
+</ul>
+<p>根据系统自带的.env.example复制几份不同的.env文件，本文暂定需要 开发环境、测试环境和线上环境。依次创建<br>.env.local  .env.staging  .env.production 并设置不同的APP_ENV</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* .env.local</span><br><span class="line">*/</span><br><span class="line">APP_ENV=local</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* .env.staging</span><br><span class="line">*/</span><br><span class="line">APP_ENV=staging</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* .env.production</span><br><span class="line">*/</span><br><span class="line">APP_ENV=production</span><br></pre></td></tr></table></figure>
 <ul>
-<li>同时使用ORDER BY和WHERE子句时，应该让ORDER BY位于WHERE之后。</li>
+<li>修改Nginx配置</li>
 </ul>
-</li>
-</ul>
-<h3 id="WHERE-子句操作符"><a href="#WHERE-子句操作符" class="headerlink" title="WHERE 子句操作符"></a>WHERE 子句操作符</h3><table>
-<thead>
-<tr>
-<th style="text-align:center">操作符</th>
-<th style="text-align:center">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">=</td>
-<td style="text-align:center">等于</td>
-</tr>
-<tr>
-<td style="text-align:center">&lt;&gt;</td>
-<td style="text-align:center">不等于</td>
-</tr>
-<tr>
-<td style="text-align:center">!=</td>
-<td style="text-align:center">不等于</td>
-</tr>
-<tr>
-<td style="text-align:center">&lt;</td>
-<td style="text-align:center">小于</td>
-</tr>
-<tr>
-<td style="text-align:center">&lt;=</td>
-<td style="text-align:center">小于等于</td>
-</tr>
-<tr>
-<td style="text-align:center">!&lt;</td>
-<td style="text-align:center">不小于</td>
-</tr>
-<tr>
-<td style="text-align:center">&gt;</td>
-<td style="text-align:center">大于</td>
-</tr>
-<tr>
-<td style="text-align:center">&gt;=</td>
-<td style="text-align:center">大于等于</td>
-</tr>
-<tr>
-<td style="text-align:center">!&gt;</td>
-<td style="text-align:center">不大于</td>
-</tr>
-<tr>
-<td style="text-align:center">BETWEEM</td>
-<td style="text-align:center">在指定的两个值之间</td>
-</tr>
-<tr>
-<td style="text-align:center">IS NULL</td>
-<td style="text-align:center">为NULL值</td>
-</tr>
-</tbody>
-</table>
+<p>将环境设置为staging</p>
+<p><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/lumenEnv/nginx.png" alt=""></p>
+<p>修改nginx配置，需要重启nginx。</p>
 <ul>
-<li>Tips &amp; Case<ul>
-<li>某些操作符是冗余的（如&lt;&gt;与!=相同，!&lt;相当于&gt;=）  </li>
+<li>修改bootstrap/app.php</li>
 </ul>
-</li>
-</ul>
-<h3 id="检查单个值"><a href="#检查单个值" class="headerlink" title="检查单个值"></a>检查单个值</h3><ul>
-<li>语法示例</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id, prod_price, prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> prod_price &lt; <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
-<h3 id="不匹配检查"><a href="#不匹配检查" class="headerlink" title="不匹配检查"></a>不匹配检查</h3><ul>
-<li>语法示例</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> vend_id, prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> vend_id &lt;&gt; <span class="string">'DLL01'</span></span><br></pre></td></tr></table></figure>
-<pre><code>或者
-</code></pre><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> vend_id, prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> vend_id != <span class="string">'DLL01'</span></span><br></pre></td></tr></table></figure>
-<h3 id="范围值检查"><a href="#范围值检查" class="headerlink" title="范围值检查"></a>范围值检查</h3><ul>
-<li>语法示例</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id, prod_price, prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> prod_price <span class="keyword">BETWEEN</span> <span class="number">5</span> <span class="keyword">AND</span> <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
-<h3 id="空值检查"><a href="#空值检查" class="headerlink" title="空值检查"></a>空值检查</h3><p>在创建表时，表设计人员可以指定其中的列能否不包括值。在一个列不包含值时，称其包含空值NULL。NULL与字段0、空字符串或者仅仅包含空格不同。</p>
+<p>取消默认的加载配置文件方式，添加以下代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">require_once __DIR__.&apos;/../vendor/autoload.php&apos;;</span><br><span class="line"></span><br><span class="line">$env = getenv(&apos;APP_ENV&apos;);</span><br><span class="line"></span><br><span class="line">if(php_sapi_name() == &apos;cli&apos;)&#123;</span><br><span class="line">    if(($input = new \Symfony\Component\Console\Input\ArgvInput)-&gt;hasParameterOption(&apos;--env&apos;))&#123;</span><br><span class="line">        $env = !empty($input-&gt;getParameterOption(&apos;--env&apos;))</span><br><span class="line">            ? &apos;.env.&apos;.$input-&gt;getParameterOption(&apos;--env&apos;)</span><br><span class="line">            : &apos;.env&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    $env = !empty($env) ? &apos;.env.&apos;.$env : &apos;.env&apos;;</span><br><span class="line">&#125;</span><br><span class="line">if(!file_exists(__DIR__.&apos;/../&apos;.$env))&#123;</span><br><span class="line">    exit(&apos;no env file!&apos;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">try &#123;</span><br><span class="line">	Dotenv\Dotenv::create(__DIR__.&apos;/../&apos;,$env)-&gt;overload();</span><br><span class="line">&#125; catch (Dotenv\Exception\InvalidPathException $e) &#123;</span><br><span class="line">    echo $e-&gt;getMessage();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>语法示例</li>
+<li>验证配置是否成功</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> prod_pice <span class="keyword">IS</span> <span class="literal">NULL</span></span><br></pre></td></tr></table></figure>
-<h3 id="AND-操作符"><a href="#AND-操作符" class="headerlink" title="AND 操作符"></a>AND 操作符</h3><p>AND用在WHRER子句中表示检索满足所有给定的条件的行。</p>
-<ul>
-<li>语法示例</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id, prod_price, prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> vend_id = <span class="string">'DLL01'</span> <span class="keyword">AND</span> prod_price &lt;= <span class="number">4</span>;</span><br></pre></td></tr></table></figure>
-<h3 id="OR-操作符"><a href="#OR-操作符" class="headerlink" title="OR 操作符"></a>OR 操作符</h3><p>OR用在WHERE子句中表示检索满足匹配任意给定条件的行。</p>
-<ul>
-<li>语法示例</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name, prod_price</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> vend_id = <span class="string">'DLL01'</span> <span class="keyword">OR</span> vend_id = <span class="string">'BRS01'</span></span><br><span class="line"><span class="string">``</span><span class="string">` </span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">### IN 操作符</span></span><br><span class="line"><span class="string">IN操作符用来指定条件范围，范围中的每个条件都进行匹配。IN取一组由逗号分隔、括在圆括号中的合法值。IN 用来指定要匹配清单的关键字，功能与OR相当。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">* 语法示例</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span><span class="keyword">SQL</span></span><br><span class="line"><span class="keyword">SELECT</span> prod_name, prod_price</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> vend_id <span class="keyword">IN</span> (<span class="string">'DLL01'</span>,<span class="string">'BRS01'</span>)</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_name</span><br></pre></td></tr></table></figure>
-<h3 id="NOT操作符"><a href="#NOT操作符" class="headerlink" title="NOT操作符"></a>NOT操作符</h3><p>NOT操作符有且只有一个功能，那就是否定其后所跟的任何条件。NOT用来否定其后条件的关键字。</p>
-<ul>
-<li>语法示例</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">NOT</span> vend_id = <span class="string">'DLL01'</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_name;</span><br></pre></td></tr></table></figure>
+<p>可以通过以下三种方式取.env中的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">echo getenv(&apos;APP_ENV&apos;).&quot;&lt;br/&gt;&quot;;</span><br><span class="line">echo $_ENV[&apos;APP_ENV&apos;].&quot;&lt;br/&gt;&quot;;</span><br><span class="line">echo $_SERVER[&apos;APP_ENV&apos;].&quot;&lt;br/&gt;&quot;;</span><br><span class="line">die();</span><br></pre></td></tr></table></figure>
+<p>输出结果如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* 输出如下</span><br><span class="line">*/</span><br><span class="line">staging</span><br><span class="line">staging</span><br><span class="line">staging</span><br></pre></td></tr></table></figure>
+<p>Done，测试完毕！</p>
 
       
 
@@ -359,7 +287,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/06/20/SQL-WHERE/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/03/28/Lumen根据环境加载不同的配置文件/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -373,18 +301,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/07/11/revet-singal-file-md/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Git回滚单个文件
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/06/15/SQL-ORDER-BY/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">SQL-ORDER BY</div>
+    <a href="/2018/12/02/unsplash-images-crawler/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">PHP抓取图片方案</div>
       <i class="icon-circle-right"></i>
     </a>
   
