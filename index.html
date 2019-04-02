@@ -315,37 +315,9 @@
 <li>自然联结(natural join)</li>
 <li>外联结(outer join)</li>
 </ul>
-<p>示例使用的所有表情况如图。</p>
-<p>Orders表：<br><img src="https://lh3.googleusercontent.com/-qG7Rj3LkxuU/W8hSRdMfvEI/AAAAAAAAABE/lTi7cJusAsg1CF_GHLvuWe7o3jhY2qQLgCHMYCw/I/Orders.png" alt="Orders"></p>
-<p>Vendors表：<br><img src="https://lh3.googleusercontent.com/-xu9chO7cF0I/W8hSRbxH_9I/AAAAAAAAABI/OFeMCARajW8pW6GbOvXJZOKF9UdI1NhhwCHMYCw/I/Vendors.png" alt="Vendors"></p>
-<p>Customers表：<br><img src="https://lh3.googleusercontent.com/-yyPxiY0VUM0/W8hSRdtE1NI/AAAAAAAAABM/sEOq1Z5K5MgCkS4xF4dnSra7pZuH_ItUwCHMYCw/I/Customers.png" alt="Customers"></p>
-<p>OrderItems表：<br><img src="https://lh3.googleusercontent.com/-kRjHRid5m6E/W8hSR9CJDrI/AAAAAAAAABQ/U9pbGEs6n6c19E_4WfHe6V1gyYOPK_42gCHMYCw/I/OrderItems.png" alt="OrderItems"></p>
-<p>Products表：<br><img src="https://lh3.googleusercontent.com/-Ixf9esftu0M/W8hSRyo7HPI/AAAAAAAAABU/ZjLXIj6GeggO-dTudGr5H7lZFuHCqntZgCHMYCw/I/Products.png" alt="Products"></p>
-<h3 id="内联结"><a href="#内联结" class="headerlink" title="内联结"></a>内联结</h3><p>内联结又称为等值联结，它基于两个表之间的相等测试。将两个表中存在联结关系的字段符合联结关系的那些记录行程记录集的联结。用INNER JOIN指定表之间的关系，用ON子句指定联结条件。</p>
-<p>示例如下：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> vend_name, prod_name, prod_price</span><br><span class="line"><span class="keyword">FROM</span> Vendors <span class="keyword">INNER</span> <span class="keyword">JOIN</span> Products</span><br><span class="line"><span class="keyword">ON</span> Vendors.vend_id = Products.vend_id</span><br></pre></td></tr></table></figure>
-<p>运行结果如下：</p>
-<p><img src="https://lh3.googleusercontent.com/-SYF1JBAP7NQ/W8hX0WYIffI/AAAAAAAAAB4/1R73-UvBCKI1ZqoiAcKAid4aIz4pF8OvQCHMYCw/I/%255BUNSET%255D" alt="内联结-Resu"></p>
-<h3 id="自联结"><a href="#自联结" class="headerlink" title="自联结"></a>自联结</h3><p>自联结常用于一张表内，只是在SELECT是需要用两次同一张表，此时使用自联结。</p>
-<p>示例如下：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> c1.cust_id, c1.cust_name, c1.cust_contact</span><br><span class="line"><span class="keyword">FROM</span> Customers <span class="keyword">AS</span> c1, Customers <span class="keyword">AS</span> c2</span><br><span class="line"><span class="keyword">WHERE</span> c1.cust_name = c2.cust_name</span><br><span class="line"><span class="keyword">AND</span> c2.cust_contact = <span class="string">'Jim Jones'</span>;</span><br></pre></td></tr></table></figure>
-<p>运行结果如下：</p>
-<p><img src="https://lh3.googleusercontent.com/-4olzh0JVXJk/W8hX5eyPw9I/AAAAAAAAAB8/ridMAIVRcDgXVLgeZ2eDbqsHb0C4BldkwCHMYCw/I/%255BUNSET%255D" alt="自联结-Resu"></p>
-<h3 id="自然联结"><a href="#自然联结" class="headerlink" title="自然联结"></a>自然联结</h3><p>自然联结是一种特殊的等值联结，要求两个关系表中进行比较的属性必须是名称相同的属性组，并且在结果中把重复的属性列去掉（即：留下名称相同的属性组中的其中一组）。</p>
-<p>示例如下：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> V.vend_id, V.vend_name, V.vend_city, P.prod_id, P.prod_price</span><br><span class="line"><span class="keyword">FROM</span> Vendors <span class="keyword">AS</span> V <span class="keyword">natural</span> <span class="keyword">join</span> Products <span class="keyword">AS</span> P;</span><br></pre></td></tr></table></figure>
-<p>运行结果如下：</p>
-<p><img src="https://lh3.googleusercontent.com/-TVCk6erFtNI/W8hX9KHmR8I/AAAAAAAAACA/cSaYx8h9CXsxwtnNh3Fwng-QewZtOxZUACHMYCw/I/%255BUNSET%255D" alt="自然联结-Resu"></p>
-<h3 id="外联结"><a href="#外联结" class="headerlink" title="外联结"></a>外联结</h3><p>联结包含了哪些在相关表中没有关联行的行。这种联结称为外联结。<br>外联结有两种基本的外联结形式：左联结、右联结和全联结。其中RIGHT 和 LEFT关键字指定包含其所有行的表（RIGHT指出的是OUTER JOIN右边的表，而LEFT指出的OUTER JOIN左边的表）全联结关键字为FULL（其中MySQL不支持全联结）。</p>
-<p>左联结示例如下：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> C.cust_id, O.order_num</span><br><span class="line"><span class="keyword">FROM</span> Customers <span class="keyword">AS</span> C <span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> Orders <span class="keyword">AS</span> O </span><br><span class="line"><span class="keyword">ON</span> C.cust_id = O.cust_id</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> C.cust_id, O.order_num;</span><br></pre></td></tr></table></figure>
-<p>左联结运行结果如下：</p>
-<p><img src="https://lh3.googleusercontent.com/-EGpLkM-Z5ik/W8hYAZBiYCI/AAAAAAAAACE/fYTljIbAb4YAjy1VTI6J6VvebESF2lgGACHMYCw/I/%255BUNSET%255D" alt="外联结-Resu"></p>
-<p>右联结示例如下：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> C.cust_id, O.order_num</span><br><span class="line"><span class="keyword">FROM</span> Customers <span class="keyword">AS</span> C <span class="keyword">RIGHT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> Orders <span class="keyword">AS</span> O </span><br><span class="line"><span class="keyword">ON</span> C.cust_id = O.cust_id</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> C.cust_id, O.order_num;</span><br></pre></td></tr></table></figure>
-<p>右联结运行结果如下：</p>
-<p><img src="https://lh3.googleusercontent.com/-M6bqj60w-ys/W8hYX7-6RwI/AAAAAAAAACY/Datgn8b1glg-IZvPzb3BKyo1gqDjFeEYgCHMYCw/I/%255BUNSET%255D" alt="右联结-Resu"></p>
-
+        
+          <a class="article-more-a" href="/2018/10/18/SQL-联结/#more">more >></a>
+        
       
 
       
@@ -408,19 +380,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="回滚某个文件到某个版本"><a href="#回滚某个文件到某个版本" class="headerlink" title="回滚某个文件到某个版本"></a>回滚某个文件到某个版本</h3><h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>在使用的git的过程中，难免会遇到以下场景：在某次commit时提交了多个文件，但是提交之后发现有一个文件是有问题的，需要回滚，但是如果全部回滚的话就会造成正确提交的文件也会被回滚，造成不必要的麻烦。此时我们需要针对某一个文件，将其回滚到指定的版本即可。</p>
-<h4 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h4><p>以回滚testFile.txt文件为例。大致可以分为三步走：</p>
-<ol>
-<li><p>首先需要回滚指定版本的hash值(如果hash值为：c78a34b1ff0d37c84f8e6ffc779452fe318efdb7)</p>
- <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> testFile.txt</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用hash值回滚指定文件</p>
- <figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout <span class="keyword">c</span><span class="number">78</span>a<span class="number">34</span>b<span class="number">1</span>ff<span class="number">0</span>d<span class="number">37</span><span class="keyword">c</span><span class="number">84</span>f<span class="number">8e6</span>ffc<span class="number">779452</span>fe<span class="number">318</span>efdb<span class="number">7</span> testFile.txt</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>提交回滚后的内容</p>
- <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">commit</span> -m <span class="string">'revet testFile.txt'</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
+        
+          <a class="article-more-a" href="/2018/07/11/revet-singal-file-md/#more">more >></a>
+        
       
 
       
@@ -493,101 +455,9 @@
 </ul>
 </li>
 </ul>
-<h3 id="WHERE-子句操作符"><a href="#WHERE-子句操作符" class="headerlink" title="WHERE 子句操作符"></a>WHERE 子句操作符</h3><table>
-<thead>
-<tr>
-<th style="text-align:center">操作符</th>
-<th style="text-align:center">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">=</td>
-<td style="text-align:center">等于</td>
-</tr>
-<tr>
-<td style="text-align:center">&lt;&gt;</td>
-<td style="text-align:center">不等于</td>
-</tr>
-<tr>
-<td style="text-align:center">!=</td>
-<td style="text-align:center">不等于</td>
-</tr>
-<tr>
-<td style="text-align:center">&lt;</td>
-<td style="text-align:center">小于</td>
-</tr>
-<tr>
-<td style="text-align:center">&lt;=</td>
-<td style="text-align:center">小于等于</td>
-</tr>
-<tr>
-<td style="text-align:center">!&lt;</td>
-<td style="text-align:center">不小于</td>
-</tr>
-<tr>
-<td style="text-align:center">&gt;</td>
-<td style="text-align:center">大于</td>
-</tr>
-<tr>
-<td style="text-align:center">&gt;=</td>
-<td style="text-align:center">大于等于</td>
-</tr>
-<tr>
-<td style="text-align:center">!&gt;</td>
-<td style="text-align:center">不大于</td>
-</tr>
-<tr>
-<td style="text-align:center">BETWEEM</td>
-<td style="text-align:center">在指定的两个值之间</td>
-</tr>
-<tr>
-<td style="text-align:center">IS NULL</td>
-<td style="text-align:center">为NULL值</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>Tips &amp; Case<ul>
-<li>某些操作符是冗余的（如&lt;&gt;与!=相同，!&lt;相当于&gt;=）  </li>
-</ul>
-</li>
-</ul>
-<h3 id="检查单个值"><a href="#检查单个值" class="headerlink" title="检查单个值"></a>检查单个值</h3><ul>
-<li>语法示例</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id, prod_price, prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> prod_price &lt; <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
-<h3 id="不匹配检查"><a href="#不匹配检查" class="headerlink" title="不匹配检查"></a>不匹配检查</h3><ul>
-<li>语法示例</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> vend_id, prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> vend_id &lt;&gt; <span class="string">'DLL01'</span></span><br></pre></td></tr></table></figure>
-<pre><code>或者
-</code></pre><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> vend_id, prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> vend_id != <span class="string">'DLL01'</span></span><br></pre></td></tr></table></figure>
-<h3 id="范围值检查"><a href="#范围值检查" class="headerlink" title="范围值检查"></a>范围值检查</h3><ul>
-<li>语法示例</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id, prod_price, prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> prod_price <span class="keyword">BETWEEN</span> <span class="number">5</span> <span class="keyword">AND</span> <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
-<h3 id="空值检查"><a href="#空值检查" class="headerlink" title="空值检查"></a>空值检查</h3><p>在创建表时，表设计人员可以指定其中的列能否不包括值。在一个列不包含值时，称其包含空值NULL。NULL与字段0、空字符串或者仅仅包含空格不同。</p>
-<ul>
-<li>语法示例</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> prod_pice <span class="keyword">IS</span> <span class="literal">NULL</span></span><br></pre></td></tr></table></figure>
-<h3 id="AND-操作符"><a href="#AND-操作符" class="headerlink" title="AND 操作符"></a>AND 操作符</h3><p>AND用在WHRER子句中表示检索满足所有给定的条件的行。</p>
-<ul>
-<li>语法示例</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id, prod_price, prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> vend_id = <span class="string">'DLL01'</span> <span class="keyword">AND</span> prod_price &lt;= <span class="number">4</span>;</span><br></pre></td></tr></table></figure>
-<h3 id="OR-操作符"><a href="#OR-操作符" class="headerlink" title="OR 操作符"></a>OR 操作符</h3><p>OR用在WHERE子句中表示检索满足匹配任意给定条件的行。</p>
-<ul>
-<li>语法示例</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name, prod_price</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> vend_id = <span class="string">'DLL01'</span> <span class="keyword">OR</span> vend_id = <span class="string">'BRS01'</span></span><br><span class="line"><span class="string">``</span><span class="string">` </span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">### IN 操作符</span></span><br><span class="line"><span class="string">IN操作符用来指定条件范围，范围中的每个条件都进行匹配。IN取一组由逗号分隔、括在圆括号中的合法值。IN 用来指定要匹配清单的关键字，功能与OR相当。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">* 语法示例</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span><span class="keyword">SQL</span></span><br><span class="line"><span class="keyword">SELECT</span> prod_name, prod_price</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> vend_id <span class="keyword">IN</span> (<span class="string">'DLL01'</span>,<span class="string">'BRS01'</span>)</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_name</span><br></pre></td></tr></table></figure>
-<h3 id="NOT操作符"><a href="#NOT操作符" class="headerlink" title="NOT操作符"></a>NOT操作符</h3><p>NOT操作符有且只有一个功能，那就是否定其后所跟的任何条件。NOT用来否定其后条件的关键字。</p>
-<ul>
-<li>语法示例</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">NOT</span> vend_id = <span class="string">'DLL01'</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_name;</span><br></pre></td></tr></table></figure>
-
+        
+          <a class="article-more-a" href="/2018/06/20/SQL-WHERE/#more">more >></a>
+        
       
 
       
@@ -660,34 +530,9 @@
 </ul>
 </li>
 </ul>
-<h3 id="按多个列排序"><a href="#按多个列排序" class="headerlink" title="按多个列排序"></a>按多个列排序</h3><ul>
-<li><p>语法示例</p>
- <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id, prod_price, prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_price, prod_name;</span><br></pre></td></tr></table></figure>
-</li>
-<li><h4 id="Tips-amp-Case"><a href="#Tips-amp-Case" class="headerlink" title="Tips &amp; Case"></a>Tips &amp; Case</h4><ul>
-<li>仅在多个行具有相同的prod_price值时才对产品按prod_name进行排序。如果prod_price列中所有的值都是唯一的，则不会按prod_name排序。</li>
-</ul>
-</li>
-</ul>
-<h3 id="按列位置排序"><a href="#按列位置排序" class="headerlink" title="按列位置排序"></a>按列位置排序</h3><ul>
-<li><h4 id="语法示例"><a href="#语法示例" class="headerlink" title="语法示例"></a>语法示例</h4>  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id, prod_price, prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="number">2</span>, <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><h4 id="Tips-amp-Case-1"><a href="#Tips-amp-Case-1" class="headerlink" title="Tips &amp; Case"></a>Tips &amp; Case</h4><ul>
-<li>根据不出现在SELECT清单中的列进行排序时，不能使用该方法。</li>
-</ul>
-</li>
-</ul>
-<h3 id="指定排序方向"><a href="#指定排序方向" class="headerlink" title="指定排序方向"></a>指定排序方向</h3><ul>
-<li><h4 id="语法示例-1"><a href="#语法示例-1" class="headerlink" title="语法示例"></a>语法示例</h4>  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id, prod_price, prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_price <span class="keyword">DESC</span>, prod_name;</span><br></pre></td></tr></table></figure>
-</li>
-<li><h4 id="Tips-amp-Case-2"><a href="#Tips-amp-Case-2" class="headerlink" title="Tips &amp; Case"></a>Tips &amp; Case</h4><ul>
-<li>使用DESC关键字对数据进行降序排序</li>
-<li>DESC关键字只应用到直接位于其前面的列名，比如上例中只对prod_price进行降序排序而对prod_name列仍然进行标准的生序排序</li>
-<li>如果想在多个列上进行排序，必须对没一列指定DESC关键字</li>
-</ul>
-</li>
-</ul>
-
+        
+          <a class="article-more-a" href="/2018/06/15/SQL-ORDER-BY/#more">more >></a>
+        
       
 
       
@@ -761,64 +606,9 @@
 </ul>
 </li>
 </ul>
-<h3 id="检索多个列"><a href="#检索多个列" class="headerlink" title="检索多个列"></a>检索多个列</h3><ul>
-<li><p>语法示例</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id, prod_name, prod_price</span><br><span class="line"><span class="keyword">FROM</span> Products;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Tips &amp; Case</p>
-<ul>
-<li>列名之间使用逗号进行分割。</li>
-</ul>
-</li>
-</ul>
-<h3 id="检索所有列"><a href="#检索所有列" class="headerlink" title="检索所有列"></a>检索所有列</h3><ul>
-<li><p>语法示例</p>
-  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> Products;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Tips &amp; Case</p>
-<ul>
-<li>除非确实需要检索所有列，否则不建议使用通配符。</li>
-</ul>
-</li>
-</ul>
-<h3 id="检索不同的值"><a href="#检索不同的值" class="headerlink" title="检索不同的值"></a>检索不同的值</h3><ul>
-<li><p>语法示例</p>
-  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> vend_id</span><br><span class="line"><span class="keyword">FROM</span> Products;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Tips &amp; Case</p>
-<ul>
-<li>DISTINCT 作用于所有列，如果同时检索多个列时无法作用与部分列</li>
-</ul>
-</li>
-</ul>
-<h3 id="限制结果"><a href="#限制结果" class="headerlink" title="限制结果"></a>限制结果</h3><p>SELECT语句返回指定表中的所有匹配的行，如果只希望返回一定数量的行，可以通过限制结果的方法进行筛选。但是各种数据库中的这一SQL实现并不相同。</p>
-<ul>
-<li><p>语法示例</p>
-<ul>
-<li><p>SQL Server、Access</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> TOP <span class="number">5</span> prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>DB2</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">FETCH</span> <span class="keyword">FIRST</span> <span class="number">5</span> <span class="keyword">ROWS</span> <span class="keyword">ONLY</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Oracle</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">ROWNUM</span> &lt;= <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>MySQL、MariaDB、SQLite</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">LIMIT</span> <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
-<p>或者</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">LIMIT</span> <span class="number">5</span> <span class="keyword">OFFSET</span> <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>Tips &amp; Case</p>
-<ul>
-<li>使用Limit时第一个被检索的是第0行，而不是第1行。因此，LIMIT 1 OFFSET 1会检索第2行，而不是第1行。</li>
-<li>使用Limit时，不带OFFSET时表示返回的行数；带有OFFSET时第一个数字表示从哪儿开始计算，第二个数字表示检索的行数。</li>
-</ul>
-</li>
-</ul>
-
+        
+          <a class="article-more-a" href="/2018/06/13/SQL-SELECT/#more">more >></a>
+        
       
 
       
@@ -882,13 +672,9 @@
       
         <p>在开发过程中有时需要将二位数组转化为JSON以便于后期的数据处理。前段时间用到了这个知识点，现在记录一下。</p>
 <hr>
-<p>现有一个二维数组</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="string">"Johone"</span>,<span class="string">"America"</span>,<span class="string">"Man"</span>,<span class="string">"IT"</span>,<span class="string">"Master"</span>],[<span class="string">"Xi"</span>,<span class="string">"China"</span>,<span class="string">"Man"</span>,<span class="string">"Finance"</span>,<span class="string">"Doctor"</span>]]]</span><br></pre></td></tr></table></figure>
-<p>需转化为格式如下的字符串</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"params"</span>:</span><br><span class="line">[&#123;<span class="string">"Name"</span>:Johone, <span class="string">"Country"</span>:America, <span class="string">"Sex"</span>:Man, <span class="string">"Job"</span>:IT,<span class="string">"Education"</span>:Master&#125;,</span><br><span class="line">&#123;<span class="string">"Name"</span>:Xi, <span class="string">"Country"</span>:China, <span class="string">"Sex"</span>:Man, <span class="string">"Job"</span>:Finance,<span class="string">"education"</span>:Dcotor&#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>实现代码块儿如下：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">var</span> arrayData = [[<span class="string">"Johone"</span>, <span class="string">"America"</span>, <span class="string">"Man"</span>, <span class="string">"IT"</span>, <span class="string">"Master"</span>],[<span class="string">"Xi"</span>, <span class="string">"China"</span>, <span class="string">"Man"</span>, <span class="string">"Finance"</span>, <span class="string">"Doctor"</span>]];</span><br><span class="line">	<span class="keyword">var</span> jsonKeys = [<span class="string">"Name"</span>, <span class="string">"Country"</span>, <span class="string">"Sex"</span>, <span class="string">"Job"</span>, <span class="string">"Education"</span>];</span><br><span class="line">	<span class="keyword">var</span> jsonValue = [];</span><br><span class="line">	<span class="keyword">var</span> jsonData = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arrayData.length; i++) &#123;</span><br><span class="line">	   <span class="keyword">var</span> jsonObj = &#123;&#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; arrayData[i].length; j++) &#123;</span><br><span class="line">			jsonObj[jsonKeys[j]] = arrayData[i][j];</span><br><span class="line">		&#125;</span><br><span class="line">		jsonValue.push(jsonObj);</span><br><span class="line">	&#125;</span><br><span class="line">	jsonData[<span class="string">'params'</span>] = jsonValue</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'jsonData str='</span>+<span class="built_in">JSON</span>.stringify(jsonData));</span><br><span class="line">	</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;body&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
-
+        
+          <a class="article-more-a" href="/2018/04/09/二维数组转化为JSON串/#more">more >></a>
+        
       
 
       
