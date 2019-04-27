@@ -6,19 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | Jabin&#39;s Blog</title>
+  <title>利用PHP基于链表实现栈和队列 | Jabin&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Description">
+  <meta name="description" content="前一篇文章介绍了栈和队列的基本结构，并且使用数组实现了基本接口功能。具体内容戳我。本文同样实现栈和队列，但是不是基于数组而是基于链表。 Node节点Node类包括两个域属性，分别为data和next。其中data为改节点的值，而next则是包含下一个节点的引用。具体代码如下 12345678910111213141516171819202122232425class Node&amp;#123;	priv">
 <meta name="keywords" content="keywords">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jabin&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用PHP基于链表实现栈和队列">
+<meta property="og:url" content="http://yoursite.com/2019/04/27/利用PHP基于链表实现栈和队列/index.html">
 <meta property="og:site_name" content="Jabin&#39;s Blog">
-<meta property="og:description" content="Description">
+<meta property="og:description" content="前一篇文章介绍了栈和队列的基本结构，并且使用数组实现了基本接口功能。具体内容戳我。本文同样实现栈和队列，但是不是基于数组而是基于链表。 Node节点Node类包括两个域属性，分别为data和next。其中data为改节点的值，而next则是包含下一个节点的引用。具体代码如下 12345678910111213141516171819202122232425class Node&amp;#123;	priv">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/StackQueue/stackQueueNodeRes.png">
+<meta property="og:updated_time" content="2019-04-27T08:11:56.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jabin&#39;s Blog">
-<meta name="twitter:description" content="Description">
+<meta name="twitter:title" content="利用PHP基于链表实现栈和队列">
+<meta name="twitter:description" content="前一篇文章介绍了栈和队列的基本结构，并且使用数组实现了基本接口功能。具体内容戳我。本文同样实现栈和队列，但是不是基于数组而是基于链表。 Node节点Node类包括两个域属性，分别为data和next。其中data为改节点的值，而next则是包含下一个节点的引用。具体代码如下 12345678910111213141516171819202122232425class Node&amp;#123;	priv">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/StackQueue/stackQueueNodeRes.png">
   
     <link rel="alternative" href="/atom.xml" title="Jabin&#39;s Blog" type="application/atom+xml">
   
@@ -154,305 +157,160 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-利用PHP基于链表实现栈和队列" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      利用PHP基于链表实现栈和队列
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/04/27/利用PHP基于链表实现栈和队列/" class="archive-article-date">
+
+        
+        <a href="/2019/04/27/利用PHP基于链表实现栈和队列/" class="archive-article-date">
   	<time datetime="2019-04-27T08:03:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-27</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/27/利用PHP基于链表实现栈和队列/">利用PHP基于链表实现栈和队列</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
+        
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/04/25/利用PHP基于数组实现栈和队列/" class="archive-article-date">
-  	<time datetime="2019-04-25T08:14:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/25/利用PHP基于数组实现栈和队列/">利用PHP基于数组实现栈和队列</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/04/22/单链表反转/" class="archive-article-date">
-  	<time datetime="2019-04-22T07:21:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/22/单链表反转/">单链表反转</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/04/13/Laravel-Layui使用Ajax请求/" class="archive-article-date">
-  	<time datetime="2019-04-13T08:35:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/13/Laravel-Layui使用Ajax请求/">Laravel-Layui使用Ajax请求</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/03/28/Lumen根据环境加载不同的配置文件/" class="archive-article-date">
-  	<time datetime="2019-03-28T09:48:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/03/28/Lumen根据环境加载不同的配置文件/">Lumen根据环境加载不同的配置文件</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
+    <div class="article-entry" itemprop="articleBody">
       
-        </div></section>
+        <p>前一篇文章介绍了栈和队列的基本结构，并且使用数组实现了基本接口功能。<a href="https://dev-jabin.github.io/2019/04/25/%E5%88%A9%E7%94%A8PHP%E5%9F%BA%E4%BA%8E%E6%95%B0%E7%BB%84%E5%AE%9E%E7%8E%B0%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/#more" target="_blank" rel="noopener">具体内容戳我。</a>本文同样实现栈和队列，但是不是基于数组而是基于链表。</p>
+<h4 id="Node节点"><a href="#Node节点" class="headerlink" title="Node节点"></a>Node节点</h4><p>Node类包括两个域属性，分别为data和next。其中data为改节点的值，而next则是包含下一个节点的引用。具体代码如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> $data = <span class="string">''</span>;</span><br><span class="line">	<span class="keyword">private</span> $next = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($data, $next)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;data = $data;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;next = $next;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__set</span><span class="params">($name, $value)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;$name = $value;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__get</span><span class="params">($name)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;$name)) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">$this</span>-&gt;$name;</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Jabin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>:   2019-04-27</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Email</span>:  jpyan2906<span class="doctag">@gmail</span>.com</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> $data = <span class="string">''</span>;</span><br><span class="line">	<span class="keyword">private</span> $next = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($data, $next)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;data = $data;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;next = $next;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__set</span><span class="params">($name, $value)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;$name = $value;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__get</span><span class="params">($name)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;$name)) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">$this</span>-&gt;$name;</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 实现队列</span></span><br><span class="line"><span class="comment"> * FIFO</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Queue</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> $front = <span class="keyword">null</span>;<span class="comment">//队头</span></span><br><span class="line">	<span class="keyword">private</span> $rear = <span class="keyword">null</span>;<span class="comment">//队尾</span></span><br><span class="line">	<span class="keyword">private</span> $size = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">isEmpty</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;front === <span class="keyword">null</span> || <span class="keyword">$this</span>-&gt;rear === <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">enQueue</span><span class="params">($data)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		$oldRear = <span class="keyword">$this</span>-&gt;rear;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;rear = <span class="keyword">new</span> Node($data, <span class="keyword">null</span>);</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;isEmpty()) &#123;</span><br><span class="line">			<span class="keyword">$this</span>-&gt;front = <span class="keyword">$this</span>-&gt;rear;</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		$oldRear-&gt;next = <span class="keyword">$this</span>-&gt;rear;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">deQueue</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;isEmpty()) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		$tempNode = <span class="keyword">$this</span>-&gt;front-&gt;next;</span><br><span class="line">		$data = <span class="keyword">$this</span>-&gt;front-&gt;data;</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;rear == <span class="keyword">$this</span>-&gt;front) &#123;</span><br><span class="line">			<span class="keyword">$this</span>-&gt;rear == $tempNode;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;front = $tempNode;</span><br><span class="line">		<span class="keyword">return</span> $data;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 实现栈结构</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Stack</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> $top = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">isEmpty</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;top === <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">push</span><span class="params">($data)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		$oldTop = <span class="keyword">$this</span>-&gt;top;</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;isEmpty()) &#123;</span><br><span class="line">			<span class="keyword">$this</span>-&gt;top = <span class="keyword">new</span> Node($data, <span class="keyword">null</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;top = <span class="keyword">new</span> Node($data,$oldTop);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">pop</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;isEmpty()) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		$node = <span class="keyword">$this</span>-&gt;top-&gt;next;</span><br><span class="line">		$data = <span class="keyword">$this</span>-&gt;top-&gt;data;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;top = $node;</span><br><span class="line">		<span class="keyword">return</span> $data;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getNode</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">$this</span>-&gt;top;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$stack = <span class="keyword">new</span> Stack();</span><br><span class="line"><span class="comment">// push data</span></span><br><span class="line">$stack-&gt;push(<span class="string">"A"</span>);</span><br><span class="line">$stack-&gt;push(<span class="string">"B"</span>);</span><br><span class="line">$stack-&gt;push(<span class="string">"C"</span>);</span><br><span class="line">$stack-&gt;push(<span class="string">"D"</span>);</span><br><span class="line">$stack-&gt;push(<span class="string">"E"</span>);</span><br><span class="line">$stack-&gt;push(<span class="string">"F"</span>);</span><br><span class="line"><span class="comment">// pop data</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"=====================\npop data\n=====================\n"</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"pop1::"</span>.$stack-&gt;pop().PHP_EOL;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"pop2::"</span>.$stack-&gt;pop().PHP_EOL;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"pop3::"</span>.$stack-&gt;pop().PHP_EOL;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"pop4::"</span>.$stack-&gt;pop().PHP_EOL;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"pop5::"</span>.$stack-&gt;pop().PHP_EOL;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"pop6::"</span>.$stack-&gt;pop().PHP_EOL;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"pop7::"</span>.$stack-&gt;pop().PHP_EOL;</span><br><span class="line"></span><br><span class="line">$queue = <span class="keyword">new</span> Queue();</span><br><span class="line"><span class="comment">// enqueue data</span></span><br><span class="line">$queue-&gt;enQueue(<span class="string">"A"</span>);</span><br><span class="line">$queue-&gt;enQueue(<span class="string">"B"</span>);</span><br><span class="line">$queue-&gt;enQueue(<span class="string">"C"</span>);</span><br><span class="line">$queue-&gt;enQueue(<span class="string">"D"</span>);</span><br><span class="line">$queue-&gt;enQueue(<span class="string">"E"</span>);</span><br><span class="line">$queue-&gt;enQueue(<span class="string">"F"</span>);</span><br><span class="line"><span class="comment">// dequeue data</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"=====================\ndequeue data\n=====================\n"</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">'dequeue1::'</span>.$queue-&gt;deQueue().PHP_EOL;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">'dequeue2::'</span>.$queue-&gt;deQueue().PHP_EOL;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">'dequeue3::'</span>.$queue-&gt;deQueue().PHP_EOL;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">'dequeue4::'</span>.$queue-&gt;deQueue().PHP_EOL;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">'dequeue5::'</span>.$queue-&gt;deQueue().PHP_EOL;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">'dequeue6::'</span>.$queue-&gt;deQueue().PHP_EOL;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">'dequeue7::'</span>.$queue-&gt;deQueue().PHP_EOL;</span><br></pre></td></tr></table></figure>
+<h4 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h4><p><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/StackQueue/stackQueueNodeRes.png" alt="测试结果"></p>
+<p>Done!</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/02/unsplash-images-crawler/" class="archive-article-date">
-  	<time datetime="2018-12-02T13:31:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/02/unsplash-images-crawler/">PHP抓取图片方案</a>
-    </h1>
-  
+      
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/04/27/利用PHP基于链表实现栈和队列/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/10/18/SQL-联结/" class="archive-article-date">
-  	<time datetime="2018-10-18T07:58:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-18</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/04/25/利用PHP基于数组实现栈和队列/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">利用PHP基于数组实现栈和队列</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/18/SQL-联结/">SQL_联结</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/11/revet-singal-file-md/" class="archive-article-date">
-  	<time datetime="2018-07-11T08:26:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/11/revet-singal-file-md/">Git回滚单个文件</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/20/SQL-WHERE/" class="archive-article-date">
-  	<time datetime="2018-06-20T03:17:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/20/SQL-WHERE/">SQL-WHERE</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/15/SQL-ORDER-BY/" class="archive-article-date">
-  	<time datetime="2018-06-15T07:47:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/15/SQL-ORDER-BY/">SQL-ORDER BY</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -476,8 +334,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
