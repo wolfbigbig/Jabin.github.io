@@ -9,7 +9,7 @@
   <title>利用PHP基于数组实现栈和队列 | Jabin&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="下压栈（或简称为栈）是一种后进先出（LIFO）策略的集合类型。栈是线性数据结构，一般包含四个接口，分别为入栈、出栈、判空和求栈的长度。本文基于PHP使用数组来模式栈的入栈和出栈，主要是用的数组的array_pop函数和array_push函数。队列是一种先进先出(FIFO)策略的集合类型。队列是线形数据结构，一般包含四个接口，分别为入队列、出队列、判空和求队列的长度。本文基于PHP使用数组来模式队">
-<meta name="keywords" content="keywords">
+<meta name="keywords" content="数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用PHP基于数组实现栈和队列">
 <meta property="og:url" content="http://yoursite.com/2019/04/25/利用PHP基于数组实现栈和队列/index.html">
@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/832cd30826e39bc1608f67003048faf4e6685a92/img/StackQueue/stackResult.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/StackQueue/queue.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/StackQueue/queueResult.png">
-<meta property="og:updated_time" content="2019-04-27T08:14:13.000Z">
+<meta property="og:updated_time" content="2019-05-21T07:00:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用PHP基于数组实现栈和队列">
 <meta name="twitter:description" content="下压栈（或简称为栈）是一种后进先出（LIFO）策略的集合类型。栈是线性数据结构，一般包含四个接口，分别为入栈、出栈、判空和求栈的长度。本文基于PHP使用数组来模式栈的入栈和出栈，主要是用的数组的array_pop函数和array_push函数。队列是一种先进先出(FIFO)策略的集合类型。队列是线形数据结构，一般包含四个接口，分别为入队列、出队列、判空和求队列的长度。本文基于PHP使用数组来模式队">
@@ -68,6 +68,8 @@
 				<li><a href="/">主页</a></li>
 	        
 				<li><a href="/tags/设计模式/">设计模式</a></li>
+	        
+				<li><a href="/tags/数据结构/">数据结构</a></li>
 	        
 				<li><a href="/tags/随笔/">随笔</a></li>
 	        
@@ -129,6 +131,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -147,11 +151,13 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
+					<li style="width: 25%"><a href="/">主页</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/设计模式/">设计模式</a></li>
+					<li style="width: 25%"><a href="/tags/设计模式/">设计模式</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 25%"><a href="/tags/数据结构/">数据结构</a></li>
+		        
+					<li style="width: 25%"><a href="/tags/随笔/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -226,6 +232,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -425,6 +442,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
