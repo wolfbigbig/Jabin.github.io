@@ -6,19 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 设计模式 | Jabin&#39;s Blog</title>
+  <title>设计模式之命令模式 | Jabin&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Description">
-<meta name="keywords" content="keywords">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jabin&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/tags/设计模式/index.html">
+  <meta name="description" content="软件设计中，我们经常需要向某些对象发送请求，但是并不关心请求的接受者是谁，我们只需要在程序运行时指定具体的请求接收者即可，此时可以使用命令模式进行设计，使发送者和接收者不再耦合。命令模式实现了发送者和接收者完全解耦，发送者与接收者之间没有直接引用关系。">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式之命令模式">
+<meta property="og:url" content="http://yoursite.com/2019/05/28/设计模式之命令模式/index.html">
 <meta property="og:site_name" content="Jabin&#39;s Blog">
-<meta property="og:description" content="Description">
+<meta property="og:description" content="软件设计中，我们经常需要向某些对象发送请求，但是并不关心请求的接受者是谁，我们只需要在程序运行时指定具体的请求接收者即可，此时可以使用命令模式进行设计，使发送者和接收者不再耦合。命令模式实现了发送者和接收者完全解耦，发送者与接收者之间没有直接引用关系。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/CommandDP/CommadUML.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/CommandDP/CommandRes.png">
+<meta property="og:updated_time" content="2019-05-28T13:43:24.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jabin&#39;s Blog">
-<meta name="twitter:description" content="Description">
+<meta name="twitter:title" content="设计模式之命令模式">
+<meta name="twitter:description" content="软件设计中，我们经常需要向某些对象发送请求，但是并不关心请求的接受者是谁，我们只需要在程序运行时指定具体的请求接收者即可，此时可以使用命令模式进行设计，使发送者和接收者不再耦合。命令模式实现了发送者和接收者完全解耦，发送者与接收者之间没有直接引用关系。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/CommandDP/CommadUML.png">
   
     <link rel="alternative" href="/atom.xml" title="Jabin&#39;s Blog" type="application/atom+xml">
   
@@ -166,36 +170,108 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-设计模式之命令模式" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      设计模式之命令模式
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/28/设计模式之命令模式/" class="archive-article-date">
+
+        
+        <a href="/2019/05/28/设计模式之命令模式/" class="archive-article-date">
   	<time datetime="2019-05-28T13:10:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-28</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/28/设计模式之命令模式/">设计模式之命令模式</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>软件设计中，我们经常需要向某些对象发送请求，但是并不关心请求的接受者是谁，我们只需要在程序运行时指定具体的请求接收者即可，此时可以使用命令模式进行设计，使发送者和接收者不再耦合。<br>命令模式实现了发送者和接收者完全解耦，发送者与接收者之间没有直接引用关系。</p>
+<a id="more"></a>
+<h4 id="模式思想描述"><a href="#模式思想描述" class="headerlink" title="模式思想描述"></a>模式思想描述</h4><p>命令模式(Command Pattern): 将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化。</p>
+<p>假设我们有一个请求者类Invoker和一个接收请求的类Receiver，在两者之间我们使用命令类Command的execute方法来托管请求方法，如此以来，请求者Invoker只知道调用命令类的execute方法来处理客户端请求，从而实现了请求者Invoker和接收者Receiver的解耦。</p>
+<h4 id="模式结构及UML图"><a href="#模式结构及UML图" class="headerlink" title="模式结构及UML图"></a>模式结构及UML图</h4><p><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/CommandDP/CommadUML.png" alt="CommadUML"></p>
+<ul>
+<li><p><strong>抽象命令接口(Command)</strong></p>
+<p>  主要用于初始化Receiver实例，并且包含一个execute抽象方法</p>
+</li>
+<li><p><strong>具体命令(CommandOn、CommandOff)</strong></p>
+<p>  具体的命令类，实现抽象类的execute方法</p>
+</li>
+<li><p><strong>请求发送者(RemoteInvoker)</strong></p>
+<p>  设置具体的命令，并且发送相关指令</p>
+</li>
+<li><p><strong>请求接收者(TVReceiver)</strong></p>
+<p>  收到Command发送过来的指令，并进行相应的操作</p>
+</li>
+</ul>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><ul>
+<li>抽象命令(Command)</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Jabin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>:   2019-05-28</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Email</span>:  jpyan2906<span class="doctag">@gmail</span>.com</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">DesignPatterns</span>\<span class="title">Command</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"TVReceiver.php"</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">DesignPatterns</span>\<span class="title">Command</span>\<span class="title">TVReceiver</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Command</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">protected</span> $receiver;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">(TVReceiver $receiver)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;receiver = $receiver;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">abstract</span> <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">execute</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>具体命令(CommandOn、CommandOff)</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Jabin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>:   2019-05-28</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Email</span>:  jpyan2906<span class="doctag">@gmail</span>.com</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">DesignPatterns</span>\<span class="title">Command</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CommandOn</span> <span class="keyword">extends</span> <span class="title">Command</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">execute</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;receiver-&gt;actionOn();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Jabin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>:   2019-05-28</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Email</span>:  jpyan2906<span class="doctag">@gmail</span>.com</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">DesignPatterns</span>\<span class="title">Command</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CommandOff</span> <span class="keyword">extends</span> <span class="title">Command</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">execute</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;receiver-&gt;actionOff();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>请求发送者(RemoteInvoker)</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Jabin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>:   2019-05-28</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Email</span>:  jpyan2906<span class="doctag">@gmail</span>.com</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">DesignPatterns</span>\<span class="title">Command</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"Command.php"</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">DesignPatterns</span>\<span class="title">Command</span>\<span class="title">Command</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RemoteInvoker</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">protected</span> $command;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setCommand</span><span class="params">(Command $command)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;command = $command;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">send</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;command-&gt;execute();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>请求接收者(TVReceiver)</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Jabin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>:   2019-05-28</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Email</span>:  jpyan2906<span class="doctag">@gmail</span>.com</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">DesignPatterns</span>\<span class="title">Command</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TVReceiver</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">actionOn</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"exec command on, open the TV\n"</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">actionOff</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"exec command off, close the TV\n"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>测试类(TestCommand)</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Jabin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>:   2019-05-28</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Email</span>:  jpyan2906<span class="doctag">@gmail</span>.com</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">DesignPatterns</span>\<span class="title">Command</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"TVReceiver.php"</span>;</span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"RemoteInvoker.php"</span>;</span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"CommandOn.php"</span>;</span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"CommandOff.php"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">DesignPatterns</span>\<span class="title">Command</span>\<span class="title">TVReceiver</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">DesignPatterns</span>\<span class="title">Command</span>\<span class="title">RemoteInvoker</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">DesignPatterns</span>\<span class="title">Command</span>\<span class="title">CommandOn</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">DesignPatterns</span>\<span class="title">Command</span>\<span class="title">CommandOff</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestCommad</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> $receiver;</span><br><span class="line">	<span class="keyword">private</span> $invoker;</span><br><span class="line">	<span class="keyword">private</span> $commandOn;</span><br><span class="line">	<span class="keyword">private</span> $commandOff;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;receiver = <span class="keyword">new</span> TVReceiver();</span><br><span class="line">		<span class="keyword">$this</span>-&gt;invoker = <span class="keyword">new</span> RemoteInvoker();</span><br><span class="line">		<span class="keyword">$this</span>-&gt;commandOn = <span class="keyword">new</span> CommandOn(<span class="keyword">$this</span>-&gt;receiver);</span><br><span class="line">		<span class="keyword">$this</span>-&gt;commandOff = <span class="keyword">new</span> CommandOff(<span class="keyword">$this</span>-&gt;receiver);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testCommadOn</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;invoker-&gt;setCommand(<span class="keyword">$this</span>-&gt;commandOn);</span><br><span class="line">		<span class="keyword">$this</span>-&gt;invoker-&gt;send();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testCommadOff</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;invoker-&gt;setCommand(<span class="keyword">$this</span>-&gt;commandOff);</span><br><span class="line">		<span class="keyword">$this</span>-&gt;invoker-&gt;send();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$testCommadObj = <span class="keyword">new</span> TestCommad();</span><br><span class="line">$testCommadObj-&gt;testCommadOn();</span><br><span class="line">$testCommadObj-&gt;testCommadOff();</span><br></pre></td></tr></table></figure>
+<h4 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/CommandDP/CommandRes.png" alt="CommandRes"></p>
+<h4 id="模式优点"><a href="#模式优点" class="headerlink" title="模式优点"></a>模式优点</h4><ul>
+<li>降低请求者和接收者之间的耦合度</li>
+<li>容易拓展新的指令</li>
+</ul>
+<h4 id="模式缺点"><a href="#模式缺点" class="headerlink" title="模式缺点"></a>模式缺点</h4><ul>
+<li>命令模式会使有些系统的具体命令类过多</li>
+</ul>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
+<li>命令模式包含四个角色：抽象命令类中声明了用于执行请求的execute()等方法，通过这些方法可以调用请求接收者的相关操作；具体命令类是抽象命令类的子类，实现了在抽象命令类中声明的方法，它对应具体的接收者对象，将接收者对象的动作绑定其中；调用者即请求的发送者，又称为请求者，它通过命令对象来执行请求；接收者执行与请求相关的操作，它具体实现对请求的业务处理</li>
+<li>命令模式的本质是对命令进行封装，将发出命令的责任和执行命令的责任分割开。命令模式使请求本身成为一个对象，这个对象和其他对象一样可以被存储和传递</li>
+</ul>
+<h4 id="代码地址"><a href="#代码地址" class="headerlink" title="代码地址"></a>代码地址</h4><p><a href="https://github.com/Dev-Jabin/DesignPattern-Command" target="_blank" rel="noopener">CommandDesignPattern</a></p>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -207,209 +283,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/05/28/设计模式之命令模式/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/28/设计模式之中介者模式/" class="archive-article-date">
-  	<time datetime="2019-05-28T08:48:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-28</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/05/28/设计模式之中介者模式/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">设计模式之中介者模式</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/28/设计模式之中介者模式/">设计模式之中介者模式</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/23/设计模式之观察者模式/" class="archive-article-date">
-  	<time datetime="2019-05-23T09:24:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/23/设计模式之观察者模式/">设计模式之观察者模式</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/21/设计模式之单例模式/" class="archive-article-date">
-  	<time datetime="2019-05-21T05:47:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/21/设计模式之单例模式/">设计模式之单例模式</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/20/设计模式之建造者模式/" class="archive-article-date">
-  	<time datetime="2019-05-20T07:00:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/20/设计模式之建造者模式/">设计模式之建造者模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/14/设计模式之工厂模式/" class="archive-article-date">
-  	<time datetime="2019-05-14T02:30:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/14/设计模式之工厂模式/">设计模式之工厂模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -432,9 +405,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
