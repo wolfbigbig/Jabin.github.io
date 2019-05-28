@@ -6,19 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019 | Jabin&#39;s Blog</title>
+  <title>设计模式之中介者模式 | Jabin&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Description">
-<meta name="keywords" content="keywords">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jabin&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/archives/2019/page/2/index.html">
+  <meta name="description" content="在现实中，以电话交换机为例，如果不使用电话交换机，如果一部电话想和另外一部电话取得联系，就需要在两部电话之间连接一条电话线，如果需要很多部电话联系，需要连接很多条电话线，这个显然是不合理的。如果使用电话交换机，那么只需要从当前电话扯一条电话线到交换机，然后由交换机将信息传给目标电话即可。在软件开发过程中，存在一个对象需要很多个人对象进行沟通，从而形成复杂的依赖关系，增加了系统耦合性，导致系统不好维">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式之中介者模式">
+<meta property="og:url" content="http://yoursite.com/2019/05/28/设计模式之中介者模式/index.html">
 <meta property="og:site_name" content="Jabin&#39;s Blog">
-<meta property="og:description" content="Description">
+<meta property="og:description" content="在现实中，以电话交换机为例，如果不使用电话交换机，如果一部电话想和另外一部电话取得联系，就需要在两部电话之间连接一条电话线，如果需要很多部电话联系，需要连接很多条电话线，这个显然是不合理的。如果使用电话交换机，那么只需要从当前电话扯一条电话线到交换机，然后由交换机将信息传给目标电话即可。在软件开发过程中，存在一个对象需要很多个人对象进行沟通，从而形成复杂的依赖关系，增加了系统耦合性，导致系统不好维">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/MediatorDP/MediatorUML.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/MediatorDP/MediatorRes.png">
+<meta property="og:updated_time" content="2019-05-28T09:48:55.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jabin&#39;s Blog">
-<meta name="twitter:description" content="Description">
+<meta name="twitter:title" content="设计模式之中介者模式">
+<meta name="twitter:description" content="在现实中，以电话交换机为例，如果不使用电话交换机，如果一部电话想和另外一部电话取得联系，就需要在两部电话之间连接一条电话线，如果需要很多部电话联系，需要连接很多条电话线，这个显然是不合理的。如果使用电话交换机，那么只需要从当前电话扯一条电话线到交换机，然后由交换机将信息传给目标电话即可。在软件开发过程中，存在一个对象需要很多个人对象进行沟通，从而形成复杂的依赖关系，增加了系统耦合性，导致系统不好维">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/MediatorDP/MediatorUML.png">
   
     <link rel="alternative" href="/atom.xml" title="Jabin&#39;s Blog" type="application/atom+xml">
   
@@ -166,79 +170,218 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-设计模式之中介者模式" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/04/13/Laravel-Layui使用Ajax请求/" class="archive-article-date">
-  	<time datetime="2019-04-13T08:35:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-13</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/13/Laravel-Layui使用Ajax请求/">Laravel-Layui使用Ajax请求</a>
+    <h1 class="article-title" itemprop="name">
+      设计模式之中介者模式
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/03/28/Lumen根据环境加载不同的配置文件/" class="archive-article-date">
-  	<time datetime="2019-03-28T09:48:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-28</time>
+        
+        <a href="/2019/05/28/设计模式之中介者模式/" class="archive-article-date">
+  	<time datetime="2019-05-28T08:48:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-28</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/03/28/Lumen根据环境加载不同的配置文件/">Lumen根据环境加载不同的配置文件</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在现实中，以电话交换机为例，如果不使用电话交换机，如果一部电话想和另外一部电话取得联系，就需要在两部电话之间连接一条电话线，如果需要很多部电话联系，需要连接很多条电话线，这个显然是不合理的。如果使用电话交换机，那么只需要从当前电话扯一条电话线到交换机，然后由交换机将信息传给目标电话即可。<br>在软件开发过程中，存在一个对象需要很多个人对象进行沟通，从而形成复杂的依赖关系，增加了系统耦合性，导致系统不好维护。此时可以使用中介者模式，使得各个同事类之间不依赖，不耦合，每个同事类只与中介者联系，由中介者对信息进行转发。</p>
+<a id="more"></a>
+<h4 id="模式思想描述"><a href="#模式思想描述" class="headerlink" title="模式思想描述"></a>模式思想描述</h4><p>中介者模式(Mediator Pattern):用一个中介对象来封装一系列的对象交互，中介者使各对象不需要显式的相互引用，从而使其耦合松散，而且可以独立地改变他们之间的交互。中介者模式是一种对象行为型模式。 </p>
+<h4 id="模式结构及UML图"><a href="#模式结构及UML图" class="headerlink" title="模式结构及UML图"></a>模式结构及UML图</h4><p><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/MediatorDP/MediatorUML.png" alt="MidiatorUML"></p>
+<ul>
+<li><p><strong>中介者接口(ICenterController)</strong></p>
+<p>  中介者类的公共属性，最简单的只有一个sendMsg接口。</p>
+</li>
+<li><p><strong>具体中介者(CenterController)</strong></p>
+<p>  具体的中介者类。</p>
+</li>
+<li><p><strong>抽象同事类(Client)</strong></p>
+<p>  依赖中介者接口，主要用于实例化中介者对象。</p>
+</li>
+<li><p><strong>具体同事类(AClient, BClient, CClient)</strong></p>
+<p>  具体的同事类逻辑，最简单包括声明信息接口和接受信息接口</p>
+</li>
+</ul>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><ul>
+<li>中介者接口</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Jabin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>:   2019-05-24</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Email</span>:  jpyan2906<span class="doctag">@gmail</span>.com</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">DesignPatterns</span>\<span class="title">Mediator</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"Client.php"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">DesignPatterns</span>\<span class="title">Mediator</span>\<span class="title">Client</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">ICenterController</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">sendMsg</span><span class="params">($msg,Client $fromClient,Client $toClient)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>具体中介者</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Jabin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>:   2019-05-24</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Email</span>:  jpyan2906<span class="doctag">@gmail</span>.com</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">DesignPatterns</span>\<span class="title">Mediator</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"ICenterController.php"</span>;</span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"Client.php"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">DesignPatterns</span>\<span class="title">Mediator</span>\<span class="title">ICenterController</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">DesignPatterns</span>\<span class="title">Mediator</span>\<span class="title">Client</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CenterController</span> <span class="keyword">implements</span> <span class="title">ICenterController</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">sendMsg</span><span class="params">($msg,Client $fromClient, Client $toClient)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		$toClient-&gt;getMsg($msg);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>抽象同事类</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Jabin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>:   2019-05-24</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Email</span>:  jpyan2906<span class="doctag">@gmail</span>.com</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">DesignPatterns</span>\<span class="title">Mediator</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"ICenterController.php"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">DesignPatterns</span>\<span class="title">Mediator</span>\<span class="title">ICenterController</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">protected</span> $mediator;</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">(ICenterController $centerController)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;mediator = $centerController;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>具体同事类</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Jabin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>:   2019-05-24</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Email</span>:  jpyan2906<span class="doctag">@gmail</span>.com</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">DesignPatterns</span>\<span class="title">Mediator</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"ICenterController.php"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">DesignPatterns</span>\<span class="title">Mediator</span>\<span class="title">ICenterController</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AClient</span> <span class="keyword">extends</span> <span class="title">Client</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">(ICenterController $centerController)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">parent</span>::__construct($centerController);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 声明消息</span></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">declared</span><span class="params">($msg,$toClient)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;mediator-&gt;sendMsg($msg,<span class="keyword">$this</span>,$toClient);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 收到消息</span></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getMsg</span><span class="params">($msg)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"$msg"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Jabin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>:   2019-05-24</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Email</span>:  jpyan2906<span class="doctag">@gmail</span>.com</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">DesignPatterns</span>\<span class="title">Mediator</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"ICenterController.php"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">DesignPatterns</span>\<span class="title">Mediator</span>\<span class="title">ICenterController</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BClient</span> <span class="keyword">extends</span> <span class="title">Client</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">(ICenterController $centerController)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">parent</span>::__construct($centerController);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 声明消息</span></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">declared</span><span class="params">($msg,$toClient)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;mediator-&gt;sendMsg($msg,<span class="keyword">$this</span>,$toClient);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 收到消息</span></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getMsg</span><span class="params">($msg)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"$msg"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Jabin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>:   2019-05-28</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Email</span>:  jpyan2906<span class="doctag">@gmail</span>.com</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">DesignPatterns</span>\<span class="title">Mediator</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"ICenterController.php"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">DesignPatterns</span>\<span class="title">Mediator</span>\<span class="title">ICenterController</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CClient</span> <span class="keyword">extends</span> <span class="title">Client</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">(ICenterController $centerController)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">parent</span>::__construct($centerController);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 声明消息</span></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">declared</span><span class="params">($msg,$toClient)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;mediator-&gt;sendMsg($msg,<span class="keyword">$this</span>,$toClient);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 收到消息</span></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getMsg</span><span class="params">($msg)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"$msg"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>测试类</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Jabin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>:   2019-05-24</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Email</span>:  jpyan2906<span class="doctag">@gmail</span>.com</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">DesignPatterns</span>\<span class="title">Mediator</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"CenterController.php"</span>;</span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"AClient.php"</span>;</span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"BClient.php"</span>;</span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"cClient.php"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">DesignPatterns</span>\<span class="title">Mediator</span>\<span class="title">CenterController</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">DesignPatterns</span>\<span class="title">Mediator</span>\<span class="title">AClient</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">DesignPatterns</span>\<span class="title">Mediator</span>\<span class="title">BClient</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">DesignPatterns</span>\<span class="title">Mediator</span>\<span class="title">cClient</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestMediator</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> $centerController;</span><br><span class="line">	<span class="keyword">private</span> $aClient;</span><br><span class="line">	<span class="keyword">private</span> $bClient;</span><br><span class="line">	<span class="keyword">private</span> $cClient;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;centerController = <span class="keyword">new</span> CenterController();</span><br><span class="line">		<span class="keyword">$this</span>-&gt;aClient = <span class="keyword">new</span> AClient(<span class="keyword">$this</span>-&gt;centerController);</span><br><span class="line">		<span class="keyword">$this</span>-&gt;bClient = <span class="keyword">new</span> BClient(<span class="keyword">$this</span>-&gt;centerController);</span><br><span class="line">		<span class="keyword">$this</span>-&gt;cClient = <span class="keyword">new</span> CClient(<span class="keyword">$this</span>-&gt;centerController);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testAc2Bc</span><span class="params">($msg)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;aClient-&gt;declared($msg,<span class="keyword">$this</span>-&gt;bClient);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testAc2Cc</span><span class="params">($msg)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;aClient-&gt;declared($msg,<span class="keyword">$this</span>-&gt;cClient);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testBc2Ac</span><span class="params">($msg)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;bClient-&gt;declared($msg,<span class="keyword">$this</span>-&gt;aClient);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$testMediatorObj = <span class="keyword">new</span> TestMediator();</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"ACleint =&gt; BClient\n"</span>;</span><br><span class="line">$testMediatorObj-&gt;testAc2Bc(<span class="string">"Hi, BClient I'm AClient Nice To Meet You!\n\n"</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"BCleint =&gt; AClient\n"</span>;</span><br><span class="line">$testMediatorObj-&gt;testBc2Ac(<span class="string">"Hi, AClient Nice To Meet You Too!\n\n"</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"ACleint =&gt; CClient\n"</span>;</span><br><span class="line">$testMediatorObj-&gt;testAc2Cc(<span class="string">"Hi, CClient I'm AClient Nice To Meet You!\n\n"</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"CCleint =&gt; AClient\n"</span>;</span><br><span class="line">$testMediatorObj-&gt;testAc2Cc(<span class="string">"Hi, AClient I'm CClient Nice To Meet You!\n"</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/MediatorDP/MediatorRes.png" alt="MediatorRes"></p>
+<h4 id="模式优点"><a href="#模式优点" class="headerlink" title="模式优点"></a>模式优点</h4><ul>
+<li>解耦同事类</li>
+<li>简化了同事类之间的交互</li>
+</ul>
+<h4 id="模式缺点"><a href="#模式缺点" class="headerlink" title="模式缺点"></a>模式缺点</h4><ul>
+<li>中介者复杂所有同事类之间的交互，使中介者类比价复杂</li>
+</ul>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
+<li>中介者模式包含四个角色：抽象中介者用于定义一个接口，该接口用于与各同事对象之间的通信；具体中介者是抽象中介者的子类，通过协调各个同事对象来实现协作行为，了解并维护它的各个同事对象的引用；抽象同事类定义各同事的公有方法；具体同事类是抽象同事类的子类，每一个同事对象都引用一个中介者对象；每一个同事对象在需要和其他同事对象通信时，先与中介者通信，通过中介者来间接完成与其他同事类的通信；在具体同事类中实现了在抽象同事类中定义的方法</li>
+<li>中介者模式的主要优点在于简化了对象之间的交互，将各同事解耦。</li>
+</ul>
+<h4 id="代码地址"><a href="#代码地址" class="headerlink" title="代码地址"></a>代码地址</h4><p><a href="https://github.com/Dev-Jabin/DesignPattern-Mediator" target="_blank" rel="noopener">MediatorDesignPattern</a></p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/05/28/设计模式之中介者模式/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/05/23/设计模式之观察者模式/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">设计模式之观察者模式</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2019/">&laquo; Prev</a><a class="page-number" href="/archives/2019/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+
+  
+
   
 
 
@@ -262,8 +405,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
