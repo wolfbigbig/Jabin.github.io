@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>常用排序算法 | Jabin&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="查找和排序算法是算法的入门知识，在日常面试中经常会被问到排序算法及其相关的问题。本文使用PHP语言对几种常见的排序算法(冒泡排序、选择排序、插入排序、二分插入排序、归并排序和快速排序)进行实现。">
+  <meta name="description" content="查找和排序算法是算法的入门知识，在日常面试中经常会被问到排序算法及其相关的问题。本文使用PHP语言对几种常见的排序算法(冒泡排序、选择排序、插入排序、二分插入排序、归并排序、快速排序、希尔排序和桶排序)进行实现。">
 <meta name="keywords" content="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="常用排序算法">
 <meta property="og:url" content="http://yoursite.com/2019/04/29/常用排序算法/index.html">
 <meta property="og:site_name" content="Jabin&#39;s Blog">
-<meta property="og:description" content="查找和排序算法是算法的入门知识，在日常面试中经常会被问到排序算法及其相关的问题。本文使用PHP语言对几种常见的排序算法(冒泡排序、选择排序、插入排序、二分插入排序、归并排序和快速排序)进行实现。">
+<meta property="og:description" content="查找和排序算法是算法的入门知识，在日常面试中经常会被问到排序算法及其相关的问题。本文使用PHP语言对几种常见的排序算法(冒泡排序、选择排序、插入排序、二分插入排序、归并排序、快速排序、希尔排序和桶排序)进行实现。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/sort/sortRes.png">
-<meta property="og:updated_time" content="2019-06-04T01:33:05.000Z">
+<meta property="og:updated_time" content="2019-06-04T01:43:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常用排序算法">
-<meta name="twitter:description" content="查找和排序算法是算法的入门知识，在日常面试中经常会被问到排序算法及其相关的问题。本文使用PHP语言对几种常见的排序算法(冒泡排序、选择排序、插入排序、二分插入排序、归并排序和快速排序)进行实现。">
+<meta name="twitter:description" content="查找和排序算法是算法的入门知识，在日常面试中经常会被问到排序算法及其相关的问题。本文使用PHP语言对几种常见的排序算法(冒泡排序、选择排序、插入排序、二分插入排序、归并排序、快速排序、希尔排序和桶排序)进行实现。">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/sort/sortRes.png">
   
     <link rel="alternative" href="/atom.xml" title="Jabin&#39;s Blog" type="application/atom+xml">
@@ -189,7 +189,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>查找和排序算法是算法的入门知识，在日常面试中经常会被问到排序算法及其相关的问题。本文使用PHP语言对几种常见的排序算法(<strong>冒泡排序</strong>、<strong>选择排序</strong>、<strong>插入排序</strong>、<strong>二分插入排序</strong>、<strong>归并排序</strong>和<strong>快速排序</strong>)进行实现。</p>
+        <p>查找和排序算法是算法的入门知识，在日常面试中经常会被问到排序算法及其相关的问题。本文使用PHP语言对几种常见的排序算法(<strong>冒泡排序</strong>、<strong>选择排序</strong>、<strong>插入排序</strong>、<strong>二分插入排序</strong>、<strong>归并排序</strong>、<strong>快速排序</strong>、<strong>希尔排序</strong>和<strong>桶排序</strong>)进行实现。</p>
 <a id="more"></a>
 <h3 id="公共部分"><a href="#公共部分" class="headerlink" title="公共部分"></a>公共部分</h3><p>新建一个排序类，用于实现不同的排序方法。所有的排序算法几乎都有交换元素的功能，因此将此函数摘出来。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sort</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">swap</span><span class="params">(&amp;$arr,$index1,$index2)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		$temp = $arr[$index2];</span><br><span class="line">		$arr[$index2] = $arr[$index1];</span><br><span class="line">		$arr[$index1] = $temp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
