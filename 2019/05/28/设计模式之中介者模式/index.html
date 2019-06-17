@@ -18,7 +18,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/MediatorDP/MediatorUML.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/MediatorDP/MediatorRes.png">
-<meta property="og:updated_time" content="2019-05-28T09:48:55.000Z">
+<meta property="og:updated_time" content="2019-06-17T03:06:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式之中介者模式">
 <meta name="twitter:description" content="在现实中，以电话交换机为例，如果不使用电话交换机，如果一部电话想和另外一部电话取得联系，就需要在两部电话之间连接一条电话线，如果需要很多部电话联系，需要连接很多条电话线，这个显然是不合理的。如果使用电话交换机，那么只需要从当前电话扯一条电话线到交换机，然后由交换机将信息传给目标电话即可。在软件开发过程中，存在一个对象需要很多个人对象进行沟通，从而形成复杂的依赖关系，增加了系统耦合性，导致系统不好维">
@@ -248,7 +248,7 @@
 <li>中介者模式包含四个角色：抽象中介者用于定义一个接口，该接口用于与各同事对象之间的通信；具体中介者是抽象中介者的子类，通过协调各个同事对象来实现协作行为，了解并维护它的各个同事对象的引用；抽象同事类定义各同事的公有方法；具体同事类是抽象同事类的子类，每一个同事对象都引用一个中介者对象；每一个同事对象在需要和其他同事对象通信时，先与中介者通信，通过中介者来间接完成与其他同事类的通信；在具体同事类中实现了在抽象同事类中定义的方法</li>
 <li>中介者模式的主要优点在于简化了对象之间的交互，将各同事解耦。</li>
 </ul>
-<h4 id="代码地址"><a href="#代码地址" class="headerlink" title="代码地址"></a>代码地址</h4><p><a href="https://github.com/Dev-Jabin/DesignPattern-Mediator" target="_blank" rel="noopener">MediatorDesignPattern</a></p>
+<h4 id="代码地址"><a href="#代码地址" class="headerlink" title="代码地址"></a>代码地址</h4><p><a href="https://github.com/Dev-Jabin/DesignPatterns/tree/master/Mediator" target="_blank" rel="noopener">MediatorDesignPattern</a></p>
 
       
 
