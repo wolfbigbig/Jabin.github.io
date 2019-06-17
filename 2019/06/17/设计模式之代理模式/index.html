@@ -6,19 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019/6 | Jabin&#39;s Blog</title>
+  <title>设计模式之代理模式 | Jabin&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Description">
-<meta name="keywords" content="keywords">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jabin&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/archives/2019/06/index.html">
+  <meta name="description" content="现实生活中有很多代理的例子，以买火车票为例，我们可以直接去火车站买火车票，也可以在就近的火车票代售点进行购票，而这个代售点就相当于一个火车站的代理。在软件工程中，如果一个客户不想或者不能直接引用一个对象，此时可以通过一个称之为“代理”的第三者来实现间接引用。代理对象可以在客户端和目标对象之间起到中介作用，并且可以通过代理对象去掉客户不能看到的内容和服务。本文以在火车票代售点购买火车票为业务场景进行">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式之代理模式">
+<meta property="og:url" content="http://yoursite.com/2019/06/17/设计模式之代理模式/index.html">
 <meta property="og:site_name" content="Jabin&#39;s Blog">
-<meta property="og:description" content="Description">
+<meta property="og:description" content="现实生活中有很多代理的例子，以买火车票为例，我们可以直接去火车站买火车票，也可以在就近的火车票代售点进行购票，而这个代售点就相当于一个火车站的代理。在软件工程中，如果一个客户不想或者不能直接引用一个对象，此时可以通过一个称之为“代理”的第三者来实现间接引用。代理对象可以在客户端和目标对象之间起到中介作用，并且可以通过代理对象去掉客户不能看到的内容和服务。本文以在火车票代售点购买火车票为业务场景进行">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/ProxyDP/ProxyUML.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/ProxyDP/ProxyRes.png">
+<meta property="og:updated_time" content="2019-06-17T05:59:53.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jabin&#39;s Blog">
-<meta name="twitter:description" content="Description">
+<meta name="twitter:title" content="设计模式之代理模式">
+<meta name="twitter:description" content="现实生活中有很多代理的例子，以买火车票为例，我们可以直接去火车站买火车票，也可以在就近的火车票代售点进行购票，而这个代售点就相当于一个火车站的代理。在软件工程中，如果一个客户不想或者不能直接引用一个对象，此时可以通过一个称之为“代理”的第三者来实现间接引用。代理对象可以在客户端和目标对象之间起到中介作用，并且可以通过代理对象去掉客户不能看到的内容和服务。本文以在火车票代售点购买火车票为业务场景进行">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/ProxyDP/ProxyUML.png">
   
     <link rel="alternative" href="/atom.xml" title="Jabin&#39;s Blog" type="application/atom+xml">
   
@@ -172,36 +176,130 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-设计模式之代理模式" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      设计模式之代理模式
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/17/设计模式之代理模式/" class="archive-article-date">
+
+        
+        <a href="/2019/06/17/设计模式之代理模式/" class="archive-article-date">
   	<time datetime="2019-06-17T05:38:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-17</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/17/设计模式之代理模式/">设计模式之代理模式</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>现实生活中有很多代理的例子，以买火车票为例，我们可以直接去火车站买火车票，也可以在就近的火车票代售点进行购票，而这个代售点就相当于一个火车站的代理。<br>在软件工程中，如果一个客户不想或者不能直接引用一个对象，此时可以通过一个称之为“代理”的第三者来实现间接引用。代理对象可以在客户端和目标对象之间起到中介作用，并且可以通过代理对象去掉客户不能看到的内容和服务。<br>本文以在火车票代售点购买火车票为业务场景进行编码。</p>
+<a id="more"></a>
+<h4 id="模式思想描述"><a href="#模式思想描述" class="headerlink" title="模式思想描述"></a>模式思想描述</h4><p>代理模式(Proxy Pattern):给某一个对象提供一个代理，并由代理对象控制对原对象的引用，是一种结构型模式。</p>
+<h4 id="模式结构及UML图"><a href="#模式结构及UML图" class="headerlink" title="模式结构及UML图"></a>模式结构及UML图</h4><p><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/ProxyDP/ProxyUML.png" alt="ProxyUML"></p>
+<ul>
+<li><p><strong>抽象主题(ITicket)</strong></p>
+<p>  声明真实对象和代理对象的共同接口</p>
+</li>
+<li><p><strong>对象代理(TrainStationProxy)</strong></p>
+<p>  代理对象内部包含对真实对象的引用，从而可以操作真实对象，同时代理对象提供与真实对象相同的接口，以便在任何时刻都能替代真实对象，同时，代理对象可以在执行真实对象操作时附加其他操作，相当于对真实对象进行封装</p>
+</li>
+<li><p><strong>真实对象(TrainStation)</strong></p>
+<p>  代理角色所代表的真实对象，是我们最终要引用的对象</p>
+</li>
+<li><p><strong>客户(Client)</strong></p>
+<p>  调用代理的客户端</p>
+</li>
+</ul>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><ul>
+<li>抽象主体</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Jabin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>:   2019-06-17</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Email</span>:  jpyan2906<span class="doctag">@gmail</span>.com</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">ITicketSubject</span></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">sell</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>对象代理</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Jabin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>:   2019-06-17</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Email</span>:  jpyan2906<span class="doctag">@gmail</span>.com</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"ITicketSubject.php"</span>;</span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"TrainStation.php"</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TrainStationProxy</span> <span class="keyword">implements</span> <span class="title">ITicketSubject</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> $trainStation;</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($trainStation)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;trainStation = $trainStation;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">sell</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"welcome to trainstation proxy\n"</span>;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;trainStation-&gt;sell();</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"handling fee please\n"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>真实对象</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Jabin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>:   2019-06-17</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Email</span>:  jpyan2906<span class="doctag">@gmail</span>.com</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"ITicketSubject.php"</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TrainStation</span> <span class="keyword">implements</span> <span class="title">ITicketSubject</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">sell</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"sell a ticket\n"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>客户</li>
+</ul>
+<pre><code class="php"><span class="meta">&lt;?php</span>
 
-        <div class="article-info info-on-right">
-          
+<span class="comment">/**</span>
+<span class="comment"> * <span class="doctag">@Author</span>: Jabin</span>
+<span class="comment"> * <span class="doctag">@Date</span>:   2019-06-17</span>
+<span class="comment"> * <span class="doctag">@Email</span>:  jpyan2906<span class="doctag">@gmail</span>.com</span>
+<span class="comment"> */</span>
+
+<span class="keyword">include_once</span> <span class="string">"TrainStationProxy.php"</span>;
+<span class="keyword">include_once</span> <span class="string">"TrainStation.php"</span>;
+
+<span class="class"><span class="keyword">class</span> <span class="title">Client</span></span>
+<span class="class"></span>{
+    <span class="keyword">private</span> $proxy;
+
+    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setProxy</span><span class="params">($trainStation)</span></span>
+<span class="function">    </span>{
+        <span class="keyword">$this</span>-&gt;proxy = <span class="keyword">new</span> TrainStationProxy($trainStation);
+    }
+
+    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">buyTicket</span><span class="params">()</span></span>
+<span class="function">    </span>{
+        <span class="keyword">$this</span>-&gt;proxy-&gt;sell();
+    }
+}
+
+$trainStation = <span class="keyword">new</span> TrainStation();
+$clientObj = <span class="keyword">new</span> Client();
+$clientObj-&gt;setProxy($trainStation);
+$clientObj-&gt;buyTicket();
+</code></pre>
+<h4 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/ProxyDP/ProxyRes.png" alt="ProxyRes"></p>
+<h4 id="模式优点"><a href="#模式优点" class="headerlink" title="模式优点"></a>模式优点</h4><ul>
+<li>代理模式能够协调调用者和被调用者，在一定程度上降低了系统的耦合度</li>
+<li>虚拟代理使用一个小对象来代表一个大对象，可以减少系统资源的消耗，对系统进行优化并提高运行速度</li>
+<li>通过代理可以控制对真实对象的使用权限</li>
+</ul>
+<h4 id="模式缺点"><a href="#模式缺点" class="headerlink" title="模式缺点"></a>模式缺点</h4><ul>
+<li>由于客户端和真实主题之间添加了一层代理，请求速度会变慢</li>
+<li>需要额外维护代理类</li>
+</ul>
+<h4 id="代码地址"><a href="#代码地址" class="headerlink" title="代码地址"></a>代码地址</h4><p><a href="https://github.com/Dev-Jabin/DesignPatterns/tree/master/Proxy" target="_blank" rel="noopener">ProxyDesignPattern</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -213,122 +311,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/06/17/设计模式之代理模式/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/17/设计模式之外观模式/" class="archive-article-date">
-  	<time datetime="2019-06-17T02:05:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-17</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/06/17/设计模式之外观模式/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">设计模式之外观模式</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/17/设计模式之外观模式/">设计模式之外观模式</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/12/SQL数据库和NoSQL数据库那些事儿/" class="archive-article-date">
-  	<time datetime="2019-06-12T15:26:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/12/SQL数据库和NoSQL数据库那些事儿/">SQL数据库和NoSQL数据库那些事儿</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/12/基于阿里云ECS和Nginx搭建负载均衡/" class="archive-article-date">
-  	<time datetime="2019-06-12T04:41:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/12/基于阿里云ECS和Nginx搭建负载均衡/">基于阿里云ECS和Nginx搭建负载均衡与反向代理</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -351,8 +433,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
