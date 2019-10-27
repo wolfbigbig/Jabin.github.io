@@ -174,82 +174,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Mysql事务隔离级别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/27/Mysql事务隔离级别/">Mysql事务隔离级别</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/27/Mysql事务隔离级别/" class="archive-article-date">
-  	<time datetime="2019-10-27T08:13:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>众所周知，事务在Mysql中起着十分重要的角色。事务一共有ACID四个特性分别为原子性(Atomicity)、一致性(Consistency)、隔离性(Isolation)和持久性(Durability)。其中隔离性是指，一个事务的执行不受其他事务的干扰，即一个事务内部的操作及使用的数据对其它并发事务是隔离的，并发执行的各个事务之间不能相互干扰。<br>数据库事务的隔离级别有4个，由低到高依次为 <strong>读未提交(Read uncommitted)</strong>、<strong>读已提交(Read committed)</strong>、<strong>可重复读(Repeatable read)</strong>、<strong>串行化(Serializable)</strong>，这四个级别可以逐个解决脏读、不可重复读、幻读这几类问题。</p>
-        
-          <a class="article-more-a" href="/2019/10/27/Mysql事务隔离级别/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/27/Mysql事务隔离级别/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-在定时任务中使用Redis做为锁" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -872,6 +796,82 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/05/28/设计模式之命令模式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-设计模式之中介者模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/28/设计模式之中介者模式/">设计模式之中介者模式</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/28/设计模式之中介者模式/" class="archive-article-date">
+  	<time datetime="2019-05-28T08:48:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在现实中，以电话交换机为例，如果不使用电话交换机，如果一部电话想和另外一部电话取得联系，就需要在两部电话之间连接一条电话线，如果需要很多部电话联系，需要连接很多条电话线，这个显然是不合理的。如果使用电话交换机，那么只需要从当前电话扯一条电话线到交换机，然后由交换机将信息传给目标电话即可。<br>在软件开发过程中，存在一个对象需要很多个人对象进行沟通，从而形成复杂的依赖关系，增加了系统耦合性，导致系统不好维护。此时可以使用中介者模式，使得各个同事类之间不依赖，不耦合，每个同事类只与中介者联系，由中介者对信息进行转发。</p>
+        
+          <a class="article-more-a" href="/2019/05/28/设计模式之中介者模式/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/28/设计模式之中介者模式/">展开全文 >></a>
         </p>
       
 
