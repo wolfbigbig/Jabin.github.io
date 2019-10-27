@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Jabin&#39;s Blog">
 <meta property="og:description" content="众所周知，事务在Mysql中起着十分重要的角色。事务一共有ACID四个特性分别为原子性(Atomicity)、一致性(Consistency)、隔离性(Isolation)和持久性(Durability)。其中隔离性是指，一个事务的执行不受其他事务的干扰，即一个事务内部的操作及使用的数据对其它并发事务是隔离的，并发执行的各个事务之间不能相互干扰。数据库事务的隔离级别有4个，由低到高依次为 读未提交">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-27T08:33:45.320Z">
+<meta property="og:updated_time" content="2019-10-27T09:04:58.680Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql事务隔离级别">
 <meta name="twitter:description" content="众所周知，事务在Mysql中起着十分重要的角色。事务一共有ACID四个特性分别为原子性(Atomicity)、一致性(Consistency)、隔离性(Isolation)和持久性(Durability)。其中隔离性是指，一个事务的执行不受其他事务的干扰，即一个事务内部的操作及使用的数据对其它并发事务是隔离的，并发执行的各个事务之间不能相互干扰。数据库事务的隔离级别有4个，由低到高依次为 读未提交">
@@ -195,7 +195,7 @@
       
         <p>众所周知，事务在Mysql中起着十分重要的角色。事务一共有ACID四个特性分别为原子性(Atomicity)、一致性(Consistency)、隔离性(Isolation)和持久性(Durability)。其中隔离性是指，一个事务的执行不受其他事务的干扰，即一个事务内部的操作及使用的数据对其它并发事务是隔离的，并发执行的各个事务之间不能相互干扰。<br>数据库事务的隔离级别有4个，由低到高依次为 <strong>读未提交(Read uncommitted)</strong>、<strong>读已提交(Read committed)</strong>、<strong>可重复读(Repeatable read)</strong>、<strong>串行化(Serializable)</strong>，这四个级别可以逐个解决脏读、不可重复读、幻读这几类问题。</p>
 <a id="more"></a>
-<p>在本文实现中，Session_A代表一个进程，Session_B代表另外一个进程，通过Session_A和Session_B共同处理同一个数据来模拟并发的情景。</p>
+<p>在本文实现中，Session_A代表一个进程，Session_B代表另外一个进程，通过Session_A和Session_B共同处理同一个数据来模拟并发情景。</p>
 <h3 id="读未提交-Read-uncommitted"><a href="#读未提交-Read-uncommitted" class="headerlink" title="读未提交(Read uncommitted)"></a>读未提交(Read uncommitted)</h3><h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>再读未提交级别，事务中的修改，即使没有提交，对其他事务也都是可见的。事务可以读取未提交的数据，这也就是<strong>脏读(Dirty Read)</strong>。这个级别会导致很多问题，从性能上来说读未提交并不会比其他级别好太多，但是却存在很多问题，所以在实际应用中一般很少使用。</p>
 <h4 id="测试步骤"><a href="#测试步骤" class="headerlink" title="测试步骤"></a>测试步骤</h4><ul>
 <li>Session_A设置transaction_isolation</li>
