@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019 | Jabin&#39;s Blog</title>
+  <title>Mysql表锁和行锁 | Jabin&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Description">
-<meta name="keywords" content="keywords">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jabin&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/archives/2019/index.html">
+  <meta name="description" content="所谓锁策略，就是在锁的开销和数据的安全性之间寻求平衡，这种平衡当然也会影响到性能。Mysql的InnoDB存储引擎支持事务，在事务中锁是一个非常重要的概念。InnoDB常用的锁可以分为三类，分别为表锁、行锁和页锁。其中表锁和行锁是比较常用来使用和比较的锁。本文就对比、分析总结行锁和表锁。">
+<meta name="keywords" content="数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql表锁和行锁">
+<meta property="og:url" content="http://yoursite.com/2019/11/09/Mysql表锁和行锁/index.html">
 <meta property="og:site_name" content="Jabin&#39;s Blog">
-<meta property="og:description" content="Description">
+<meta property="og:description" content="所谓锁策略，就是在锁的开销和数据的安全性之间寻求平衡，这种平衡当然也会影响到性能。Mysql的InnoDB存储引擎支持事务，在事务中锁是一个非常重要的概念。InnoDB常用的锁可以分为三类，分别为表锁、行锁和页锁。其中表锁和行锁是比较常用来使用和比较的锁。本文就对比、分析总结行锁和表锁。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-11-10T05:56:16.392Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jabin&#39;s Blog">
-<meta name="twitter:description" content="Description">
+<meta name="twitter:title" content="Mysql表锁和行锁">
+<meta name="twitter:description" content="所谓锁策略，就是在锁的开销和数据的安全性之间寻求平衡，这种平衡当然也会影响到性能。Mysql的InnoDB存储引擎支持事务，在事务中锁是一个非常重要的概念。InnoDB常用的锁可以分为三类，分别为表锁、行锁和页锁。其中表锁和行锁是比较常用来使用和比较的锁。本文就对比、分析总结行锁和表锁。">
   
     <link rel="alternative" href="/atom.xml" title="Jabin&#39;s Blog" type="application/atom+xml">
   
@@ -172,36 +173,110 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-Mysql表锁和行锁" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Mysql表锁和行锁
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/09/Mysql表锁和行锁/" class="archive-article-date">
+
+        
+        <a href="/2019/11/09/Mysql表锁和行锁/" class="archive-article-date">
   	<time datetime="2019-11-09T02:59:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-09</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/09/Mysql表锁和行锁/">Mysql表锁和行锁</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>所谓锁策略，就是在锁的开销和数据的安全性之间寻求平衡，这种平衡当然也会影响到性能。<br>Mysql的InnoDB存储引擎支持事务，在事务中<strong>锁</strong>是一个非常重要的概念。InnoDB常用的锁可以分为三类，分别为<strong>表锁</strong>、<strong>行锁</strong>和<strong>页锁</strong>。其中表锁和行锁是比较常用来使用和比较的锁。本文就对比、分析总结行锁和表锁。</p>
+<a id="more"></a>
+<h3 id="行锁-Row-Lock"><a href="#行锁-Row-Lock" class="headerlink" title="行锁(Row Lock)"></a>行锁(Row Lock)</h3><h4 id="所谓行锁"><a href="#所谓行锁" class="headerlink" title="所谓行锁"></a>所谓行锁</h4><p>顾名思义就是只对某一行进行加锁。当使用行锁时，一个事务对其中一行进行了加锁，另外一个事务如果再对这行数据进行更新时将会被阻塞，但是如果另外一个事务对表中的其他行数据进行更新时将不受影响，因此行锁的并发性能会比较好。Innodb 默认采用行锁，但是有条件，如果不满足条件时行锁将</p>
+<h4 id="测试行锁"><a href="#测试行锁" class="headerlink" title="测试行锁"></a>测试行锁</h4><ul>
+<li>设置autocommit</li>
+</ul>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; set session autocommit=0;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; show session variables like <span class="emphasis">'autocommit'</span>;</span><br><span class="line"><span class="code">+---------------+</span>-------+</span><br><span class="line">| Variable<span class="emphasis">_name | Value |</span></span><br><span class="line"><span class="emphasis">+---------------+-------+</span></span><br><span class="line"><span class="emphasis">| autocommit    | OFF   |</span></span><br><span class="line"><span class="emphasis">+---------------+-------+</span></span><br><span class="line"><span class="emphasis">1 row in set (0.00 sec)</span></span><br></pre></td></tr></table></figure>
+<p>Mysql默认autocommit为ON，也就是说在执行命令时，Mysql会自动帮我们commit，为了验证锁，先关闭autocommit。</p>
+<ul>
+<li>Session_A 更新其中一行数据</li>
+</ul>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select <span class="symbol">*</span> from card_account;</span><br><span class="line">+----+---------+--------+</span><br><span class="line">|<span class="string"> id </span>|<span class="string"> account </span>|<span class="string"> status </span>|</span><br><span class="line">+----+---------+--------+</span><br><span class="line">|<span class="string">  1 </span>|<span class="string">    3000 </span>|<span class="string">      1 </span>|</span><br><span class="line">|<span class="string">  2 </span>|<span class="string">    1000 </span>|<span class="string">      1 </span>|</span><br><span class="line">|<span class="string">  3 </span>|<span class="string">    2000 </span>|<span class="string">      1 </span>|</span><br><span class="line">|<span class="string">  4 </span>|<span class="string">    3000 </span>|<span class="string">      1 </span>|</span><br><span class="line">|<span class="string">  5 </span>|<span class="string">    5000 </span>|<span class="string">      1 </span>|</span><br><span class="line">|<span class="string">  6 </span>|<span class="string">    6000 </span>|<span class="string">      1 </span>|</span><br><span class="line">|<span class="string">  7 </span>|<span class="string">    7000 </span>|<span class="string">      1 </span>|</span><br><span class="line">+----+---------+--------+</span><br><span class="line">7 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; begin;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; update card_account set account = 2000 where id = 1;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line">Rows matched: 1  Changed: 0  Warnings: 0</span><br></pre></td></tr></table></figure>
+<p>Session_A开启一个事务后，更新id=1的列，将account的值更新为4000。</p>
+<ul>
+<li>Session_B 操作数据    </li>
+</ul>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select <span class="symbol">*</span> from card_account;</span><br><span class="line">+----+---------+--------+</span><br><span class="line">|<span class="string"> id </span>|<span class="string"> account </span>|<span class="string"> status </span>|</span><br><span class="line">+----+---------+--------+</span><br><span class="line">|<span class="string">  1 </span>|<span class="string">    3000 </span>|<span class="string">      1 </span>|</span><br><span class="line">|<span class="string">  2 </span>|<span class="string">    1000 </span>|<span class="string">      1 </span>|</span><br><span class="line">|<span class="string">  3 </span>|<span class="string">    2000 </span>|<span class="string">      1 </span>|</span><br><span class="line">|<span class="string">  4 </span>|<span class="string">    3000 </span>|<span class="string">      1 </span>|</span><br><span class="line">|<span class="string">  5 </span>|<span class="string">    5000 </span>|<span class="string">      1 </span>|</span><br><span class="line">|<span class="string">  6 </span>|<span class="string">    6000 </span>|<span class="string">      1 </span>|</span><br><span class="line">|<span class="string">  7 </span>|<span class="string">    7000 </span>|<span class="string">      1 </span>|</span><br><span class="line">+----+---------+--------+</span><br><span class="line">7 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; begin;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; update card_account set account = 2000 where id = 2;</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line">Rows matched: 1  Changed: 1  Warnings: 0</span><br><span class="line"></span><br><span class="line">mysql&gt; commit;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select <span class="symbol">*</span> from card_account;</span><br><span class="line">+----+---------+--------+</span><br><span class="line">|<span class="string"> id </span>|<span class="string"> account </span>|<span class="string"> status </span>|</span><br><span class="line">+----+---------+--------+</span><br><span class="line">|<span class="string">  1 </span>|<span class="string">    3000 </span>|<span class="string">      1 </span>|</span><br><span class="line">|<span class="string">  2 </span>|<span class="string">    2000 </span>|<span class="string">      1 </span>|</span><br><span class="line">|<span class="string">  3 </span>|<span class="string">    2000 </span>|<span class="string">      1 </span>|</span><br><span class="line">|<span class="string">  4 </span>|<span class="string">    3000 </span>|<span class="string">      1 </span>|</span><br><span class="line">|<span class="string">  5 </span>|<span class="string">    5000 </span>|<span class="string">      1 </span>|</span><br><span class="line">|<span class="string">  6 </span>|<span class="string">    6000 </span>|<span class="string">      1 </span>|</span><br><span class="line">|<span class="string">  7 </span>|<span class="string">    7000 </span>|<span class="string">      1 </span>|</span><br><span class="line">+----+---------+--------+</span><br><span class="line">7 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>Session_B查询操作不受影响，可以查询查询全表数据。Session_B更新id=2的数据也是成功的，因为是行锁，Sesion_A只是锁了id=1的行数据，不影响id=2的数据。</p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; update card_account set account = 5000 where id = 1;</span><br><span class="line"><span class="keyword">ERROR </span>1205 (HY000): Lock wait timeout exceeded; try restarting transaction</span><br></pre></td></tr></table></figure>
+<p>但是当Session_B更新id=1的数据时，就会被阻塞直至超时。此时id=1的行被Session_A锁定。</p>
+<h4 id="行锁升级表锁"><a href="#行锁升级表锁" class="headerlink" title="行锁升级表锁"></a>行锁升级表锁</h4><p>但是InnoDB在使用行锁时有一个前提，那就是检索条件需要是索引，如果检索条件不是索引时则会将行锁升级为表锁。还是以刚才的card_account表为例，其中id为主键、status为普通索引、account不是索引。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; desc card_account;</span><br><span class="line">+---------+------------------+------+-----+---------+----------------+</span><br><span class="line">| Field   |<span class="built_in"> Type </span>            | <span class="literal">Null</span> | Key |<span class="built_in"> Default </span>| Extra          |</span><br><span class="line">+---------+------------------+------+-----+---------+----------------+</span><br><span class="line">| id      | int(10) unsigned | <span class="literal">NO</span>   | PRI | <span class="literal">NULL</span>    | auto_increment |</span><br><span class="line">| account | int(10) unsigned | <span class="literal">NO</span>   |     | <span class="literal">NULL</span>    |                |</span><br><span class="line">| status  | tinyint(2)       | <span class="literal">NO</span>   | MUL | 1       |                |</span><br><span class="line">+---------+------------------+------+-----+---------+----------------+</span><br><span class="line">3 rows <span class="keyword">in</span> <span class="builtin-name">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>上面的案例是将主键id作为检索条件的，因此使用行锁是生效的。接下来以account作为检索条件看看会发生什么？</p>
+<ul>
+<li>Session_A更新其中一行数据</li>
+</ul>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; begin;</span><br><span class="line">Query OK, <span class="number">0</span> <span class="built_in">rows</span> affected (<span class="number">0.00</span> <span class="built_in">sec</span>)</span><br><span class="line"></span><br><span class="line">mysql&gt; update card_account set status = <span class="number">0</span> where account = <span class="number">2000</span>;</span><br><span class="line">Query OK, <span class="number">2</span> <span class="built_in">rows</span> affected (<span class="number">0.00</span> <span class="built_in">sec</span>)</span><br><span class="line"><span class="built_in">Rows</span> <span class="built_in">match</span><span class="symbol">ed:</span> <span class="number">2</span>  Chang<span class="symbol">ed:</span> <span class="number">2</span>  Warnin<span class="symbol">gs:</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Session_B操作数据</li>
+</ul>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; begin;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; update card_account set status = 2 where account = 2000;</span><br><span class="line"><span class="keyword">ERROR </span>1205 (HY000): Lock wait timeout exceeded; try restarting transaction</span><br><span class="line">mysql&gt; update card_account set status = 2 where account = 5000;</span><br><span class="line"><span class="keyword">ERROR </span>1205 (HY000): Lock wait timeout exceeded; try restarting transaction</span><br></pre></td></tr></table></figure>
+<p>Session_B操作和Session_A同样的数据时，会更新失败。如果更新表中非Session_A更新的数据时发现也是失败的。这是为什么呐？为什么行锁，锁了其他行呐？这是因为account不是索引，此时行锁升级为了表锁。</p>
+<h4 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h4><p>行锁虽然可以提升并发性，但是存在死锁的可能。所谓死锁是指两个或两个以上的进程在执行过程中，因争夺资源而造成的一种互相等待的现象，若无外力作用，它们都将无法推进下去。此时称系统处于死锁状态或系统产生了死锁，这些永远在互相等待的进程称为死锁进程。</p>
+<ul>
+<li>Session_A 更新id=1</li>
+</ul>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; begin;</span><br><span class="line">Query OK, <span class="number">0</span> <span class="built_in">rows</span> affected (<span class="number">0.00</span> <span class="built_in">sec</span>)</span><br><span class="line"></span><br><span class="line">mysql&gt; update card_account set account = <span class="number">4000</span> where id = <span class="number">1</span>;</span><br><span class="line">Query OK, <span class="number">1</span> <span class="built_in">row</span> affected (<span class="number">0.00</span> <span class="built_in">sec</span>)</span><br><span class="line"><span class="built_in">Rows</span> <span class="built_in">match</span><span class="symbol">ed:</span> <span class="number">1</span>  Chang<span class="symbol">ed:</span> <span class="number">1</span>  Warnin<span class="symbol">gs:</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Session_B 更新id=2</li>
+</ul>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; begin;</span><br><span class="line">Query OK, <span class="number">0</span> <span class="built_in">rows</span> affected (<span class="number">0.00</span> <span class="built_in">sec</span>)</span><br><span class="line"></span><br><span class="line">mysql&gt; update card_account set account = <span class="number">4000</span> where id = <span class="number">2</span>;</span><br><span class="line">Query OK, <span class="number">1</span> <span class="built_in">row</span> affected (<span class="number">0.01</span> <span class="built_in">sec</span>)</span><br><span class="line"><span class="built_in">Rows</span> <span class="built_in">match</span><span class="symbol">ed:</span> <span class="number">1</span>  Chang<span class="symbol">ed:</span> <span class="number">1</span>  Warnin<span class="symbol">gs:</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Session_A 更新id=2</li>
+</ul>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; update card_account set account = <span class="number">3000</span> where id = <span class="number">2</span>;</span><br><span class="line">Query OK, <span class="number">1</span> <span class="built_in">row</span> affected (<span class="number">16.58</span> <span class="built_in">sec</span>)</span><br><span class="line"><span class="built_in">Rows</span> <span class="built_in">match</span><span class="symbol">ed:</span> <span class="number">1</span>  Chang<span class="symbol">ed:</span> <span class="number">1</span>  Warnin<span class="symbol">gs:</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Session_B 更新id=1</li>
+</ul>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; update card_account set account = 5000 where id = 1;</span><br><span class="line"><span class="keyword">ERROR </span>1213 (40001): Deadlock found when trying to get lock; try restarting transaction</span><br></pre></td></tr></table></figure>
+<p>此时就出现了Deadlock。</p>
+<h3 id="表锁-Row-Lock"><a href="#表锁-Row-Lock" class="headerlink" title="表锁(Row Lock)"></a>表锁(Row Lock)</h3><p>表锁时Mysql中最基本的锁策略，并且是开销最小的策略。具体的表锁案例在行锁升级表锁中已经阐述。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>表级锁：开销小，加锁快；不会出现死锁；锁定粒度大，发生锁冲突的概率最高，并发度最低。</li>
+<li>行级锁：开销大，加锁慢；会出现死锁；锁定粒度最小，发生锁冲突的概率最低，并发度也最高。</li>
+</ul>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -213,331 +288,105 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/11/09/Mysql表锁和行锁/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/27/Mysql事务隔离级别/" class="archive-article-date">
-  	<time datetime="2019-10-27T08:13:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-27</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/10/27/Mysql事务隔离级别/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Mysql事务隔离级别</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/27/Mysql事务隔离级别/">Mysql事务隔离级别</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/20/在定时任务中使用Redis做为锁/" class="archive-article-date">
-  	<time datetime="2019-10-20T06:40:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/20/在定时任务中使用Redis做为锁/">在定时任务中使用Redis做为锁</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/13/cUrl应用/" class="archive-article-date">
-  	<time datetime="2019-10-13T08:52:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/13/cUrl应用/">cUrl应用</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/17/设计模式之适配器模式/" class="archive-article-date">
-  	<time datetime="2019-06-17T10:22:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/17/设计模式之适配器模式/">设计模式之适配器模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/17/设计模式之代理模式/" class="archive-article-date">
-  	<time datetime="2019-06-17T05:38:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/17/设计模式之代理模式/">设计模式之代理模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/17/设计模式之外观模式/" class="archive-article-date">
-  	<time datetime="2019-06-17T02:05:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/17/设计模式之外观模式/">设计模式之外观模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/12/SQL数据库和NoSQL数据库那些事儿/" class="archive-article-date">
-  	<time datetime="2019-06-12T15:26:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/12/SQL数据库和NoSQL数据库那些事儿/">SQL数据库和NoSQL数据库那些事儿</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/12/基于阿里云ECS和Nginx搭建负载均衡/" class="archive-article-date">
-  	<time datetime="2019-06-12T04:41:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/12/基于阿里云ECS和Nginx搭建负载均衡/">基于阿里云ECS和Nginx搭建负载均衡与反向代理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/29/设计模式之策略模式/" class="archive-article-date">
-  	<time datetime="2019-05-29T10:37:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/29/设计模式之策略模式/">设计模式之策略模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2019/page/2/">2</a><a class="page-number" href="/archives/2019/page/3/">3</a><a class="extend next" rel="next" href="/archives/2019/page/2/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -561,8 +410,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
