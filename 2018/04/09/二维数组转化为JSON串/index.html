@@ -6,22 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Lumen根据环境加载不同的配置文件 | Jabin&#39;s Blog</title>
+  <title>二维数组转化为JSON串 | Jabin&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Lumen通过Dotenv管理配置文件。因为开发过程中，我们需要根据不同的环境进行加载不同的配置文件。比如在开发环境我们希望加载 .env.local 测试环境我们希望加载 .env.staging 而在线上我们希望加载 .env.production。但是如何可以简单的通过一些配置来加载不同的配置文件呐？本文是通过配置Nginx来实现根据不同的环境加载不同的配置文件。">
+  <meta name="description" content="在开发过程中有时需要将二位数组转化为JSON以便于后期的数据处理。前段时间用到了这个知识点，现在记录一下。">
 <meta name="keywords" content="keywords">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Lumen根据环境加载不同的配置文件">
-<meta property="og:url" content="http://yoursite.com/2019/03/28/Lumen根据环境加载不同的配置文件/index.html">
+<meta property="og:title" content="二维数组转化为JSON串">
+<meta property="og:url" content="http://yoursite.com/2018/04/09/二维数组转化为JSON串/index.html">
 <meta property="og:site_name" content="Jabin&#39;s Blog">
-<meta property="og:description" content="Lumen通过Dotenv管理配置文件。因为开发过程中，我们需要根据不同的环境进行加载不同的配置文件。比如在开发环境我们希望加载 .env.local 测试环境我们希望加载 .env.staging 而在线上我们希望加载 .env.production。但是如何可以简单的通过一些配置来加载不同的配置文件呐？本文是通过配置Nginx来实现根据不同的环境加载不同的配置文件。">
+<meta property="og:description" content="在开发过程中有时需要将二位数组转化为JSON以便于后期的数据处理。前段时间用到了这个知识点，现在记录一下。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/lumenEnv/nginx1.png">
-<meta property="og:updated_time" content="2019-05-09T09:37:15.000Z">
+<meta property="og:updated_time" content="2019-04-02T10:48:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lumen根据环境加载不同的配置文件">
-<meta name="twitter:description" content="Lumen通过Dotenv管理配置文件。因为开发过程中，我们需要根据不同的环境进行加载不同的配置文件。比如在开发环境我们希望加载 .env.local 测试环境我们希望加载 .env.staging 而在线上我们希望加载 .env.production。但是如何可以简单的通过一些配置来加载不同的配置文件呐？本文是通过配置Nginx来实现根据不同的环境加载不同的配置文件。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/lumenEnv/nginx1.png">
+<meta name="twitter:title" content="二维数组转化为JSON串">
+<meta name="twitter:description" content="在开发过程中有时需要将二位数组转化为JSON以便于后期的数据处理。前段时间用到了这个知识点，现在记录一下。">
   
     <link rel="alternative" href="/atom.xml" title="Jabin&#39;s Blog" type="application/atom+xml">
   
@@ -175,58 +173,35 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Lumen根据环境加载不同的配置文件" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-二维数组转化为JSON串" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Lumen根据环境加载不同的配置文件
+      二维数组转化为JSON串
     </h1>
   
 
         
-        <a href="/2019/03/28/Lumen根据环境加载不同的配置文件/" class="archive-article-date">
-  	<time datetime="2019-03-28T09:48:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-28</time>
+        <a href="/2018/04/09/二维数组转化为JSON串/" class="archive-article-date">
+  	<time datetime="2018-04-09T06:58:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Lumen通过Dotenv管理配置文件。因为开发过程中，我们需要根据不同的环境进行加载不同的配置文件。比如在开发环境我们希望加载 .env.local 测试环境我们希望加载 .env.staging 而在线上我们希望加载 .env.production。但是如何可以简单的通过一些配置来加载不同的配置文件呐？本文是通过配置Nginx来实现根据不同的环境加载不同的配置文件。</p>
+        <p>在开发过程中有时需要将二位数组转化为JSON以便于后期的数据处理。前段时间用到了这个知识点，现在记录一下。</p>
+<hr>
 <a id="more"></a>
-<blockquote>
-<h4 id="项目环境"><a href="#项目环境" class="headerlink" title="项目环境"></a>项目环境</h4><p>Lumen : 5.8</p>
-</blockquote>
-<h3 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h3><p>首先创建多个.env文件，根据不同的环境进行不同的配置。然后在Nginx中设置环境。最后在Lumen中bootstrap/app.php中执行加载.env文件</p>
-<h3 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h3><ul>
-<li>新建.env文件</li>
-</ul>
-<p>根据系统自带的.env.example复制几份不同的.env文件，本文暂定需要 开发环境、测试环境和线上环境。依次创建<br>.env.local  .env.staging  .env.production 并设置不同的APP_ENV</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* .env.<span class="keyword">local</span></span><br><span class="line">*/</span><br><span class="line">APP_ENV=<span class="keyword">local</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="markdown">/**</span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="bullet">* </span>.env.staging</span></span></span><br><span class="line"><span class="comment"><span class="markdown">*/</span></span></span><br><span class="line">APP_ENV=staging</span><br></pre></td></tr></table></figure>
-<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="markdown">/**</span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="bullet">* </span>.env.production</span></span></span><br><span class="line"><span class="comment"><span class="markdown">*/</span></span></span><br><span class="line">APP_ENV=production</span><br></pre></td></tr></table></figure>
-<ul>
-<li>修改Nginx配置</li>
-</ul>
-<p>将环境设置为staging</p>
-<p><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/lumenEnv/nginx1.png" alt=""></p>
-<p>修改nginx配置，需要重启nginx。</p>
-<ul>
-<li>修改bootstrap/app.php</li>
-</ul>
-<p>取消默认的加载配置文件方式，添加以下代码。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require_once</span> <span class="keyword">__DIR__</span>.<span class="string">'/../vendor/autoload.php'</span>;</span><br><span class="line"></span><br><span class="line">$env = getenv(<span class="string">'APP_ENV'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(php_sapi_name() == <span class="string">'cli'</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(($input = <span class="keyword">new</span> \Symfony\Component\Console\Input\ArgvInput)-&gt;hasParameterOption(<span class="string">'--env'</span>))&#123;</span><br><span class="line">        $env = !<span class="keyword">empty</span>($input-&gt;getParameterOption(<span class="string">'--env'</span>))</span><br><span class="line">            ? <span class="string">'.env.'</span>.$input-&gt;getParameterOption(<span class="string">'--env'</span>)</span><br><span class="line">            : <span class="string">'.env'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    $env = !<span class="keyword">empty</span>($env) ? <span class="string">'.env.'</span>.$env : <span class="string">'.env'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(!file_exists(<span class="keyword">__DIR__</span>.<span class="string">'/../'</span>.$env))&#123;</span><br><span class="line">    <span class="keyword">exit</span>(<span class="string">'no env file!'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	Dotenv\Dotenv::create(<span class="keyword">__DIR__</span>.<span class="string">'/../'</span>,$env)-&gt;overload();</span><br><span class="line">&#125; <span class="keyword">catch</span> (Dotenv\<span class="keyword">Exception</span>\InvalidPathException $e) &#123;</span><br><span class="line">    <span class="keyword">echo</span> $e-&gt;getMessage();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>验证配置是否成功</li>
-</ul>
-<p>可以通过以下三种方式取.env中的值。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> getenv(<span class="string">'APP_ENV'</span>).<span class="string">"&lt;br/&gt;"</span>;</span><br><span class="line"><span class="keyword">echo</span> $_ENV[<span class="string">'APP_ENV'</span>].<span class="string">"&lt;br/&gt;"</span>;</span><br><span class="line"><span class="keyword">echo</span> $_SERVER[<span class="string">'APP_ENV'</span>].<span class="string">"&lt;br/&gt;"</span>;</span><br><span class="line"><span class="keyword">die</span>();</span><br></pre></td></tr></table></figure>
-<p>输出结果如下</p>
-<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="markdown">/**</span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="bullet">* </span>输出如下</span></span></span><br><span class="line"><span class="comment"><span class="markdown">*/</span></span></span><br><span class="line">staging</span><br><span class="line">staging</span><br><span class="line">staging</span><br></pre></td></tr></table></figure>
-<p>Done，测试完毕！</p>
+<p>现有一个二维数组</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="string">"Johone"</span>,<span class="string">"America"</span>,<span class="string">"Man"</span>,<span class="string">"IT"</span>,<span class="string">"Master"</span>],[<span class="string">"Xi"</span>,<span class="string">"China"</span>,<span class="string">"Man"</span>,<span class="string">"Finance"</span>,<span class="string">"Doctor"</span>]]]</span><br></pre></td></tr></table></figure>
+<p>需转化为格式如下的字符串</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"params"</span>:</span><br><span class="line">[&#123;<span class="string">"Name"</span>:Johone, <span class="string">"Country"</span>:America, <span class="string">"Sex"</span>:Man, <span class="string">"Job"</span>:IT,<span class="string">"Education"</span>:Master&#125;,</span><br><span class="line">&#123;<span class="string">"Name"</span>:Xi, <span class="string">"Country"</span>:China, <span class="string">"Sex"</span>:Man, <span class="string">"Job"</span>:Finance,<span class="string">"education"</span>:Dcotor&#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实现代码块儿如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">var</span> arrayData = [[<span class="string">"Johone"</span>, <span class="string">"America"</span>, <span class="string">"Man"</span>, <span class="string">"IT"</span>, <span class="string">"Master"</span>],[<span class="string">"Xi"</span>, <span class="string">"China"</span>, <span class="string">"Man"</span>, <span class="string">"Finance"</span>, <span class="string">"Doctor"</span>]];</span><br><span class="line">	<span class="keyword">var</span> jsonKeys = [<span class="string">"Name"</span>, <span class="string">"Country"</span>, <span class="string">"Sex"</span>, <span class="string">"Job"</span>, <span class="string">"Education"</span>];</span><br><span class="line">	<span class="keyword">var</span> jsonValue = [];</span><br><span class="line">	<span class="keyword">var</span> jsonData = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arrayData.length; i++) &#123;</span><br><span class="line">	   <span class="keyword">var</span> jsonObj = &#123;&#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; arrayData[i].length; j++) &#123;</span><br><span class="line">			jsonObj[jsonKeys[j]] = arrayData[i][j];</span><br><span class="line">		&#125;</span><br><span class="line">		jsonValue.push(jsonObj);</span><br><span class="line">	&#125;</span><br><span class="line">	jsonData[<span class="string">'params'</span>] = jsonValue</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'jsonData str='</span>+<span class="built_in">JSON</span>.stringify(jsonData));</span><br><span class="line">	</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;body&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
 
       
 
@@ -306,7 +281,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/03/28/Lumen根据环境加载不同的配置文件/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/04/09/二维数组转化为JSON串/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -320,18 +295,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/04/13/Laravel-Layui使用Ajax请求/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/07/11/revet-singal-file-md/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Laravel-Layui使用Ajax请求
+          Git回滚单个文件
         
       </div>
     </a>
   
   
-    <a href="/2018/12/02/unsplash-images-crawler/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">PHP抓取图片方案</div>
+    <a href="/2018/03/27/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
       <i class="icon-circle-right"></i>
     </a>
   
