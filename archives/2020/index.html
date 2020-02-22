@@ -6,20 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Git回滚单个文件 | Jabin&#39;s Blog</title>
+  <title>Archives: 2020 | Jabin&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="回滚某个文件到某个版本问题描述在使用的git的过程中，难免会遇到以下场景：在某次commit时提交了多个文件，但是提交之后发现有一个文件是有问题的，需要回滚，但是如果全部回滚的话就会造成正确提交的文件也会被回滚，造成不必要的麻烦。此时我们需要针对某一个文件，将其回滚到指定的版本即可。">
+  <meta name="description" content="Description">
 <meta name="keywords" content="keywords">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Git回滚单个文件">
-<meta property="og:url" content="http://yoursite.com/2018/07/11/revet-singal-file-md/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jabin&#39;s Blog">
+<meta property="og:url" content="http://yoursite.com/archives/2020/index.html">
 <meta property="og:site_name" content="Jabin&#39;s Blog">
-<meta property="og:description" content="回滚某个文件到某个版本问题描述在使用的git的过程中，难免会遇到以下场景：在某次commit时提交了多个文件，但是提交之后发现有一个文件是有问题的，需要回滚，但是如果全部回滚的话就会造成正确提交的文件也会被回滚，造成不必要的麻烦。此时我们需要针对某一个文件，将其回滚到指定的版本即可。">
+<meta property="og:description" content="Description">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-02T10:48:15.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Git回滚单个文件">
-<meta name="twitter:description" content="回滚某个文件到某个版本问题描述在使用的git的过程中，难免会遇到以下场景：在某次commit时提交了多个文件，但是提交之后发现有一个文件是有问题的，需要回滚，但是如果全部回滚的话就会造成正确提交的文件也会被回滚，造成不必要的麻烦。此时我们需要针对某一个文件，将其回滚到指定的版本即可。">
+<meta name="twitter:title" content="Jabin&#39;s Blog">
+<meta name="twitter:description" content="Description">
   
     <link rel="alternative" href="/atom.xml" title="Jabin&#39;s Blog" type="application/atom+xml">
   
@@ -173,178 +172,49 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-revet-singal-file-md" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      Git回滚单个文件
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2020/02/22/Mac本地重置Mysql密码/" class="archive-article-date">
+  	<time datetime="2020-02-22T06:26:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-22</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/02/22/Mac本地重置Mysql密码/">Mac本地重置Mysql密码</a>
     </h1>
   
 
-        
-        <a href="/2018/07/11/revet-singal-file-md/" class="archive-article-date">
-  	<time datetime="2018-07-11T08:26:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="回滚某个文件到某个版本"><a href="#回滚某个文件到某个版本" class="headerlink" title="回滚某个文件到某个版本"></a>回滚某个文件到某个版本</h3><h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>在使用的git的过程中，难免会遇到以下场景：在某次commit时提交了多个文件，但是提交之后发现有一个文件是有问题的，需要回滚，但是如果全部回滚的话就会造成正确提交的文件也会被回滚，造成不必要的麻烦。此时我们需要针对某一个文件，将其回滚到指定的版本即可。</p>
-<a id="more"></a>
-<h4 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h4><p>以回滚testFile.txt文件为例。大致可以分为三步走：</p>
-<ol>
-<li><p>首先需要回滚指定版本的hash值(如果hash值为：c78a34b1ff0d37c84f8e6ffc779452fe318efdb7)</p>
- <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> testFile.txt</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用hash值回滚指定文件</p>
- <figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout <span class="keyword">c</span><span class="number">78</span>a<span class="number">34</span>b<span class="number">1</span>ff<span class="number">0</span>d<span class="number">37</span><span class="keyword">c</span><span class="number">84</span>f<span class="number">8e6</span>ffc<span class="number">779452</span>fe<span class="number">318</span>efdb<span class="number">7</span> testFile.txt</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>提交回滚后的内容</p>
- <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git</span> commit -m <span class="string">'revet testFile.txt'</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
+        <div class="article-info info-on-right">
+          
+          
 
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
         </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/07/11/revet-singal-file-md/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2018/12/02/unsplash-images-crawler/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          PHP抓取图片方案
-        
-      </div>
-    </a>
   
   
-    <a href="/2018/04/09/二维数组转化为JSON串/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">二维数组转化为JSON串</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -367,8 +237,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
