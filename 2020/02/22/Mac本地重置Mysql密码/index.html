@@ -6,20 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>cUrl应用 | Jabin&#39;s Blog</title>
+  <title>Mac本地重置Mysql密码 | Jabin&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="curl命令是一个利用URL规则在命令行下工作的文件传输工具。它支持文件的上传和下载。curl支持包括HTTP、HTTPS、ftp等众多协议，还支持POST、cookies、认证、从指定偏移处下载部分文件、用户代理字符串、限速、文件大小、进度条等特征。在web后台开发的过程中，应该会测试接口是否正常，此时可以使用cUrl模拟url请求进行访问，使用十分方便。本文主要记录cUrl的一些简单的使用方法">
+  <meta name="description" content="Mac本地配置Mysql方便学习、实验一些Mysql小知识。但是由于长时间不使用本地的Mysql，导致忘记了登陆密码，上网找了一些攻略，终于解决了问题，现在记录一下。">
 <meta name="keywords" content="keywords">
 <meta property="og:type" content="article">
-<meta property="og:title" content="cUrl应用">
-<meta property="og:url" content="http://yoursite.com/2019/10/13/cUrl应用/index.html">
+<meta property="og:title" content="Mac本地重置Mysql密码">
+<meta property="og:url" content="http://yoursite.com/2020/02/22/Mac本地重置Mysql密码/index.html">
 <meta property="og:site_name" content="Jabin&#39;s Blog">
-<meta property="og:description" content="curl命令是一个利用URL规则在命令行下工作的文件传输工具。它支持文件的上传和下载。curl支持包括HTTP、HTTPS、ftp等众多协议，还支持POST、cookies、认证、从指定偏移处下载部分文件、用户代理字符串、限速、文件大小、进度条等特征。在web后台开发的过程中，应该会测试接口是否正常，此时可以使用cUrl模拟url请求进行访问，使用十分方便。本文主要记录cUrl的一些简单的使用方法">
+<meta property="og:description" content="Mac本地配置Mysql方便学习、实验一些Mysql小知识。但是由于长时间不使用本地的Mysql，导致忘记了登陆密码，上网找了一些攻略，终于解决了问题，现在记录一下。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-24T08:49:47.241Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/mysql_navicat/Mysql_Navicat.png">
+<meta property="og:updated_time" content="2020-02-22T06:31:57.812Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cUrl应用">
-<meta name="twitter:description" content="curl命令是一个利用URL规则在命令行下工作的文件传输工具。它支持文件的上传和下载。curl支持包括HTTP、HTTPS、ftp等众多协议，还支持POST、cookies、认证、从指定偏移处下载部分文件、用户代理字符串、限速、文件大小、进度条等特征。在web后台开发的过程中，应该会测试接口是否正常，此时可以使用cUrl模拟url请求进行访问，使用十分方便。本文主要记录cUrl的一些简单的使用方法">
+<meta name="twitter:title" content="Mac本地重置Mysql密码">
+<meta name="twitter:description" content="Mac本地配置Mysql方便学习、实验一些Mysql小知识。但是由于长时间不使用本地的Mysql，导致忘记了登陆密码，上网找了一些攻略，终于解决了问题，现在记录一下。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/mysql_navicat/Mysql_Navicat.png">
   
     <link rel="alternative" href="/atom.xml" title="Jabin&#39;s Blog" type="application/atom+xml">
   
@@ -173,38 +175,58 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-cUrl应用" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Mac本地重置Mysql密码" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      cUrl应用
+      Mac本地重置Mysql密码
     </h1>
   
 
         
-        <a href="/2019/10/13/cUrl应用/" class="archive-article-date">
-  	<time datetime="2019-10-13T08:52:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-13</time>
+        <a href="/2020/02/22/Mac本地重置Mysql密码/" class="archive-article-date">
+  	<time datetime="2020-02-22T06:26:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-22</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>curl命令是一个利用URL规则在命令行下工作的文件传输工具。它支持文件的上传和下载。curl支持包括HTTP、HTTPS、ftp等众多协议，还支持POST、cookies、认证、从指定偏移处下载部分文件、用户代理字符串、限速、文件大小、进度条等特征。<br>在web后台开发的过程中，应该会测试接口是否正常，此时可以使用cUrl模拟url请求进行访问，使用十分方便。<br>本文主要记录cUrl的一些简单的使用方法。包括：<strong>模拟Get请求</strong>、<strong>模拟Post请求</strong>、<strong>下载响应体</strong>。</p>
+        <p>Mac本地配置Mysql方便学习、实验一些Mysql小知识。但是由于长时间不使用本地的Mysql，导致忘记了登陆密码，上网找了一些攻略，终于解决了问题，现在记录一下。</p>
 <a id="more"></a>
-<h3 id="模拟目标域名"><a href="#模拟目标域名" class="headerlink" title="模拟目标域名"></a>模拟目标域名</h3><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">http:</span><span class="comment">//curl.example.com</span></span><br></pre></td></tr></table></figure>
-<h3 id="模拟Get请求"><a href="#模拟Get请求" class="headerlink" title="模拟Get请求"></a>模拟Get请求</h3><h4 id="request请求"><a href="#request请求" class="headerlink" title="request请求"></a>request请求</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl http:<span class="regexp">//</span>curl.example.com<span class="regexp">/v2/</span>chatroom<span class="regexp">/number/</span>room<span class="regexp">/325300</span></span><br></pre></td></tr></table></figure>
-<h4 id="response响应"><a href="#response响应" class="headerlink" title="response响应"></a>response响应</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"success"</span>:<span class="number">0</span>,<span class="attr">"value"</span>:<span class="number">0</span>,<span class="attr">"err_msg"</span>:<span class="string">"not found"</span>,<span class="attr">"avatar_list"</span>:<span class="literal">null</span>,<span class="attr">"strategy"</span>:&#123;<span class="attr">"show"</span>:&#123;<span class="attr">"queue"</span>:<span class="number">10</span>&#125;,<span class="attr">"rule1"</span>:&#123;<span class="attr">"queue"</span>:<span class="number">50</span>,<span class="attr">"value"</span>:<span class="number">10</span>&#125;,<span class="attr">"rule2"</span>:&#123;<span class="attr">"queue"</span>:<span class="number">100</span>,<span class="attr">"value"</span>:<span class="number">20</span>&#125;&#125;&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="模拟Post请求"><a href="#模拟Post请求" class="headerlink" title="模拟Post请求"></a>模拟Post请求</h3><h4 id="request请求-1"><a href="#request请求-1" class="headerlink" title="request请求"></a>request请求</h4><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -d 'gift_id=28&amp;user_id=<span class="number">160667</span>6&amp;price=4&amp;team_class=1&amp;relate_type=match&amp;relate_id=<span class="number">50953153</span>&amp;conv_id=<span class="number">8501</span>8&amp;video_gift_flag=1&amp;sign=<span class="number">169061775874</span>f5ce638eec0b<span class="number">299426</span>1d' http:<span class="comment">//curl.example.com/gift/create</span></span><br></pre></td></tr></table></figure>
-<p>或者</p>
-<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST -d 'gift_id=28&amp;user_id=<span class="number">160667</span>6&amp;price=4&amp;team_class=1&amp;relate_type=match&amp;relate_id=<span class="number">50953153</span>&amp;conv_id=<span class="number">8501</span>8&amp;video_gift_flag=1&amp;sign=<span class="number">169061775874</span>f5ce638eec0b<span class="number">299426</span>1d' http:<span class="comment">//curl.example.com/gift/create</span></span><br></pre></td></tr></table></figure>
-<h4 id="response响应-1"><a href="#response响应-1" class="headerlink" title="response响应"></a>response响应</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"reCode"</span>:<span class="string">"000000"</span>,<span class="attr">"reMsg"</span>:<span class="string">""</span>,<span class="attr">"reData"</span>:&#123;<span class="attr">"id"</span>:<span class="number">79975</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="模拟Post请求设置header"><a href="#模拟Post请求设置header" class="headerlink" title="模拟Post请求设置header"></a>模拟Post请求设置header</h3><h4 id="request请求-2"><a href="#request请求-2" class="headerlink" title="request请求"></a>request请求</h4><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST \</span><br><span class="line">  -<span class="ruby">H <span class="string">"X-LC-Id: 9fupcy72mg8txxxxxxxxxxxxxxxxd9yxkpgg49dhwrgwr"</span> \</span></span><br><span class="line"><span class="ruby">  -H <span class="string">"X-LC-Key: 44r44bu0jg3nyyyyyyyyyyyyyyyyyyybrpdvn2728fgu"</span> \</span></span><br><span class="line"><span class="ruby">  -H <span class="string">"Content-Type: application/json"</span> \</span></span><br><span class="line"><span class="ruby">  -d <span class="string">'&#123;"name":"\u7403\u8ff7\u804a\u5929\u5ba4","m":[],"tr":true&#125;'</span> \</span></span><br><span class="line"><span class="ruby"><span class="symbol">https:</span>/<span class="regexp">/example.com/</span><span class="number">1.1</span>/classes/_Conversation</span></span><br></pre></td></tr></table></figure>
-<h3 id="下载响应体"><a href="#下载响应体" class="headerlink" title="下载响应体"></a>下载响应体</h3><h4 id="不显示下载进度"><a href="#不显示下载进度" class="headerlink" title="不显示下载进度"></a>不显示下载进度</h4><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o curl.txt -X POST -d 'gift_id=28&amp;user_id=<span class="number">160667</span>6&amp;price=4&amp;team_class=1&amp;relate_type=match&amp;relate_id=<span class="number">50953153</span>&amp;conv_id=<span class="number">8501</span>8&amp;video_gift_flag=1&amp;sign=<span class="number">169061775874</span>f5ce638eec0b<span class="number">299426</span>1d' http:<span class="comment">//curl.example.com/gift/create</span></span><br></pre></td></tr></table></figure>
-<h4 id="显示下载进度"><a href="#显示下载进度" class="headerlink" title="显示下载进度"></a>显示下载进度</h4><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o curl.txt --progress -X POST -d 'gift_id=28&amp;user_id=<span class="number">160667</span>6&amp;price=4&amp;team_class=1&amp;relate_type=match&amp;relate_id=<span class="number">50953153</span>&amp;conv_id=<span class="number">8501</span>8&amp;video_gift_flag=1&amp;sign=<span class="number">169061775874</span>f5ce638eec0b<span class="number">299426</span>1d' http:<span class="comment">//curl.example.com/gift/create</span></span><br></pre></td></tr></table></figure>
+<h3 id="重置Mysql密码"><a href="#重置Mysql密码" class="headerlink" title="重置Mysql密码"></a>重置Mysql密码</h3><ul>
+<li>在Mac系统偏好配置中，手动停止Mysql服务</li>
+<li>切换到MySQL的安装目录下的bin目录</li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd  <span class="regexp">/usr/</span>local<span class="regexp">/mysql/</span>bin</span><br></pre></td></tr></table></figure>
+<ul>
+<li>登录管理员权限</li>
+</ul>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">sudo su</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>禁止mysql验证功能</li>
+</ul>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">./mysqld_safe</span> <span class="params">--skip-grant-tables</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>新开一个terminal tab切换到MySQL的安装目录下的bin目录登陆mysql</li>
+</ul>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">./mysql</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>在mysql环境下输入如下命令</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FLUSH</span> <span class="keyword">PRIVILEGES</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置新密码</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">USER</span> <span class="string">'root'</span>@<span class="string">'localhost'</span> <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">'123456'</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="添加Mysql到Navicat"><a href="#添加Mysql到Navicat" class="headerlink" title="添加Mysql到Navicat"></a>添加Mysql到Navicat</h3><p>第一次在navicat添加mysql时，提示链接失败，错误消息为:</p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">2003 </span>- Can<span class="comment">'t connect to MySQL server on '127.0.0.1' (61 "Connection refused")</span></span><br></pre></td></tr></table></figure>
+<p>解决办法</p>
+<p>编辑链接，勾选 <strong>高级</strong> Tab下的 <strong>使用套接字文件</strong></p>
+<p><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/mysql_navicat/Mysql_Navicat.png" alt="Navicat"></p>
 
       
 
@@ -284,7 +306,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/13/cUrl应用/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/02/22/Mac本地重置Mysql密码/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -298,18 +320,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/10/20/在定时任务中使用Redis做为锁/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          在定时任务中使用Redis做为锁
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/06/17/设计模式之适配器模式/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">设计模式之适配器模式</div>
+    <a href="/2019/11/24/Mysql聚簇索引/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Mysql聚簇索引</div>
       <i class="icon-circle-right"></i>
     </a>
   
