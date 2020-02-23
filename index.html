@@ -65,6 +65,8 @@
 	        
 				<li><a href="/tags/数据库/">数据库</a></li>
 	        
+				<li><a href="/tags/Redis">Redis</a></li>
+	        
 				<li><a href="/tags/数据结构/">数据结构</a></li>
 	        
 				<li><a href="/tags/随笔/">随笔</a></li>
@@ -131,6 +133,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -149,15 +153,17 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 20%"><a href="/">主页</a></li>
+					<li style="width: 16.666666666666668%"><a href="/">主页</a></li>
 		        
-					<li style="width: 20%"><a href="/tags/设计模式/">设计模式</a></li>
+					<li style="width: 16.666666666666668%"><a href="/tags/设计模式/">设计模式</a></li>
 		        
-					<li style="width: 20%"><a href="/tags/数据库/">数据库</a></li>
+					<li style="width: 16.666666666666668%"><a href="/tags/数据库/">数据库</a></li>
 		        
-					<li style="width: 20%"><a href="/tags/数据结构/">数据结构</a></li>
+					<li style="width: 16.666666666666668%"><a href="/tags/Redis">Redis</a></li>
 		        
-					<li style="width: 20%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 16.666666666666668%"><a href="/tags/数据结构/">数据结构</a></li>
+		        
+					<li style="width: 16.666666666666668%"><a href="/tags/随笔/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -173,6 +179,101 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-防止Redis缓存击穿" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/23/防止Redis缓存击穿/">防止Redis缓存击穿</a>
+    </h1>
+  
+
+        
+        <a href="/2020/02/23/防止Redis缓存击穿/" class="archive-article-date">
+  	<time datetime="2020-02-23T07:33:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="什么是缓存击穿"><a href="#什么是缓存击穿" class="headerlink" title="什么是缓存击穿"></a>什么是缓存击穿</h3><p>缓存击穿是指某一个key非常热点，不停的扛着大并发，使得请求不会打到数据库上。但是在这个key失效的瞬间，大量的查询会击穿到数据库，此时的情况就是缓存击穿。</p>
+<h3 id="缓存击穿的现象"><a href="#缓存击穿的现象" class="headerlink" title="缓存击穿的现象"></a>缓存击穿的现象</h3><p>如果并发特别大的话，数据库扛不住，就会被打挂，如果是比较重要的数据库，将会波及很多服务跪掉，影响也将是灾难性的。</p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><ol>
+<li>给缓存key不设置过期时间，使其永远不会被击穿。</li>
+<li>给缓存key加上互斥锁，使其同一时刻只有一次请求打到数据库。</li>
+</ol>
+<p>针对第二种解决方案，使用代码实现</p>
+<h4 id="代码展示"><a href="#代码展示" class="headerlink" title="代码展示"></a>代码展示</h4><h5 id="缓存使用方法"><a href="#缓存使用方法" class="headerlink" title="缓存使用方法"></a>缓存使用方法</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">UseCache</span><span class="params">($cacheKey,$cacheTime,$saveTime)</span></span>&#123;</span><br><span class="line">    $redis = <span class="keyword">self</span>::GetRedis();</span><br><span class="line">    $ttl = $redis-&gt;ttl($cacheKey);</span><br><span class="line">    <span class="keyword">if</span>(!$ttl || $ttl &lt;= <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    $minTime = $saveTime - $cacheTime;</span><br><span class="line">    <span class="keyword">if</span>($ttl &gt;= $minTime)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    $lockKey = $cacheKey . <span class="string">":lock_key"</span>;</span><br><span class="line">    $lockRet = $redis-&gt;set($lockKey,<span class="number">1</span>, <span class="keyword">Array</span>(<span class="string">'nx'</span>, <span class="string">'ex'</span>=&gt;<span class="number">3</span>));</span><br><span class="line">    <span class="keyword">if</span>($lockRet) </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="缓存调用方式"><a href="#缓存调用方式" class="headerlink" title="缓存调用方式"></a>缓存调用方式</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$isCache = CacheManage::UseCache($cache_key, <span class="number">5</span>, <span class="number">300</span>);</span><br><span class="line"><span class="keyword">if</span> ($isCache) &#123;</span><br><span class="line">    $cacheData = CacheManage::Get($cache_key);</span><br><span class="line">    <span class="keyword">if</span> ($cacheData) <span class="keyword">return</span> $cacheData;</span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// DB Query</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h5><ul>
+<li>缓存有个时间，一个是缓存存活时间(saveTime)，另一个为缓存生效时间(cacheTime)。</li>
+<li>如果缓存超过存活时间，此次请求落到DB</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!$ttl <span class="params">||</span> $ttl &lt;= <span class="number">0</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果在cacheTime间隔内，多次请求则走缓存</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$minTime = $saveTime - $cacheTime;</span><br><span class="line"><span class="keyword">if</span>($ttl &gt;= $minTime)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果间隔时间超过cacheTime，此时第一请求加互斥锁进行重构，与此同时的请求获取不到互斥锁，将使用缓存（间隔时间未超过saveTime，此时缓存还存在）</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$lockKey = $cacheKey . <span class="string">":lock_key"</span>;</span><br><span class="line">$lockRet = $redis-&gt;set($lockKey,<span class="number">1</span>, <span class="keyword">Array</span>(<span class="string">'nx'</span>, <span class="string">'ex'</span>=&gt;<span class="number">3</span>));</span><br><span class="line"><span class="keyword">if</span>($lockRet) </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/23/防止Redis缓存击穿/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-Mac本地重置Mysql密码" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -827,85 +928,9 @@
 
 
   
-    <article id="post-设计模式之外观模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/17/设计模式之外观模式/">设计模式之外观模式</a>
-    </h1>
-  
-
-        
-        <a href="/2019/06/17/设计模式之外观模式/" class="archive-article-date">
-  	<time datetime="2019-06-17T02:05:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在现实生活中以医院看病为例，患者需要去挂号、门诊、划价和取药等，过程比较复杂，如果提供一个接待人员，患者只需要告诉接待人员下一步要干啥，剩余工作交给接待人员，这样对于患者来说就方便很多。<br>在软件开发过程中，一个系统可能存在多个子系统，对于客户类来说，如果自己分别依赖（调用）多个子系统，就会提升系统复杂性，所以做一个统一的接口来接受客户端的指令，由这个接口和子系统进行具体的依赖调用，这样就解决了客户类和子系统的依赖耦合。<br>外观模式，我们通过外观的包装，使应用程序只能看到外观对象，而不会看到具体的细节对象。如此以来，我们就会降低整个系统的复杂性，提高了系统了可维护性。<br>本文以电脑开机为业务场景，进行编码实现。</p>
-        
-          <a class="article-more-a" href="/2019/06/17/设计模式之外观模式/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/17/设计模式之外观模式/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -1009,6 +1034,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
             
             <div class="clearfix"></div>
