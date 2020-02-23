@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>防止Redis缓存击穿 | Jabin&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="什么是缓存击穿缓存击穿是指某一个key非常热点，不停的扛着大并发，使得请求不会打到数据库上。但是在这个key失效的瞬间，大量的查询会击穿到数据库，此时的情况就是缓存击穿。 缓存击穿的现象如果并发特别大的话，数据库扛不住，就会被打挂，如果是比较重要的数据库，将会波及很多服务跪掉，影响也将是灾难性的。 解决方案 给缓存key不设置过期时间，使其永远不会被击穿。 给缓存key加上互斥锁，使其同一时刻只有">
+  <meta name="description" content="在高并发系统中，缓存的使用十分普遍，其中最常使用的就是Redis，在使用Redis的过程中，有几个问题需要注意，否则有可能带来致命性的灾难。本文主要就主要如何防止缓存击穿进行编码分析。">
 <meta name="keywords" content="Redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="防止Redis缓存击穿">
 <meta property="og:url" content="http://yoursite.com/2020/02/23/防止Redis缓存击穿/index.html">
 <meta property="og:site_name" content="Jabin&#39;s Blog">
-<meta property="og:description" content="什么是缓存击穿缓存击穿是指某一个key非常热点，不停的扛着大并发，使得请求不会打到数据库上。但是在这个key失效的瞬间，大量的查询会击穿到数据库，此时的情况就是缓存击穿。 缓存击穿的现象如果并发特别大的话，数据库扛不住，就会被打挂，如果是比较重要的数据库，将会波及很多服务跪掉，影响也将是灾难性的。 解决方案 给缓存key不设置过期时间，使其永远不会被击穿。 给缓存key加上互斥锁，使其同一时刻只有">
+<meta property="og:description" content="在高并发系统中，缓存的使用十分普遍，其中最常使用的就是Redis，在使用Redis的过程中，有几个问题需要注意，否则有可能带来致命性的灾难。本文主要就主要如何防止缓存击穿进行编码分析。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-23T07:59:19.517Z">
+<meta property="og:updated_time" content="2020-02-23T08:06:00.368Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="防止Redis缓存击穿">
-<meta name="twitter:description" content="什么是缓存击穿缓存击穿是指某一个key非常热点，不停的扛着大并发，使得请求不会打到数据库上。但是在这个key失效的瞬间，大量的查询会击穿到数据库，此时的情况就是缓存击穿。 缓存击穿的现象如果并发特别大的话，数据库扛不住，就会被打挂，如果是比较重要的数据库，将会波及很多服务跪掉，影响也将是灾难性的。 解决方案 给缓存key不设置过期时间，使其永远不会被击穿。 给缓存key加上互斥锁，使其同一时刻只有">
+<meta name="twitter:description" content="在高并发系统中，缓存的使用十分普遍，其中最常使用的就是Redis，在使用Redis的过程中，有几个问题需要注意，否则有可能带来致命性的灾难。本文主要就主要如何防止缓存击穿进行编码分析。">
   
     <link rel="alternative" href="/atom.xml" title="Jabin&#39;s Blog" type="application/atom+xml">
   
@@ -199,7 +199,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="什么是缓存击穿"><a href="#什么是缓存击穿" class="headerlink" title="什么是缓存击穿"></a>什么是缓存击穿</h3><p>缓存击穿是指某一个key非常热点，不停的扛着大并发，使得请求不会打到数据库上。但是在这个key失效的瞬间，大量的查询会击穿到数据库，此时的情况就是缓存击穿。</p>
+        <p>在高并发系统中，缓存的使用十分普遍，其中最常使用的就是Redis，在使用Redis的过程中，有几个问题需要注意，否则有可能带来致命性的灾难。本文主要就主要如何防止缓存击穿进行编码分析。</p>
+<a id="more"></a>
+<h3 id="什么是缓存击穿"><a href="#什么是缓存击穿" class="headerlink" title="什么是缓存击穿"></a>什么是缓存击穿</h3><p>缓存击穿是指某一个key非常热点，不停的扛着大并发，使得请求不会打到数据库上。但是在这个key失效的瞬间，大量的查询会击穿到数据库，此时的情况就是缓存击穿。</p>
 <h3 id="缓存击穿的现象"><a href="#缓存击穿的现象" class="headerlink" title="缓存击穿的现象"></a>缓存击穿的现象</h3><p>如果并发特别大的话，数据库扛不住，就会被打挂，如果是比较重要的数据库，将会波及很多服务跪掉，影响也将是灾难性的。</p>
 <h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><ol>
 <li>给缓存key不设置过期时间，使其永远不会被击穿。</li>
