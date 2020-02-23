@@ -6,23 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>设计模式之适配器模式 | Jabin&#39;s Blog</title>
+  <title>防止Redis缓存击穿 | Jabin&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="现实生活中，每个地区的充电插座有可能是不一样的，例如中国是扁的两头或者三头插头，但是德国是圆的两头插头。这样就会出现一个问题，如果你去德国无法直接使用自己的充电器进行充电，现在需要一个转接头或者适配器进行不同接口之间的转换。这就是适配器模式的现实思想。软件开发过程中，客户端调用目标类时发现，目标类的接口不是客户端所期待的那样，在这种情况下，需要将目标类中的接口转化为客户端所期望的接口。本文就以充电">
-<meta name="keywords" content="设计模式">
+  <meta name="description" content="什么是缓存击穿缓存击穿是指某一个key非常热点，不停的扛着大并发，使得请求不会打到数据库上。但是在这个key失效的瞬间，大量的查询会击穿到数据库，此时的情况就是缓存击穿。 缓存击穿的现象如果并发特别大的话，数据库扛不住，就会被打挂，如果是比较重要的数据库，将会波及很多服务跪掉，影响也将是灾难性的。 解决方案 给缓存key不设置过期时间，使其永远不会被击穿。 给缓存key加上互斥锁，使其同一时刻只有">
+<meta name="keywords" content="Redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="设计模式之适配器模式">
-<meta property="og:url" content="http://yoursite.com/2019/06/17/设计模式之适配器模式/index.html">
+<meta property="og:title" content="防止Redis缓存击穿">
+<meta property="og:url" content="http://yoursite.com/2020/02/23/防止Redis缓存击穿/index.html">
 <meta property="og:site_name" content="Jabin&#39;s Blog">
-<meta property="og:description" content="现实生活中，每个地区的充电插座有可能是不一样的，例如中国是扁的两头或者三头插头，但是德国是圆的两头插头。这样就会出现一个问题，如果你去德国无法直接使用自己的充电器进行充电，现在需要一个转接头或者适配器进行不同接口之间的转换。这就是适配器模式的现实思想。软件开发过程中，客户端调用目标类时发现，目标类的接口不是客户端所期待的那样，在这种情况下，需要将目标类中的接口转化为客户端所期望的接口。本文就以充电">
+<meta property="og:description" content="什么是缓存击穿缓存击穿是指某一个key非常热点，不停的扛着大并发，使得请求不会打到数据库上。但是在这个key失效的瞬间，大量的查询会击穿到数据库，此时的情况就是缓存击穿。 缓存击穿的现象如果并发特别大的话，数据库扛不住，就会被打挂，如果是比较重要的数据库，将会波及很多服务跪掉，影响也将是灾难性的。 解决方案 给缓存key不设置过期时间，使其永远不会被击穿。 给缓存key加上互斥锁，使其同一时刻只有">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/AdapterDP/AdapterUML.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/AdapterDP/AdapterRes.png">
-<meta property="og:updated_time" content="2019-06-17T10:57:21.000Z">
+<meta property="og:updated_time" content="2020-02-23T07:59:19.517Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="设计模式之适配器模式">
-<meta name="twitter:description" content="现实生活中，每个地区的充电插座有可能是不一样的，例如中国是扁的两头或者三头插头，但是德国是圆的两头插头。这样就会出现一个问题，如果你去德国无法直接使用自己的充电器进行充电，现在需要一个转接头或者适配器进行不同接口之间的转换。这就是适配器模式的现实思想。软件开发过程中，客户端调用目标类时发现，目标类的接口不是客户端所期待的那样，在这种情况下，需要将目标类中的接口转化为客户端所期望的接口。本文就以充电">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/AdapterDP/AdapterUML.png">
+<meta name="twitter:title" content="防止Redis缓存击穿">
+<meta name="twitter:description" content="什么是缓存击穿缓存击穿是指某一个key非常热点，不停的扛着大并发，使得请求不会打到数据库上。但是在这个key失效的瞬间，大量的查询会击穿到数据库，此时的情况就是缓存击穿。 缓存击穿的现象如果并发特别大的话，数据库扛不住，就会被打挂，如果是比较重要的数据库，将会波及很多服务跪掉，影响也将是灾难性的。 解决方案 给缓存key不设置过期时间，使其永远不会被击穿。 给缓存key加上互斥锁，使其同一时刻只有">
   
     <link rel="alternative" href="/atom.xml" title="Jabin&#39;s Blog" type="application/atom+xml">
   
@@ -182,85 +179,48 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-设计模式之适配器模式" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-防止Redis缓存击穿" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      设计模式之适配器模式
+      防止Redis缓存击穿
     </h1>
   
 
         
-        <a href="/2019/06/17/设计模式之适配器模式/" class="archive-article-date">
-  	<time datetime="2019-06-17T10:22:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-17</time>
+        <a href="/2020/02/23/防止Redis缓存击穿/" class="archive-article-date">
+  	<time datetime="2020-02-23T07:33:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-23</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>现实生活中，每个地区的充电插座有可能是不一样的，例如中国是扁的两头或者三头插头，但是德国是圆的两头插头。这样就会出现一个问题，如果你去德国无法直接使用自己的充电器进行充电，现在需要一个转接头或者适配器进行不同接口之间的转换。这就是适配器模式的现实思想。<br>软件开发过程中，客户端调用目标类时发现，目标类的接口不是客户端所期待的那样，在这种情况下，需要将目标类中的接口转化为客户端所期望的接口。<br>本文就以充电器插头转换为业务场景进行编码实现。</p>
-<a id="more"></a>
-<h4 id="模式定义"><a href="#模式定义" class="headerlink" title="模式定义"></a>模式定义</h4><p>适配器模式(Adapter Pattern): 将一个接口转换为客户希望的另一个接口，让原本不兼容的接口可以合作无间。</p>
-<h4 id="模式结构及UML图"><a href="#模式结构及UML图" class="headerlink" title="模式结构及UML图"></a>模式结构及UML图</h4><p><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/AdapterDP/AdapterUML.png" alt="AdapterUML"></p>
+        <h3 id="什么是缓存击穿"><a href="#什么是缓存击穿" class="headerlink" title="什么是缓存击穿"></a>什么是缓存击穿</h3><p>缓存击穿是指某一个key非常热点，不停的扛着大并发，使得请求不会打到数据库上。但是在这个key失效的瞬间，大量的查询会击穿到数据库，此时的情况就是缓存击穿。</p>
+<h3 id="缓存击穿的现象"><a href="#缓存击穿的现象" class="headerlink" title="缓存击穿的现象"></a>缓存击穿的现象</h3><p>如果并发特别大的话，数据库扛不住，就会被打挂，如果是比较重要的数据库，将会波及很多服务跪掉，影响也将是灾难性的。</p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><ol>
+<li>给缓存key不设置过期时间，使其永远不会被击穿。</li>
+<li>给缓存key加上互斥锁，使其同一时刻只有一次请求打到数据库。</li>
+</ol>
+<p>针对第二种解决方案，使用代码实现</p>
+<h4 id="代码展示"><a href="#代码展示" class="headerlink" title="代码展示"></a>代码展示</h4><h5 id="缓存使用方法"><a href="#缓存使用方法" class="headerlink" title="缓存使用方法"></a>缓存使用方法</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">UseCache</span><span class="params">($cacheKey,$cacheTime,$saveTime)</span></span>&#123;</span><br><span class="line">    $redis = <span class="keyword">self</span>::GetRedis();</span><br><span class="line">    $ttl = $redis-&gt;ttl($cacheKey);</span><br><span class="line">    <span class="keyword">if</span>(!$ttl || $ttl &lt;= <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    $minTime = $saveTime - $cacheTime;</span><br><span class="line">    <span class="keyword">if</span>($ttl &gt;= $minTime)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    $lockKey = $cacheKey . <span class="string">":lock_key"</span>;</span><br><span class="line">    $lockRet = $redis-&gt;set($lockKey,<span class="number">1</span>, <span class="keyword">Array</span>(<span class="string">'nx'</span>, <span class="string">'ex'</span>=&gt;<span class="number">3</span>));</span><br><span class="line">    <span class="keyword">if</span>($lockRet) </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="缓存调用方式"><a href="#缓存调用方式" class="headerlink" title="缓存调用方式"></a>缓存调用方式</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$isCache = CacheManage::UseCache($cache_key, <span class="number">5</span>, <span class="number">300</span>);</span><br><span class="line"><span class="keyword">if</span> ($isCache) &#123;</span><br><span class="line">    $cacheData = CacheManage::Get($cache_key);</span><br><span class="line">    <span class="keyword">if</span> ($cacheData) <span class="keyword">return</span> $cacheData;</span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// DB Query</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h5><ul>
+<li>缓存有个时间，一个是缓存存活时间(saveTime)，另一个为缓存生效时间(cacheTime)。</li>
+<li>如果缓存超过存活时间，此次请求落到DB</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!$ttl <span class="params">||</span> $ttl &lt;= <span class="number">0</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p><strong>目标类接口(IGerSocket)</strong></p>
-<p>  目标类抽象接口</p>
-</li>
-<li><p><strong>具体目标类(GetSocket)</strong></p>
-<p>  具体目标类的具体实现</p>
-</li>
-<li><p><strong>适配器(SocketAdapter)</strong></p>
-<p>  实现目标类接口，组合适配者接口</p>
-</li>
-<li><p><strong>适配者接口(IChinaAdapter)</strong></p>
-<p>  适配者抽象接口</p>
-</li>
-<li><p><strong>具体适配者(ChinaAdapter)</strong></p>
-<p>  具体适配者的具体实现</p>
-</li>
-<li><p><strong>客户端(Client)</strong></p>
-<p>  通过适配器，使用适配者的接口实现目标类的功能</p>
-</li>
+<li>如果在cacheTime间隔内，多次请求则走缓存</li>
 </ul>
-<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><ul>
-<li>目标类接口</li>
-</ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Jabin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>:   2019-06-17</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Email</span>:  jpyan2906<span class="doctag">@gmail</span>.com</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">IGerSocket</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">powerWithRound</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$minTime = $saveTime - $cacheTime;</span><br><span class="line"><span class="keyword">if</span>($ttl &gt;= $minTime)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>具体目标类</li>
+<li>如果间隔时间超过cacheTime，此时第一请求加互斥锁进行重构，与此同时的请求获取不到互斥锁，将使用缓存（间隔时间未超过saveTime，此时缓存还存在）</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Jabin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>:   2019-06-17</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Email</span>:  jpyan2906<span class="doctag">@gmail</span>.com</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"IGerSocket.php"</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GerSocket</span> <span class="keyword">implements</span> <span class="title">IGerSocket</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">powerWithRound</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"powerd with two round socket\n"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>适配器</li>
-</ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Jabin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>:   2019-06-17</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Email</span>:  jpyan2906<span class="doctag">@gmail</span>.com</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"IGerSocket.php"</span>;</span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"IChinaSocket.php"</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SocketAdapter</span> <span class="keyword">implements</span> <span class="title">IGerSocket</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> $chinaSocket;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($chinaSocket)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;chinaSocket = $chinaSocket;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">powerWithRound</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;chinaSocket-&gt;powerWithFlat();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>适配者接口</li>
-</ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Jabin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>:   2019-06-17</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Email</span>:  jpyan2906<span class="doctag">@gmail</span>.com</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">IChinaSocket</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">powerWithFlat</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>具体适配者</li>
-</ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Jabin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>:   2019-06-17</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Email</span>:  jpyan2906<span class="doctag">@gmail</span>.com</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"IChinaSocket.php"</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ChinaSocket</span> <span class="keyword">implements</span> <span class="title">IChinaSocket</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">powerWithFlat</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"powerd with two flat socket\n"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>客户端</li>
-</ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Jabin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>:   2019-06-17</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Email</span>:  jpyan2906<span class="doctag">@gmail</span>.com</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"ChinaSocket.php"</span>;</span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"SocketAdapter.php"</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> $gerSocket;</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setSocket</span><span class="params">($socket)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;gerSocket = $socket;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">charge</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;gerSocket-&gt;powerWithRound();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$chinaSocket = <span class="keyword">new</span> ChinaSocket();</span><br><span class="line">$client = <span class="keyword">new</span> Client();</span><br><span class="line">$socketAdapter = <span class="keyword">new</span> SocketAdapter($chinaSocket);</span><br><span class="line">$client-&gt;setSocket($socketAdapter);</span><br><span class="line">$client-&gt;charge();</span><br></pre></td></tr></table></figure>
-<h4 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/AdapterDP/AdapterRes.png" alt="AdapterRes"></p>
-<h4 id="模式优点"><a href="#模式优点" class="headerlink" title="模式优点"></a>模式优点</h4><ul>
-<li>目标类和适配者类解耦，通过引入适配器，无序修改目标类就可以为新的适配者类使用</li>
-<li>灵活性和扩展性好</li>
-</ul>
-<h4 id="模式缺点"><a href="#模式缺点" class="headerlink" title="模式缺点"></a>模式缺点</h4><h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
-<li>适配器对象实现目标类接口</li>
-<li>适配器对象组合一个适配者对象</li>
-<li>对适配器原有接口方法的调用被委托给新接口的实例的特定方法</li>
-</ul>
-<h4 id="代码地址"><a href="#代码地址" class="headerlink" title="代码地址"></a>代码地址</h4><p><a href="https://github.com/Dev-Jabin/DesignPatterns/tree/master/Adapter" target="_blank" rel="noopener">AdapterDesignPattern</a></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$lockKey = $cacheKey . <span class="string">":lock_key"</span>;</span><br><span class="line">$lockRet = $redis-&gt;set($lockKey,<span class="number">1</span>, <span class="keyword">Array</span>(<span class="string">'nx'</span>, <span class="string">'ex'</span>=&gt;<span class="number">3</span>));</span><br><span class="line"><span class="keyword">if</span>($lockRet) </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br></pre></td></tr></table></figure>
 
       
 
@@ -295,7 +255,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
         		</li>
       		
 		</ul>
@@ -351,7 +311,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/06/17/设计模式之适配器模式/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/02/23/防止Redis缓存击穿/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -365,18 +325,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/10/13/cUrl应用/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          cUrl应用
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/06/17/设计模式之代理模式/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">设计模式之代理模式</div>
+    <a href="/2020/02/22/Mac本地重置Mysql密码/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Mac本地重置Mysql密码</div>
       <i class="icon-circle-right"></i>
     </a>
   

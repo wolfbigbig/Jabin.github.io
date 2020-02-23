@@ -65,6 +65,8 @@
 	        
 				<li><a href="/tags/数据库/">数据库</a></li>
 	        
+				<li><a href="/tags/Redis">Redis</a></li>
+	        
 				<li><a href="/tags/数据结构/">数据结构</a></li>
 	        
 				<li><a href="/tags/随笔/">随笔</a></li>
@@ -131,6 +133,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -149,15 +153,17 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 20%"><a href="/">主页</a></li>
+					<li style="width: 16.666666666666668%"><a href="/">主页</a></li>
 		        
-					<li style="width: 20%"><a href="/tags/设计模式/">设计模式</a></li>
+					<li style="width: 16.666666666666668%"><a href="/tags/设计模式/">设计模式</a></li>
 		        
-					<li style="width: 20%"><a href="/tags/数据库/">数据库</a></li>
+					<li style="width: 16.666666666666668%"><a href="/tags/数据库/">数据库</a></li>
 		        
-					<li style="width: 20%"><a href="/tags/数据结构/">数据结构</a></li>
+					<li style="width: 16.666666666666668%"><a href="/tags/Redis">Redis</a></li>
 		        
-					<li style="width: 20%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 16.666666666666668%"><a href="/tags/数据结构/">数据结构</a></li>
+		        
+					<li style="width: 16.666666666666668%"><a href="/tags/随笔/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -173,6 +179,82 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-设计模式之外观模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/17/设计模式之外观模式/">设计模式之外观模式</a>
+    </h1>
+  
+
+        
+        <a href="/2019/06/17/设计模式之外观模式/" class="archive-article-date">
+  	<time datetime="2019-06-17T02:05:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在现实生活中以医院看病为例，患者需要去挂号、门诊、划价和取药等，过程比较复杂，如果提供一个接待人员，患者只需要告诉接待人员下一步要干啥，剩余工作交给接待人员，这样对于患者来说就方便很多。<br>在软件开发过程中，一个系统可能存在多个子系统，对于客户类来说，如果自己分别依赖（调用）多个子系统，就会提升系统复杂性，所以做一个统一的接口来接受客户端的指令，由这个接口和子系统进行具体的依赖调用，这样就解决了客户类和子系统的依赖耦合。<br>外观模式，我们通过外观的包装，使应用程序只能看到外观对象，而不会看到具体的细节对象。如此以来，我们就会降低整个系统的复杂性，提高了系统了可维护性。<br>本文以电脑开机为业务场景，进行编码实现。</p>
+        
+          <a class="article-more-a" href="/2019/06/17/设计模式之外观模式/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/06/17/设计模式之外观模式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-SQL数据库和NoSQL数据库那些事儿" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -847,74 +929,9 @@
 
 
   
-    <article id="post-Laravel打印最后一条SQL语句" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/09/Laravel打印最后一条SQL语句/">Laravel打印最后一条SQL语句</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/09/Laravel打印最后一条SQL语句/" class="archive-article-date">
-  	<time datetime="2019-05-09T09:34:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在日常开发过程中，如果遇到对数据库执行出现数据异常的情况，需要对SQL语句打印出来，以便查找问题。本文记录使用Laravel/Lumen打印最后一条SQL语句。</p>
-        
-          <a class="article-more-a" href="/2019/05/09/Laravel打印最后一条SQL语句/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/09/Laravel打印最后一条SQL语句/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 
@@ -1018,6 +1035,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
             
             <div class="clearfix"></div>
