@@ -6,19 +6,28 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Jabin&#39;s Blog</title>
+  <title>Http缓存 | Jabin&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Description">
-<meta name="keywords" content="keywords">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jabin&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+  <meta name="description" content="Web缓存是可以自动保存常见文档副本的http设备。当web请求抵达缓存时如果本地有已经存在的副本，就可以使用副本，就不用向原始服务器发起请求。Http缓存是提升web性能的重要手段之一。">
+<meta name="keywords" content="HTTP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Http缓存">
+<meta property="og:url" content="http://yoursite.com/2020/03/13/Http缓存/index.html">
 <meta property="og:site_name" content="Jabin&#39;s Blog">
-<meta property="og:description" content="Description">
+<meta property="og:description" content="Web缓存是可以自动保存常见文档副本的http设备。当web请求抵达缓存时如果本地有已经存在的副本，就可以使用副本，就不用向原始服务器发起请求。Http缓存是提升web性能的重要手段之一。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/http%E7%BC%93%E5%AD%98/%E7%BC%93%E5%AD%98%E8%AF%B7%E6%B1%82%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/http%E7%BC%93%E5%AD%98/Http%E5%BC%BA%E5%88%B6%E7%BC%93%E5%AD%98.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/http%E7%BC%93%E5%AD%98/Expires.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/http%E7%BC%93%E5%AD%98/Cache-Control.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/http%E7%BC%93%E5%AD%98/Http%E5%AF%B9%E6%AF%94%E7%BC%93%E5%AD%98.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/http%E7%BC%93%E5%AD%98/LastModified.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/http%E7%BC%93%E5%AD%98/Etag-Match.jpg">
+<meta property="og:updated_time" content="2020-03-13T13:09:50.017Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jabin&#39;s Blog">
-<meta name="twitter:description" content="Description">
+<meta name="twitter:title" content="Http缓存">
+<meta name="twitter:description" content="Web缓存是可以自动保存常见文档副本的http设备。当web请求抵达缓存时如果本地有已经存在的副本，就可以使用副本，就不用向原始服务器发起请求。Http缓存是提升web性能的重要手段之一。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/http%E7%BC%93%E5%AD%98/%E7%BC%93%E5%AD%98%E8%AF%B7%E6%B1%82%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Jabin&#39;s Blog" type="application/atom+xml">
   
@@ -184,34 +193,97 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-设计模式之建造者模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-Http缓存" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/20/设计模式之建造者模式/">设计模式之建造者模式</a>
+    <h1 class="article-title" itemprop="name">
+      Http缓存
     </h1>
   
 
         
-        <a href="/2019/05/20/设计模式之建造者模式/" class="archive-article-date">
-  	<time datetime="2019-05-20T07:00:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-20</time>
+        <a href="/2020/03/13/Http缓存/" class="archive-article-date">
+  	<time datetime="2020-03-13T09:15:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-13</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>建造者模式是又一个典型的创建型设计模式。当遇到复杂的对象创建时使用建造者模式可以简化对象创建过程。建造器表现为接口形式。<br>本文还是以制造电脑为业务场景，以PHP语言进行编码实现。</p>
-        
-          <a class="article-more-a" href="/2019/05/20/设计模式之建造者模式/#more">more >></a>
-        
+        <p>Web缓存是可以自动保存常见文档副本的http设备。当web请求抵达缓存时如果本地有已经存在的副本，就可以使用副本，就不用向原始服务器发起请求。Http缓存是提升web性能的重要手段之一。</p>
+<a id="more"></a>
+<h3 id="缓存意义"><a href="#缓存意义" class="headerlink" title="缓存意义"></a>缓存意义</h3><p>使用缓存主要有以下几个优点。</p>
+<ul>
+<li>缓存减少冗余数据传输，节省宽带费用</li>
+<li>缓存可以减少距离时延，使得页面加载变化用户体验较好</li>
+<li>缓存降低了对原始服务器的请求，从而降低了原始服务器的压力</li>
+</ul>
+<h3 id="缓存流程"><a href="#缓存流程" class="headerlink" title="缓存流程"></a>缓存流程</h3><p>针对一个GET报文的基本缓存处理包括6个步骤。</p>
+<ol>
+<li>接收：缓存从网络中读取抵达的请求报文</li>
+<li>解析：缓存对报文进行解析，提取中URL和各种首部</li>
+<li>查询：缓存查看是否本地副本可用。如果没有，就获取一份副本，并保存到本地</li>
+<li>新鲜度检测：缓存查看已缓存副本是否足够新鲜，如果不新鲜，就询问服务器是否有任何更新</li>
+<li>创建响应：缓存会用新的首部和已缓存的主体来构建一条响应报文</li>
+<li>发送：缓存通过网络将响应发回给客户端</li>
+</ol>
+<p>流程图如下</p>
+<p><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/http%E7%BC%93%E5%AD%98/%E7%BC%93%E5%AD%98%E8%AF%B7%E6%B1%82%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg" alt="缓存流程"></p>
+<h3 id="缓存规则"><a href="#缓存规则" class="headerlink" title="缓存规则"></a>缓存规则</h3><p>根据客户端请求是否一定会到达服务器，将缓存可以分为<strong>强制缓存</strong>和<strong>对比缓存</strong>。其中对比缓存指每次客户端请求一定会到达服务器，只是有时候服务器会返回完整数据，而有时只返回相应Header。</p>
+<h4 id="强制缓存"><a href="#强制缓存" class="headerlink" title="强制缓存"></a>强制缓存</h4><p>客户端在第一次请求服务器时，服务器进行响应时会将数据和缓存规则一并返回给客户端，其中缓存规则时在Response Header中返回的。<br>强制缓存请求数据流程如下:<br><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/http%E7%BC%93%E5%AD%98/Http%E5%BC%BA%E5%88%B6%E7%BC%93%E5%AD%98.jpg" alt="强制缓存"><br>对于标识强制缓存规则的Header中有两个字段Expires和Cache-Control。</p>
+<h5 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h5><p>Expires是服务端返回的缓存到期时间，是一个绝对时间。一般不推荐使用Expires因为很多服务器的时钟不同步，因而会导致缓存生存周期误差的问题。HTTP1.0默认使用Expires，HTTP1.1版本默认使用Cache-Control。<br>Expires在Response Header中的示意图如下<br><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/http%E7%BC%93%E5%AD%98/Expires.png" alt="Expires"></p>
+<h5 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h5><p>Cache-Control在Response Header中示意图如下<br><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/http%E7%BC%93%E5%AD%98/Cache-Control.png" alt="Cache-Control"></p>
+<ul>
+<li><p>Cache-Control: no-store<br>  no-store表示禁止缓存对响应进行复制。缓存通常会像非缓存代理服务器一样，向客户端转发一条no-store响应，然后删除对象。</p>
+</li>
+<li><p>Cache-Control: no-cache<br>  no-cache响应实际上可以存储在本地缓存中，但是每次使用之前都必须与原始服务器进行新鲜度检测。</p>
+</li>
+<li><p>Cache-Control: must-revalidate<br>  must-revalidate是指本地副本未过期之前可以使用本地副本，本地副本过期之后必须去原始服务器进行校验</p>
+</li>
+<li><p>Cache-Control: max-age<br>  max-age表示从服务器将文档传来之时起，可以认为此文档处于新鲜状态的秒数，属于一个相对时间。</p>
+</li>
+</ul>
+<h5 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h5><p>多个字段同时在Header中存在时，优先级由强到弱依次为：</p>
+<ol>
+<li>Cache-Control: no-store</li>
+<li>Cache-Control: no-cache</li>
+<li>Cache-Control: must-revalidate</li>
+<li>Cache-Control: max-age</li>
+<li>Expires</li>
+</ol>
+<h4 id="对比缓存"><a href="#对比缓存" class="headerlink" title="对比缓存"></a>对比缓存</h4><p>对比缓存是指客户端每次请求都会到达服务器进行新鲜度检测，只是如果缓存处于新鲜状态此时返回304状态码，通知客户端可以使用缓存数据。反之，如果缓存已经失效，会返回200状态码，同时返回数据和新的缓存标识。</p>
+<p>对比缓存流程如下：<br><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/http%E7%BC%93%E5%AD%98/Http%E5%AF%B9%E6%AF%94%E7%BC%93%E5%AD%98.jpg" alt="对比缓存"><br>对比缓存方式主要是通过在Request和Response中的Header中进行传递的。主要有两组Header值分别为<strong>Last-Modified/If-Modified-Since</strong>和<strong>Etag/If-None-Match</strong></p>
+<h5 id="Last-Modified-If-Modified-Since"><a href="#Last-Modified-If-Modified-Since" class="headerlink" title="Last-Modified/If-Modified-Since"></a>Last-Modified/If-Modified-Since</h5><p>在客户端第一次请求服务器时，服务器会在Response Header中返回给客户端Last-Modified字段，代表该资源的最后修改时间。此后客户端在请求服务器时在Request Header中传递If-Modified-Since字段。此时服务器收到If-Modified-Since字段时会和Last-Modified进行比较。如果发现在资源修改时间早于If-Modified-Since则说明资源无修改，缓存仍是处于新鲜状态，此时返回304状态码，同时通知客户端使用缓存数据。反之，说明缓存数据已经过期，此时返回200状态码和新的数据。<br>Header消息如下<br><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/http%E7%BC%93%E5%AD%98/LastModified.png" alt="Last-Modified/If-Modified-Since"></p>
+<h5 id="Etag-If-None-Match"><a href="#Etag-If-None-Match" class="headerlink" title="Etag/If-None-Match"></a>Etag/If-None-Match</h5><p>在客户端第一次请求服务器时，服务器会在Response Header中返回给客户端Etag字段，代表该资源唯一标识。此后客户端在请求服务器时在Request Header中传递If-None-Match字段。服务器收到消息后会将资源的Etag值和If-None-Match中的值进行对比，如果一致，说明缓存仍可用，返回304状态码，反之返回200状态码和新鲜数据。<br>Header消息如下<br><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/http%E7%BC%93%E5%AD%98/Etag-Match.jpg" alt="Etag/If-None-Match"></p>
+<h5 id="优先级-1"><a href="#优先级-1" class="headerlink" title="优先级"></a>优先级</h5><p>两套对比缓存字段都存在时，优先使用<strong>Etag/If-None-Match</strong></p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>当强制缓存和对比缓存同时存在时，优先使用强制缓存策略。</p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -222,7 +294,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">HTTP</a>
         		</li>
       		
 		</ul>
@@ -231,16 +303,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/20/设计模式之建造者模式/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/03/13/Http缓存/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2020/03/08/HTTPS初探/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">HTTPS初探</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -260,642 +391,14 @@
 
 
 
-
-  
-    <article id="post-设计模式之工厂模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/14/设计模式之工厂模式/">设计模式之工厂模式</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/14/设计模式之工厂模式/" class="archive-article-date">
-  	<time datetime="2019-05-14T02:30:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>设计模式在日常项目和日常面试中是非常重要的。从本文开始，我准备把一些重要的和常用的设计模式撸一遍并且以PHP实现。一般而言可以把设计模式分为三种，分别为创建式模式、结构型模式和行为型模式。本文主要实现创建式模式中的工厂模式。</p>
-        
-          <a class="article-more-a" href="/2019/05/14/设计模式之工厂模式/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/14/设计模式之工厂模式/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Laravel打印最后一条SQL语句" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/09/Laravel打印最后一条SQL语句/">Laravel打印最后一条SQL语句</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/09/Laravel打印最后一条SQL语句/" class="archive-article-date">
-  	<time datetime="2019-05-09T09:34:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在日常开发过程中，如果遇到对数据库执行出现数据异常的情况，需要对SQL语句打印出来，以便查找问题。本文记录使用Laravel/Lumen打印最后一条SQL语句。</p>
-        
-          <a class="article-more-a" href="/2019/05/09/Laravel打印最后一条SQL语句/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/09/Laravel打印最后一条SQL语句/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-常用排序算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/29/常用排序算法/">常用排序算法</a>
-    </h1>
-  
-
-        
-        <a href="/2019/04/29/常用排序算法/" class="archive-article-date">
-  	<time datetime="2019-04-29T09:35:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>查找和排序算法是算法的入门知识，在日常面试中经常会被问到排序算法及其相关的问题。本文使用PHP语言对几种常见的排序算法(<strong>冒泡排序</strong>、<strong>选择排序</strong>、<strong>插入排序</strong>、<strong>二分插入排序</strong>、<strong>归并排序</strong>、<strong>快速排序</strong>、<strong>希尔排序</strong>和<strong>桶排序</strong>)进行实现。</p>
-        
-          <a class="article-more-a" href="/2019/04/29/常用排序算法/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/29/常用排序算法/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-利用PHP基于链表实现栈和队列" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/27/利用PHP基于链表实现栈和队列/">利用PHP基于链表实现栈和队列</a>
-    </h1>
-  
-
-        
-        <a href="/2019/04/27/利用PHP基于链表实现栈和队列/" class="archive-article-date">
-  	<time datetime="2019-04-27T08:03:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>前一篇文章介绍了栈和队列的基本结构，并且使用数组实现了基本接口功能。<a href="https://dev-jabin.github.io/2019/04/25/%E5%88%A9%E7%94%A8PHP%E5%9F%BA%E4%BA%8E%E6%95%B0%E7%BB%84%E5%AE%9E%E7%8E%B0%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/#more" target="_blank" rel="noopener">具体内容戳我。</a>本文同样实现栈和队列，但是不是基于数组而是基于链表。</p>
-        
-          <a class="article-more-a" href="/2019/04/27/利用PHP基于链表实现栈和队列/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/27/利用PHP基于链表实现栈和队列/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-利用PHP基于数组实现栈和队列" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/25/利用PHP基于数组实现栈和队列/">利用PHP基于数组实现栈和队列</a>
-    </h1>
-  
-
-        
-        <a href="/2019/04/25/利用PHP基于数组实现栈和队列/" class="archive-article-date">
-  	<time datetime="2019-04-25T08:14:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>下压栈</strong>（或简称为栈）是一种<strong>后进先出</strong>（LIFO）策略的集合类型。栈是线性数据结构，一般包含四个接口，分别为<strong>入栈</strong>、<strong>出栈</strong>、<strong>判空</strong>和<strong>求栈的长度</strong>。本文基于PHP使用数组来模式栈的入栈和出栈，主要是用的数组的array_pop函数和array_push函数。<br><strong>队列</strong>是一种<strong>先进先出</strong>(FIFO)策略的集合类型。队列是线形数据结构，一般包含四个接口，分别为<strong>入队列</strong>、<strong>出队列</strong>、<strong>判空</strong>和<strong>求队列的长度</strong>。本文基于PHP使用数组来模式队列的入队列和出队列，主要是用的数组的array_push函数和array_shift函数。</p>
-        
-          <a class="article-more-a" href="/2019/04/25/利用PHP基于数组实现栈和队列/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/25/利用PHP基于数组实现栈和队列/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-单链表反转" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/22/单链表反转/">单链表反转</a>
-    </h1>
-  
-
-        
-        <a href="/2019/04/22/单链表反转/" class="archive-article-date">
-  	<time datetime="2019-04-22T07:21:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>链表(Linked List)</strong>是一种线性结构，它是由一些列节点组成的链。每个节点都有两部分组成，其中一部分保存了数据，另一部分保存了下一个节点的指针。链表的头指针指向第一个节点，如果链表为空，则头指针为空或者为null。</p>
-        
-          <a class="article-more-a" href="/2019/04/22/单链表反转/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/22/单链表反转/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Laravel-Layui使用Ajax请求" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/13/Laravel-Layui使用Ajax请求/">Laravel-Layui使用Ajax请求</a>
-    </h1>
-  
-
-        
-        <a href="/2019/04/13/Laravel-Layui使用Ajax请求/" class="archive-article-date">
-  	<time datetime="2019-04-13T08:35:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在使用larval开发后台的过程中，难免少不了提交表单的操作。然而在提交数据最优雅的方式应该数Ajax了。本文的后台代码基于Laravel框架，前端使用Layui框架，使用Ajax进行表单提交。<br>本文以登录功能为例，通过邮箱和密码登录。登录成功后前端提示登录成功，而后重定向到首页；反之如果登录失败，前端提示登录失败。<br>Ps:服务器配置，Nginx配置等暂且不表</p>
-        
-          <a class="article-more-a" href="/2019/04/13/Laravel-Layui使用Ajax请求/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/13/Laravel-Layui使用Ajax请求/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-二维数组转化为JSON串" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/02/二维数组转化为JSON串/">二维数组转化为JSON串</a>
-    </h1>
-  
-
-        
-        <a href="/2019/04/02/二维数组转化为JSON串/" class="archive-article-date">
-  	<time datetime="2019-04-02T10:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在开发过程中有时需要将二位数组转化为JSON以便于后期的数据处理。前段时间用到了这个知识点，现在记录一下。</p>
-<hr>
-        
-          <a class="article-more-a" href="/2019/04/02/二维数组转化为JSON串/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/02/二维数组转化为JSON串/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Lumen根据环境加载不同的配置文件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/28/Lumen根据环境加载不同的配置文件/">Lumen根据环境加载不同的配置文件</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/28/Lumen根据环境加载不同的配置文件/" class="archive-article-date">
-  	<time datetime="2019-03-28T09:48:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Lumen通过Dotenv管理配置文件。因为开发过程中，我们需要根据不同的环境进行加载不同的配置文件。比如在开发环境我们希望加载 .env.local 测试环境我们希望加载 .env.staging 而在线上我们希望加载 .env.production。但是如何可以简单的通过一些配置来加载不同的配置文件呐？本文是通过配置Nginx来实现根据不同的环境加载不同的配置文件。</p>
-        
-          <a class="article-more-a" href="/2019/03/28/Lumen根据环境加载不同的配置文件/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/28/Lumen根据环境加载不同的配置文件/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -918,8 +421,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
