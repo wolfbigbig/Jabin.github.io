@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Redis过期策略 | Jabin&#39;s Blog</title>
+  <title>Redis键过期策略 | Jabin&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="在使用redis是可以通过expire、pexpire对redis数据库中的某个键设置生存时间(Time To Live, TTL)，在经过指定的秒数或者毫秒数之后，服务器就会自动删除ttl为0的键。但是我们设置了ttl，redis是如何判断过期？以及使用什么样的策略进行删除过期的键呐？">
 <meta name="keywords" content="Redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis过期策略">
+<meta property="og:title" content="Redis键过期策略">
 <meta property="og:url" content="http://yoursite.com/2020/03/21/Redis过期策略/index.html">
 <meta property="og:site_name" content="Jabin&#39;s Blog">
 <meta property="og:description" content="在使用redis是可以通过expire、pexpire对redis数据库中的某个键设置生存时间(Time To Live, TTL)，在经过指定的秒数或者毫秒数之后，服务器就会自动删除ttl为0的键。但是我们设置了ttl，redis是如何判断过期？以及使用什么样的策略进行删除过期的键呐？">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/redis%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5/Redis%E6%83%B0%E6%80%A7%E5%88%A0%E9%99%A4.jpg">
-<meta property="og:updated_time" content="2020-03-21T13:49:39.029Z">
+<meta property="og:updated_time" content="2020-03-21T13:55:22.028Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redis过期策略">
+<meta name="twitter:title" content="Redis键过期策略">
 <meta name="twitter:description" content="在使用redis是可以通过expire、pexpire对redis数据库中的某个键设置生存时间(Time To Live, TTL)，在经过指定的秒数或者毫秒数之后，服务器就会自动删除ttl为0的键。但是我们设置了ttl，redis是如何判断过期？以及使用什么样的策略进行删除过期的键呐？">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/redis%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5/Redis%E6%83%B0%E6%80%A7%E5%88%A0%E9%99%A4.jpg">
   
@@ -194,7 +194,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Redis过期策略
+      Redis键过期策略
     </h1>
   
 
