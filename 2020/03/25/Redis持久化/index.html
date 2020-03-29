@@ -6,20 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Git回滚单个文件 | Jabin&#39;s Blog</title>
+  <title>Redis持久化 | Jabin&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="回滚某个文件到某个版本问题描述在使用的git的过程中，难免会遇到以下场景：在某次commit时提交了多个文件，但是提交之后发现有一个文件是有问题的，需要回滚，但是如果全部回滚的话就会造成正确提交的文件也会被回滚，造成不必要的麻烦。此时我们需要针对某一个文件，将其回滚到指定的版本即可。">
-<meta name="keywords" content="keywords">
+  <meta name="description" content="Redis是一个内存数据库，所有数据都存在内存中，这是redis可以提供高效服务的原因。但是数据在内存中有一个问题就是服务器重启或者宕机时将会导致数据丢失，如果redis只是作为缓存服务器还好，但是如果作为数据库服务器时就会不可接受的。好在redis提供了持久化的方式，可以使得在内存中的数据持久化到本地磁盘，所以服务器重启或者宕机时也不会导致数据丢失。">
+<meta name="keywords" content="Redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Git回滚单个文件">
-<meta property="og:url" content="http://yoursite.com/2018/07/11/revet-singal-file-md/index.html">
+<meta property="og:title" content="Redis持久化">
+<meta property="og:url" content="http://yoursite.com/2020/03/25/Redis持久化/index.html">
 <meta property="og:site_name" content="Jabin&#39;s Blog">
-<meta property="og:description" content="回滚某个文件到某个版本问题描述在使用的git的过程中，难免会遇到以下场景：在某次commit时提交了多个文件，但是提交之后发现有一个文件是有问题的，需要回滚，但是如果全部回滚的话就会造成正确提交的文件也会被回滚，造成不必要的麻烦。此时我们需要针对某一个文件，将其回滚到指定的版本即可。">
+<meta property="og:description" content="Redis是一个内存数据库，所有数据都存在内存中，这是redis可以提供高效服务的原因。但是数据在内存中有一个问题就是服务器重启或者宕机时将会导致数据丢失，如果redis只是作为缓存服务器还好，但是如果作为数据库服务器时就会不可接受的。好在redis提供了持久化的方式，可以使得在内存中的数据持久化到本地磁盘，所以服务器重启或者宕机时也不会导致数据丢失。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-02T10:48:15.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/Redis%E6%8C%81%E4%B9%85%E5%8C%96/RDB%20conf.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/Redis%E6%8C%81%E4%B9%85%E5%8C%96/BGSAVE.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/Redis%E6%8C%81%E4%B9%85%E5%8C%96/BGREWRITEAOF.jpg">
+<meta property="og:updated_time" content="2020-03-29T07:56:06.354Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Git回滚单个文件">
-<meta name="twitter:description" content="回滚某个文件到某个版本问题描述在使用的git的过程中，难免会遇到以下场景：在某次commit时提交了多个文件，但是提交之后发现有一个文件是有问题的，需要回滚，但是如果全部回滚的话就会造成正确提交的文件也会被回滚，造成不必要的麻烦。此时我们需要针对某一个文件，将其回滚到指定的版本即可。">
+<meta name="twitter:title" content="Redis持久化">
+<meta name="twitter:description" content="Redis是一个内存数据库，所有数据都存在内存中，这是redis可以提供高效服务的原因。但是数据在内存中有一个问题就是服务器重启或者宕机时将会导致数据丢失，如果redis只是作为缓存服务器还好，但是如果作为数据库服务器时就会不可接受的。好在redis提供了持久化的方式，可以使得在内存中的数据持久化到本地磁盘，所以服务器重启或者宕机时也不会导致数据丢失。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/Redis%E6%8C%81%E4%B9%85%E5%8C%96/RDB%20conf.png">
   
     <link rel="alternative" href="/atom.xml" title="Jabin&#39;s Blog" type="application/atom+xml">
   
@@ -185,40 +189,87 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-revet-singal-file-md" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Redis持久化" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Git回滚单个文件
+      Redis持久化
     </h1>
   
 
         
-        <a href="/2018/07/11/revet-singal-file-md/" class="archive-article-date">
-  	<time datetime="2018-07-11T08:26:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-11</time>
+        <a href="/2020/03/25/Redis持久化/" class="archive-article-date">
+  	<time datetime="2020-03-25T10:40:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-25</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="回滚某个文件到某个版本"><a href="#回滚某个文件到某个版本" class="headerlink" title="回滚某个文件到某个版本"></a>回滚某个文件到某个版本</h3><h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>在使用的git的过程中，难免会遇到以下场景：在某次commit时提交了多个文件，但是提交之后发现有一个文件是有问题的，需要回滚，但是如果全部回滚的话就会造成正确提交的文件也会被回滚，造成不必要的麻烦。此时我们需要针对某一个文件，将其回滚到指定的版本即可。</p>
+        <p>Redis是一个内存数据库，所有数据都存在内存中，这是redis可以提供高效服务的原因。但是数据在内存中有一个问题就是服务器重启或者宕机时将会导致数据丢失，如果redis只是作为缓存服务器还好，但是如果作为数据库服务器时就会不可接受的。好在redis提供了持久化的方式，可以使得在内存中的数据持久化到本地磁盘，所以服务器重启或者宕机时也不会导致数据丢失。</p>
 <a id="more"></a>
-<h4 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h4><p>以回滚testFile.txt文件为例。大致可以分为三步走：</p>
-<ol>
-<li><p>首先需要回滚指定版本的hash值(如果hash值为：c78a34b1ff0d37c84f8e6ffc779452fe318efdb7)</p>
- <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> testFile.txt</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用hash值回滚指定文件</p>
- <figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout <span class="keyword">c</span><span class="number">78</span>a<span class="number">34</span>b<span class="number">1</span>ff<span class="number">0</span>d<span class="number">37</span><span class="keyword">c</span><span class="number">84</span>f<span class="number">8e6</span>ffc<span class="number">779452</span>fe<span class="number">318</span>efdb<span class="number">7</span> testFile.txt</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>提交回滚后的内容</p>
- <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git</span> commit -m <span class="string">'revet testFile.txt'</span></span><br></pre></td></tr></table></figure>
-</li>
+<h3 id="Redis持久化方式"><a href="#Redis持久化方式" class="headerlink" title="Redis持久化方式"></a>Redis持久化方式</h3><p>redis提供两种持久化方式：<strong>快照(RDB)</strong> 和 <strong>追加式文件(AOF)</strong>。</p>
+<ul>
+<li>RDB持久化会在一个特定时间间隔保存那个时间点的数据快照</li>
+<li>AOF记录每次服务器的写操作，当服务器重启时，这些操作将会被逐条执行，从而恢复重建数据</li>
+<li>RDB和AOF可以同时关闭，此时数据仅存活在运行时</li>
+<li>RDB和AOF也可以同时开启，当两种持久化方式同时开启，在服务器重启时会有显示AOF方式进行重建，因为一般来讲，AOF恢复的数据会比RDB恢复的数据要完整一些</li>
+</ul>
+<h3 id="RDB持久化"><a href="#RDB持久化" class="headerlink" title="RDB持久化"></a>RDB持久化</h3><h4 id="RDB持久化运作方式"><a href="#RDB持久化运作方式" class="headerlink" title="RDB持久化运作方式"></a>RDB持久化运作方式</h4><ol>
+<li>Redis调用fork()，生成一个子进程</li>
+<li>子进程负责将数据写进新的dump.rdb</li>
+<li>数据快照完毕后，使用新的dump.rdb替换旧的dump.rdb</li>
 </ol>
+<h4 id="RDB持久化触发方式"><a href="#RDB持久化触发方式" class="headerlink" title="RDB持久化触发方式"></a>RDB持久化触发方式</h4><p>RDB快照有两种触发方式，自动触发和手动触发。</p>
+<h5 id="RDB持久化自动触发"><a href="#RDB持久化自动触发" class="headerlink" title="RDB持久化自动触发"></a>RDB持久化自动触发</h5><p>可以在<strong>redis.conf</strong>中进行设置，让它在X秒内数据至少要Y个变动时触发保存因此快照。redis 默认RDB持久化如下:</p>
+<p><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/Redis%E6%8C%81%E4%B9%85%E5%8C%96/RDB%20conf.png" alt="RDB conf"></p>
+<p>分别意味着 <strong>过去900秒数据至少变动1次</strong>、<strong>过去300秒数据变动至少10次</strong>、<strong>过去60秒数据变动至少10000次</strong>，满足这三种情况的一种就会触发一次快照保存。</p>
+<p>注:当在配置中设置为 <code>save &quot;&quot;</code>时将会关闭RDB持久化。</p>
+<h5 id="RDB持久化手动触发"><a href="#RDB持久化手动触发" class="headerlink" title="RDB持久化手动触发"></a>RDB持久化手动触发</h5><p>可以使用<code>SAVE</code>和<code>BGSAVE</code>手动触发RDB持久化。</p>
+<ul>
+<li>SAVE: 会阻塞redis服务器，直到持久化完成，线上应该禁止这种方式，因为这种持久化方式会导致线上停止服务</li>
+<li>BGSAVE:这种方式首先会fork一个子线程，持久化工作由子线程完成，服务器进程可以继续提供服务</li>
+</ul>
+<p>在使用BGSAVE时首先会检查是否有正在运行的<strong>BGSAVE</strong>和<strong>BGREWRITEAOF</strong>当存在其中一种时，将允许执行BGSAVE，因为同时多个子进程同时执行时将会有大量的磁盘I/O操作。所以执行BGSAVE时的流程图如下：</p>
+<p><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/Redis%E6%8C%81%E4%B9%85%E5%8C%96/BGSAVE.jpg" alt="BGSAVE"></p>
+<h4 id="RDB优点"><a href="#RDB优点" class="headerlink" title="RDB优点"></a>RDB优点</h4><ul>
+<li>RDB文件是一个简洁的二进制文件，体积较小</li>
+<li>RDB文件是某个时间点的Redis数据，适合用于做备份，适合用于在容灾</li>
+<li>RDB性能较好，在持久化会fork一个子进程，把持久化工作交付给子进程</li>
+<li>与AOF相比，在数据量较大时，RDB启动速度较快</li>
+</ul>
+<h4 id="RDB缺点"><a href="#RDB缺点" class="headerlink" title="RDB缺点"></a>RDB缺点</h4><ul>
+<li>在数据安全性方面来说，RDB不如AOF</li>
+</ul>
+<h3 id="AOF持久化"><a href="#AOF持久化" class="headerlink" title="AOF持久化"></a>AOF持久化</h3><p>在redis.conf中配置<code>appendonly yes</code>即可开启AOF持久化。</p>
+<h4 id="AOF持久化运作方式"><a href="#AOF持久化运作方式" class="headerlink" title="AOF持久化运作方式"></a>AOF持久化运作方式</h4><ol>
+<li>Redis执行fork(), 生层一个子进程</li>
+<li>子进程开始将新的AOF文件写进临时文件</li>
+<li>对于所有新执行的写入命令，父进程一边将它们累积到一个内存缓存中，一边将这些改动追加到现有 AOF 文件的末尾： 这样即使在重写的中途发生停机，现有的 AOF 文件也还是安全的</li>
+<li>当子进程完成重写工作时，它给父进程发送一个信号，父进程在接收到信号之后，将内存缓存中的所有数据追加到新 AOF 文件的末尾</li>
+<li>现在 Redis 原子地用新文件替换旧文件，之后所有命令都会直接追加到新 AOF 文件的末尾</li>
+</ol>
+<h4 id="AOF持久化触发方式"><a href="#AOF持久化触发方式" class="headerlink" title="AOF持久化触发方式"></a>AOF持久化触发方式</h4><p>AOF快照有两种触发方式，自动触发和手动触发。</p>
+<h5 id="AOF持久化自动触发"><a href="#AOF持久化自动触发" class="headerlink" title="AOF持久化自动触发"></a>AOF持久化自动触发</h5><p>可以在<strong>redis.conf</strong>中进行设置，有三种fsync配置自动触发AOF持久化</p>
+<ul>
+<li>always: 每个写入操作命令都会同步到aof，效率低，但是数据安全</li>
+<li>everysec: 每秒同步一次，是个折中方案</li>
+<li>no: 有操作系统进行同步，效率高，但是数据不安全</li>
+</ul>
+<p>一般情况下都采用 everysec 配置，这样可以兼顾速度与安全，最多损失1s的数据。</p>
+<h5 id="AOF持久化手动触发"><a href="#AOF持久化手动触发" class="headerlink" title="AOF持久化手动触发"></a>AOF持久化手动触发</h5><p>可以使用<code>BGREWRITEAOF</code>手动触发AOF持久化。同样执行BGREWRITEAOF时会首先检查是否有BGREWRITEAOF或者BGSAVE正在运行，以避免大量的磁盘IO。执行BGREWRITEAOF时的流程图如下：<br><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/Redis%E6%8C%81%E4%B9%85%E5%8C%96/BGREWRITEAOF.jpg" alt="BGREWRITEAOF"></p>
+<h4 id="AOF重写"><a href="#AOF重写" class="headerlink" title="AOF重写"></a>AOF重写</h4><p>因为AOF的运作方式是不断地将命令追加到文件的末尾，所以随着写入命令的不断增加，AOF文件的体积也会变得越来越大。<br>举个例子，如果你对一个计数器调用了100次INCR key，那么仅仅是为了保存这个计数器的当前值，AOF文件就需要使用100条记录(entry)。<br>然而在实际上，只使用一条 SET key value [EX seconds] [PX milliseconds] [NX|XX] 命令已经足以保存计数器的当前值了，其余99条记录实际上都是多余的。<br>为了处理这种情况，Redis支持一种有趣的特性:可以在不打断服务客户端的情况下，对AOF文件进行重建(rebuild)。<br>执行BGREWRITEAOF命令时Redis将生成一个新的AOF文件，这个文件包含重建当前数据集所需的最少命令。<br>注意：在AOF重写时不会读旧的AOF文件，而是基于现有的数据进行重写。</p>
+<h4 id="AOF持久化优点"><a href="#AOF持久化优点" class="headerlink" title="AOF持久化优点"></a>AOF持久化优点</h4><ul>
+<li>数据安全，比RDB可靠。AOF的fsync配置为everysec，最多只会丢失1s的数据</li>
+<li>AOF文件由简单易懂的redis命名组成，容易恢复数据</li>
+</ul>
+<h4 id="AOF持久化缺点"><a href="#AOF持久化缺点" class="headerlink" title="AOF持久化缺点"></a>AOF持久化缺点</h4><ul>
+<li>相同数据集下，AOF文件比RDB文件大</li>
+<li>fsync配置不合适时，会影响速度或者数据安全性</li>
+</ul>
 
       
 
@@ -248,6 +299,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -298,7 +360,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/07/11/revet-singal-file-md/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/03/25/Redis持久化/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -312,18 +374,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/12/02/unsplash-images-crawler/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          PHP抓取图片方案
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/04/09/二维数组转化为JSON串/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">二维数组转化为JSON串</div>
+    <a href="/2020/03/21/Redis过期策略/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Redis键过期策略</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -457,11 +510,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">

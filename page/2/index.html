@@ -186,6 +186,82 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-在定时任务中使用Redis做为锁" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/20/在定时任务中使用Redis做为锁/">在定时任务中使用Redis做为锁</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/20/在定时任务中使用Redis做为锁/" class="archive-article-date">
+  	<time datetime="2019-10-20T06:40:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在日常开发中，会写很多定时任务用于在后台一直执行一些任务逻辑。存在这么一种应用场景：我们会定时循环执行一个任务，比如每分钟执行一次，但是又必须保证同一时刻只能存在一个任务正在执行，否则的话就会出现多个进程存在，从而导致Bug，但是如何保证同一时刻只有一个进程存在呐？一个比较简单的方法就是借助Redis Key的有效期，使用Redis实现一个锁机制。在每一个新的任务启动之前首先检查Redis锁，如果锁存在说明上一个任务还未执行完毕，先等待，如果检测不到锁，说明上一个任务执行完毕，则启动新的任务。</p>
+        
+          <a class="article-more-a" href="/2019/10/20/在定时任务中使用Redis做为锁/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/20/在定时任务中使用Redis做为锁/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-cUrl应用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -848,85 +924,9 @@
 
 
   
-    <article id="post-设计模式之观察者模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/23/设计模式之观察者模式/">设计模式之观察者模式</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/23/设计模式之观察者模式/" class="archive-article-date">
-  	<time datetime="2019-05-23T09:24:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在软件开发过程中存在一种情况，就是当一个对象发生变化时需要自动通知其他对象自身的变动情况，以让其他对象发生相应的改变。<br>本文以温度变化为业务场景，假想存在一个中央温度计用于测量当前温度，同时存在三个电子显示面板，业务要求，当中央温度计测量到温度变化时需要通知所有的电子显示面板更新显示的温度。<br>观察者模式是一种对象行为模式。</p>
-        
-          <a class="article-more-a" href="/2019/05/23/设计模式之观察者模式/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/23/设计模式之观察者模式/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 
