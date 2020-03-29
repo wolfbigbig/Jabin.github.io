@@ -186,6 +186,82 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Redis持久化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/25/Redis持久化/">Redis持久化</a>
+    </h1>
+  
+
+        
+        <a href="/2020/03/25/Redis持久化/" class="archive-article-date">
+  	<time datetime="2020-03-25T10:40:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Redis是一个内存数据库，所有数据都存在内存中，这是redis可以提供高效服务的原因。但是数据在内存中有一个问题就是服务器重启或者宕机时将会导致数据丢失，如果redis只是作为缓存服务器还好，但是如果作为数据库服务器时就会不可接受的。好在redis提供了持久化的方式，可以使得在内存中的数据持久化到本地磁盘，所以服务器重启或者宕机时也不会导致数据丢失。</p>
+        
+          <a class="article-more-a" href="/2020/03/25/Redis持久化/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/03/25/Redis持久化/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Redis过期策略" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -872,85 +948,9 @@
 
 
   
-    <article id="post-在定时任务中使用Redis做为锁" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/20/在定时任务中使用Redis做为锁/">在定时任务中使用Redis做为锁</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/20/在定时任务中使用Redis做为锁/" class="archive-article-date">
-  	<time datetime="2019-10-20T06:40:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在日常开发中，会写很多定时任务用于在后台一直执行一些任务逻辑。存在这么一种应用场景：我们会定时循环执行一个任务，比如每分钟执行一次，但是又必须保证同一时刻只能存在一个任务正在执行，否则的话就会出现多个进程存在，从而导致Bug，但是如何保证同一时刻只有一个进程存在呐？一个比较简单的方法就是借助Redis Key的有效期，使用Redis实现一个锁机制。在每一个新的任务启动之前首先检查Redis锁，如果锁存在说明上一个任务还未执行完毕，先等待，如果检测不到锁，说明上一个任务执行完毕，则启动新的任务。</p>
-        
-          <a class="article-more-a" href="/2019/10/20/在定时任务中使用Redis做为锁/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/20/在定时任务中使用Redis做为锁/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
