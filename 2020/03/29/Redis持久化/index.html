@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/Redis%E6%8C%81%E4%B9%85%E5%8C%96/RDB%20conf.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/Redis%E6%8C%81%E4%B9%85%E5%8C%96/BGSAVE.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/Redis%E6%8C%81%E4%B9%85%E5%8C%96/BGREWRITEAOF.jpg">
-<meta property="og:updated_time" content="2020-03-29T08:07:35.058Z">
+<meta property="og:updated_time" content="2020-03-29T08:12:01.506Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis持久化">
 <meta name="twitter:description" content="Redis是一个内存数据库，所有数据都存在内存中，这是redis可以提供高效服务的原因。但是数据在内存中有一个问题就是服务器重启或者宕机时将会导致数据丢失，如果redis只是作为缓存服务器还好，但是如果作为数据库服务器时就会不可接受的。好在redis提供了持久化的方式，可以使得在内存中的数据持久化到本地磁盘，所以服务器重启或者宕机时也不会导致数据丢失。">
@@ -73,6 +73,8 @@
 				<li><a href="/tags/Redis">Redis</a></li>
 	        
 				<li><a href="/tags/HTTP">HTTP</a></li>
+	        
+				<li><a href="/tags/Nginx">Nginx</a></li>
 	        
 				<li><a href="/tags/数据结构/">数据结构</a></li>
 	        
@@ -144,6 +146,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -162,19 +166,21 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 14.285714285714286%"><a href="/">主页</a></li>
+					<li style="width: 12.5%"><a href="/">主页</a></li>
 		        
-					<li style="width: 14.285714285714286%"><a href="/tags/设计模式/">设计模式</a></li>
+					<li style="width: 12.5%"><a href="/tags/设计模式/">设计模式</a></li>
 		        
-					<li style="width: 14.285714285714286%"><a href="/tags/数据库/">数据库</a></li>
+					<li style="width: 12.5%"><a href="/tags/数据库/">数据库</a></li>
 		        
-					<li style="width: 14.285714285714286%"><a href="/tags/Redis">Redis</a></li>
+					<li style="width: 12.5%"><a href="/tags/Redis">Redis</a></li>
 		        
-					<li style="width: 14.285714285714286%"><a href="/tags/HTTP">HTTP</a></li>
+					<li style="width: 12.5%"><a href="/tags/HTTP">HTTP</a></li>
 		        
-					<li style="width: 14.285714285714286%"><a href="/tags/数据结构/">数据结构</a></li>
+					<li style="width: 12.5%"><a href="/tags/Nginx">Nginx</a></li>
 		        
-					<li style="width: 14.285714285714286%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 12.5%"><a href="/tags/数据结构/">数据结构</a></li>
+		        
+					<li style="width: 12.5%"><a href="/tags/随笔/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -374,6 +380,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2020/04/02/探索Nginx-Php-fpm运行原理/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          探索Nginx+Php-fpm运行原理
+        
+      </div>
+    </a>
+  
   
     <a href="/2020/03/21/Redis过期策略/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">Redis键过期策略</div>
@@ -515,6 +530,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
               </li>
              
               <li class="article-tag-list-item">
