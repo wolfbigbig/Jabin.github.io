@@ -6,19 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 设计模式 | Jabin&#39;s Blog</title>
+  <title>Nginx 502和504 异常分析 | Jabin&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Description">
-<meta name="keywords" content="keywords">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jabin&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/tags/设计模式/index.html">
+  <meta name="description" content="在日常开发中会经常遇到类似Bad Gateway```和```504 Gateway Timeout```的报错，但是一直不知道具体是什么原因会导致502和504，现在查了一些资料准备对502和504的原因进行探一下究竟，并进行相应的演示。123456789101112131415161718192021222324252627282930313233343536&amp;lt;!-- more --&amp;g">
+<meta name="keywords" content="Nginx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx 502和504 异常分析">
+<meta property="og:url" content="http://yoursite.com/2020/04/06/Nginx-502-504-异常分析/index.html">
 <meta property="og:site_name" content="Jabin&#39;s Blog">
-<meta property="og:description" content="Description">
+<meta property="og:description" content="在日常开发中会经常遇到类似Bad Gateway```和```504 Gateway Timeout```的报错，但是一直不知道具体是什么原因会导致502和504，现在查了一些资料准备对502和504的原因进行探一下究竟，并进行相应的演示。123456789101112131415161718192021222324252627282930313233343536&amp;lt;!-- more --&amp;g">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/nginx502_504/504/php-fpm%20conf.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/nginx502_504/504/nginx%20conf%20read.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/nginx502_504/504/status%20code.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/nginx502_504/504/nginx%20log.png">
+<meta property="og:updated_time" content="2020-04-06T11:01:45.073Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jabin&#39;s Blog">
-<meta name="twitter:description" content="Description">
+<meta name="twitter:title" content="Nginx 502和504 异常分析">
+<meta name="twitter:description" content="在日常开发中会经常遇到类似Bad Gateway```和```504 Gateway Timeout```的报错，但是一直不知道具体是什么原因会导致502和504，现在查了一些资料准备对502和504的原因进行探一下究竟，并进行相应的演示。123456789101112131415161718192021222324252627282930313233343536&amp;lt;!-- more --&amp;g">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/nginx502_504/504/php-fpm%20conf.png">
   
     <link rel="alternative" href="/atom.xml" title="Jabin&#39;s Blog" type="application/atom+xml">
   
@@ -190,402 +196,169 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Nginx-502-504-异常分析" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Nginx 502和504 异常分析
+    </h1>
+  
+
+        
+        <a href="/2020/04/06/Nginx-502-504-异常分析/" class="archive-article-date">
+  	<time datetime="2020-04-06T08:34:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-06</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在日常开发中会经常遇到类似<figure class="highlight plain"><figcaption><span>Bad Gateway```和```504 Gateway Timeout```的报错，但是一直不知道具体是什么原因会导致502和504，现在查了一些资料准备对502和504的原因进行探一下究竟，并进行相应的演示。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;!-- more --&gt;</span><br><span class="line"></span><br><span class="line">### 502 Bad Gateway</span><br><span class="line"></span><br><span class="line">#### 502含义</span><br><span class="line"></span><br><span class="line">&gt; 502 Bad Gateway</span><br><span class="line">&gt; The server was acting as a gateway or proxy and received an invalid response from the upstream server</span><br><span class="line"></span><br><span class="line">502是指作为网关或者代理的服务器，从上游服务器收到了不合法的响应导致的报错。我们知道，普通的LNMP架构，nginx经常作为web服务器将客户端请求（php）通过fast-cgi将请求转发给php-fpm进行处理，处理完毕后，php-fpm将处理结果返给nginx，如果这一步出现问题时就会出现502 Bad Gateway。</span><br><span class="line">#### 502的原因</span><br><span class="line">如果nginx收到非法的响应会导致502，那么什么情况下会收到非法响应呐？主要有两种情况需要考虑。</span><br><span class="line">1. nginx无法与php-fpm进行通讯</span><br><span class="line">2. nginx和php-fpm的连接被php-fpm断开</span><br><span class="line"></span><br><span class="line">如果出现以上两种情况，一般是由以下两个原因导致的。</span><br><span class="line">1. php-fpm未启动，nginx转发的请求没有php-fpm监听</span><br><span class="line">2. php-fpm运行脚本超时，此时php-fpm会终止脚本，同时会kill掉相应的work线程，此时nginx和php-fpm的tcp连接就断掉了</span><br><span class="line"></span><br><span class="line">针对以上两种情况，分别进行演示502的情况。</span><br><span class="line"></span><br><span class="line">#### 502演示</span><br><span class="line">##### php-fpm未启动</span><br><span class="line">首先kill运行的php-fpm进程，执行步骤如图所示：</span><br><span class="line">![kill php-fpm](https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/nginx502_504/502/no%20php-fpm/kill%20php-fpm.png)</span><br><span class="line">在kill php-fpm进程之后，通过浏览器发送请求```http://localhost:8080/test.php```发现响应的status code是502，如图所示：</span><br><span class="line">![502 no php-fpm status code](https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/nginx502_504/502/timeout/terminate_timeout_head_status_code.png)</span><br><span class="line">此时的nginx的error_log如下：</span><br><span class="line">![502 no php-fpm nginx log](https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/nginx502_504/502/no%20php-fpm/nginx%20log.png)</span><br><span class="line">根据nginx的error_log可以发现因为php-fpm未启动，在nginx试图连接上游服务器时出现问题。此时将会返回502 Bad Gateway。</span><br><span class="line">##### php-fpm脚本执行超时</span><br><span class="line">在php-fpm脚本执行超时演示502时，有一个参数比较重要。在php-fpm的配置文件有一个参数是```request_terminate_timeout```。这个参数是指一个脚本执行的超时时间，如果一个脚本执行时间超过这个值，这个脚本就会被终止掉，与此同时运行该脚本的work进程也会被kill掉，此时nginx和php-fpm的连接也就断开了。</span><br><span class="line">首先我们测试一下，先将```request_terminate_timeout```的设置为一个比较小的值(5s)，如图所示：</span><br><span class="line">![502 php-fpm php-fpm conf](https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/nginx502_504/502/timeout/Php-fpm%20timeout%20conf.png)</span><br><span class="line">然后将php脚本sleep 20s，脚本如下：</span><br></pre></td></tr></table></figure></p>
+<p>&lt;?php<br>sleep(20);<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">此时进行请求，发现同样获得了<span class="number">502</span>的返回，如图所示：</span><br><span class="line">![<span class="number">502</span> timeout status <span class="keyword">code</span>](https:<span class="comment">//raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/nginx502_504/502/timeout/terminate_timeout_head_status_code.png)</span></span><br><span class="line">于此同时nginx和php-fpm都有一些error_log。nginx的error_log如下所示:</span><br><span class="line">![<span class="number">502</span> timeout nginx errlog](https:<span class="comment">//raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/nginx502_504/502/timeout/nginx%20log.png)</span></span><br><span class="line">nginx的error_log显示tcp连接被reset，这是因为执行脚本的work线程被kill掉导致的。</span><br><span class="line">php-fpm的error_log如下所示:</span><br><span class="line">![<span class="number">502</span> timeout php-fpm errlog](https:<span class="comment">//raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/nginx502_504/502/timeout/php-fpm%20log.png)</span></span><br><span class="line">php-fpm的error_log显示由于执行时间超过了```request_terminate_timeout```而出现了```execution time out```的报错。此时依旧将会返回<span class="number">502</span> Bad Gateway。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### <span class="number">504</span> Gateway Timeout</span><br><span class="line"></span><br><span class="line">#### <span class="number">504</span>含义</span><br><span class="line">&gt; <span class="number">502</span> Gateway Timeout</span><br><span class="line">&gt; The server was acting <span class="keyword">as</span> a gateway or proxy and did not receive a timely response <span class="keyword">from</span> the upstream server</span><br><span class="line"></span><br><span class="line"><span class="number">504</span>是指作为网关或者代理的服务器在执行请求时，未能及时从上游服务器收到响应。这个及时是指nginx等待或者连接时间超过了自己设置的timeout，这时nginx会直接给客户端返回<span class="number">504</span>错误，但是此时php-fpm有可能依然还在处理请求。</span><br><span class="line"></span><br><span class="line">#### <span class="number">504</span>的原因</span><br><span class="line"></span><br><span class="line">在发生<span class="number">504</span>时，一般是指在规定时间内（nginx设置的timeout）没有收到php-fpm返回的消息。这时需要关注一下nginx配置中关于fastcgi的配置项，分别为`fastcgi_connect_timeout`、`fastcgi_read_timeout`、`fastcgi_send_timeout`。</span><br><span class="line">* fastcgi_connect_timeout:指定连接到后端fast-cgi的超时时间</span><br><span class="line">* fastcgi_read_timeout:指nginx接受php-fpm响应的超时时间</span><br><span class="line">* fastcgi_send_timeout:指nginx向php-fpm发送fast-cgi请求的超时时间</span><br><span class="line">理论上来说一般最需要关注的是`fastcgi_read_timeout`，如果这个值设置的比php-fpm的`request_terminate_timeout`小，同时比脚本的执行时间小，那么就有可能返回<span class="number">504</span>。下面就对<span class="number">504</span>的错误进行演示。</span><br><span class="line"></span><br><span class="line">#### <span class="number">504</span>演示</span><br><span class="line">首先还是将脚本sleep <span class="number">20</span>s不变</span><br></pre></td></tr></table></figure></p>
+<p>&lt;?php<br>sleep(20);<br><code>`</code><br>为了防止502的出现，需要将php-fpm的<code>fastcgi_read_timeout</code>设置到足够大（大于20s），配置如下:<br><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/nginx502_504/504/php-fpm%20conf.png" alt="504 php-fpm conf"><br>同时设置nginx中的<code>fastcgi_read_timeout</code>设置足够小（小于20s），配置如图:<br><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/nginx502_504/504/nginx%20conf%20read.png" alt="504 nginx conf"><br>此时请求，发现获得504的返回，如图所示:<br><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/nginx502_504/504/status%20code.png" alt="504 status code"><br>查看nginx的error_log，如下所示:<br><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/nginx502_504/504/nginx%20log.png" alt="504 nginx errlog"><br>根据log可以发现，nginx的read_timeout设置了10s，导致它在等待php-fpm返回时超时，此时nginx将会直接给客户端返回504的错误码。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/17/设计模式之适配器模式/" class="archive-article-date">
-  	<time datetime="2019-06-17T10:22:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/17/设计模式之适配器模式/">设计模式之适配器模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nginx</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/06/Nginx-502-504-异常分析/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/17/设计模式之代理模式/" class="archive-article-date">
-  	<time datetime="2019-06-17T05:38:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-17</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/04/02/探索Nginx-Php-fpm运行原理/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">探索Nginx+Php-fpm运行原理</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/17/设计模式之代理模式/">设计模式之代理模式</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/17/设计模式之外观模式/" class="archive-article-date">
-  	<time datetime="2019-06-17T02:05:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/17/设计模式之外观模式/">设计模式之外观模式</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/29/设计模式之策略模式/" class="archive-article-date">
-  	<time datetime="2019-05-29T10:37:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/29/设计模式之策略模式/">设计模式之策略模式</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/28/设计模式之命令模式/" class="archive-article-date">
-  	<time datetime="2019-05-28T13:10:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/28/设计模式之命令模式/">设计模式之命令模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/28/设计模式之中介者模式/" class="archive-article-date">
-  	<time datetime="2019-05-28T08:48:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/28/设计模式之中介者模式/">设计模式之中介者模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/23/设计模式之观察者模式/" class="archive-article-date">
-  	<time datetime="2019-05-23T09:24:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/23/设计模式之观察者模式/">设计模式之观察者模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/21/设计模式之单例模式/" class="archive-article-date">
-  	<time datetime="2019-05-21T05:47:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/21/设计模式之单例模式/">设计模式之单例模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/20/设计模式之建造者模式/" class="archive-article-date">
-  	<time datetime="2019-05-20T07:00:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/20/设计模式之建造者模式/">设计模式之建造者模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/14/设计模式之工厂模式/" class="archive-article-date">
-  	<time datetime="2019-05-14T02:30:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/14/设计模式之工厂模式/">设计模式之工厂模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -608,9 +381,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

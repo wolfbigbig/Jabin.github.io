@@ -192,6 +192,82 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Nginx-502-504-异常分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/06/Nginx-502-504-异常分析/">Nginx 502和504 异常分析</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/06/Nginx-502-504-异常分析/" class="archive-article-date">
+  	<time datetime="2020-04-06T08:34:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在日常开发中会经常遇到类似<figure class="highlight plain"><figcaption><span>Bad Gateway```和```504 Gateway Timeout```的报错，但是一直不知道具体是什么原因会导致502和504，现在查了一些资料准备对502和504的原因进行探一下究竟，并进行相应的演示。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;!-- more --&gt;</span><br><span class="line"></span><br><span class="line">### 502 Bad Gateway</span><br><span class="line"></span><br><span class="line">#### 502含义</span><br><span class="line"></span><br><span class="line">&gt; 502 Bad Gateway</span><br><span class="line">&gt; The server was acting as a gateway or proxy and received an invalid response from the upstream server</span><br><span class="line"></span><br><span class="line">502是指作为网关或者代理的服务器，从上游服务器收到了不合法的响应导致的报错。我们知道，普通的LNMP架构，nginx经常作为web服务器将客户端请求（php）通过fast-cgi将请求转发给php-fpm进行处理，处理完毕后，php-fpm将处理结果返给nginx，如果这一步出现问题时就会出现502 Bad Gateway。</span><br><span class="line">#### 502的原因</span><br><span class="line">如果nginx收到非法的响应会导致502，那么什么情况下会收到非法响应呐？主要有两种情况需要考虑。</span><br><span class="line">1. nginx无法与php-fpm进行通讯</span><br><span class="line">2. nginx和php-fpm的连接被php-fpm断开</span><br><span class="line"></span><br><span class="line">如果出现以上两种情况，一般是由以下两个原因导致的。</span><br><span class="line">1. php-fpm未启动，nginx转发的请求没有php-fpm监听</span><br><span class="line">2. php-fpm运行脚本超时，此时php-fpm会终止脚本，同时会kill掉相应的work线程，此时nginx和php-fpm的tcp连接就断掉了</span><br><span class="line"></span><br><span class="line">针对以上两种情况，分别进行演示502的情况。</span><br><span class="line"></span><br><span class="line">#### 502演示</span><br><span class="line">##### php-fpm未启动</span><br><span class="line">首先kill运行的php-fpm进程，执行步骤如图所示：</span><br><span class="line">![kill php-fpm](https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/nginx502_504/502/no%20php-fpm/kill%20php-fpm.png)</span><br><span class="line">在kill php-fpm进程之后，通过浏览器发送请求```http://localhost:8080/test.php```发现响应的status code是502，如图所示：</span><br><span class="line">![502 no php-fpm status code](https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/nginx502_504/502/timeout/terminate_timeout_head_status_code.png)</span><br><span class="line">此时的nginx的error_log如下：</span><br><span class="line">![502 no php-fpm nginx log](https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/nginx502_504/502/no%20php-fpm/nginx%20log.png)</span><br><span class="line">根据nginx的error_log可以发现因为php-fpm未启动，在nginx试图连接上游服务器时出现问题。此时将会返回502 Bad Gateway。</span><br><span class="line">##### php-fpm脚本执行超时</span><br><span class="line">在php-fpm脚本执行超时演示502时，有一个参数比较重要。在php-fpm的配置文件有一个参数是```request_terminate_timeout```。这个参数是指一个脚本执行的超时时间，如果一个脚本执行时间超过这个值，这个脚本就会被终止掉，与此同时运行该脚本的work进程也会被kill掉，此时nginx和php-fpm的连接也就断开了。</span><br><span class="line">首先我们测试一下，先将```request_terminate_timeout```的设置为一个比较小的值(5s)，如图所示：</span><br><span class="line">![502 php-fpm php-fpm conf](https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/nginx502_504/502/timeout/Php-fpm%20timeout%20conf.png)</span><br><span class="line">然后将php脚本sleep 20s，脚本如下：</span><br></pre></td></tr></table></figure></p>
+<p>&lt;?php<br>sleep(20);<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">此时进行请求，发现同样获得了<span class="number">502</span>的返回，如图所示：</span><br><span class="line">![<span class="number">502</span> timeout status <span class="keyword">code</span>](https:<span class="comment">//raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/nginx502_504/502/timeout/terminate_timeout_head_status_code.png)</span></span><br><span class="line">于此同时nginx和php-fpm都有一些error_log。nginx的error_log如下所示:</span><br><span class="line">![<span class="number">502</span> timeout nginx errlog](https:<span class="comment">//raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/nginx502_504/502/timeout/nginx%20log.png)</span></span><br><span class="line">nginx的error_log显示tcp连接被reset，这是因为执行脚本的work线程被kill掉导致的。</span><br><span class="line">php-fpm的error_log如下所示:</span><br><span class="line">![<span class="number">502</span> timeout php-fpm errlog](https:<span class="comment">//raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/nginx502_504/502/timeout/php-fpm%20log.png)</span></span><br><span class="line">php-fpm的error_log显示由于执行时间超过了```request_terminate_timeout```而出现了```execution time out```的报错。此时依旧将会返回<span class="number">502</span> Bad Gateway。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### <span class="number">504</span> Gateway Timeout</span><br><span class="line"></span><br><span class="line">#### <span class="number">504</span>含义</span><br><span class="line">&gt; <span class="number">502</span> Gateway Timeout</span><br><span class="line">&gt; The server was acting <span class="keyword">as</span> a gateway or proxy and did not receive a timely response <span class="keyword">from</span> the upstream server</span><br><span class="line"></span><br><span class="line"><span class="number">504</span>是指作为网关或者代理的服务器在执行请求时，未能及时从上游服务器收到响应。这个及时是指nginx等待或者连接时间超过了自己设置的timeout，这时nginx会直接给客户端返回<span class="number">504</span>错误，但是此时php-fpm有可能依然还在处理请求。</span><br><span class="line"></span><br><span class="line">#### <span class="number">504</span>的原因</span><br><span class="line"></span><br><span class="line">在发生<span class="number">504</span>时，一般是指在规定时间内（nginx设置的timeout）没有收到php-fpm返回的消息。这时需要关注一下nginx配置中关于fastcgi的配置项，分别为`fastcgi_connect_timeout`、`fastcgi_read_timeout`、`fastcgi_send_timeout`。</span><br><span class="line">* fastcgi_connect_timeout:指定连接到后端fast-cgi的超时时间</span><br><span class="line">* fastcgi_read_timeout:指nginx接受php-fpm响应的超时时间</span><br><span class="line">* fastcgi_send_timeout:指nginx向php-fpm发送fast-cgi请求的超时时间</span><br><span class="line">理论上来说一般最需要关注的是`fastcgi_read_timeout`，如果这个值设置的比php-fpm的`request_terminate_timeout`小，同时比脚本的执行时间小，那么就有可能返回<span class="number">504</span>。下面就对<span class="number">504</span>的错误进行演示。</span><br><span class="line"></span><br><span class="line">#### <span class="number">504</span>演示</span><br><span class="line">首先还是将脚本sleep <span class="number">20</span>s不变</span><br></pre></td></tr></table></figure></p>
+<p>&lt;?php<br>sleep(20);<br><code>`</code><br>为了防止502的出现，需要将php-fpm的<code>fastcgi_read_timeout</code>设置到足够大（大于20s），配置如下:<br><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/nginx502_504/504/php-fpm%20conf.png" alt="504 php-fpm conf"><br>同时设置nginx中的<code>fastcgi_read_timeout</code>设置足够小（小于20s），配置如图:<br><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/nginx502_504/504/nginx%20conf%20read.png" alt="504 nginx conf"><br>此时请求，发现获得504的返回，如图所示:<br><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/nginx502_504/504/status%20code.png" alt="504 status code"><br>查看nginx的error_log，如下所示:<br><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/nginx502_504/504/nginx%20log.png" alt="504 nginx errlog"><br>根据log可以发现，nginx的read_timeout设置了10s，导致它在等待php-fpm返回时超时，此时nginx将会直接给客户端返回504的错误码。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nginx</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/06/Nginx-502-504-异常分析/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-探索Nginx-Php-fpm运行原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -878,82 +954,6 @@
 
 
   
-    <article id="post-Mysql表锁和行锁" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/09/Mysql表锁和行锁/">Mysql表锁和行锁</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/09/Mysql表锁和行锁/" class="archive-article-date">
-  	<time datetime="2019-11-09T02:59:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>所谓锁策略，就是在锁的开销和数据的安全性之间寻求平衡，这种平衡当然也会影响到性能。<br>Mysql的InnoDB存储引擎支持事务，在事务中<strong>锁</strong>是一个非常重要的概念。InnoDB常用的锁可以分为三类，分别为<strong>表锁</strong>、<strong>行锁</strong>和<strong>页锁</strong>。其中表锁和行锁是比较常用来使用和比较的锁。本文就对比、分析总结行锁和表锁。</p>
-        
-          <a class="article-more-a" href="/2019/11/09/Mysql表锁和行锁/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/09/Mysql表锁和行锁/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1059,15 +1059,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
               </li>
              
               <li class="article-tag-list-item">
