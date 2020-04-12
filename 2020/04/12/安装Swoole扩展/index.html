@@ -6,19 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019/10 | Jabin&#39;s Blog</title>
+  <title>安装Swoole扩展 | Jabin&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Description">
-<meta name="keywords" content="keywords">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jabin&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/archives/2019/10/index.html">
+  <meta name="description" content="在公司一直负责聊天室模块，我们的聊天室架构主要分为三部分，底层为C语言编写的长链接服务，中间层为PHP+Swoole编写的聊天室服务，上层为使用PHP+Yaf编写的api服务。现在准备花些时间整理一下自己负责的模块（聊天室服务+api服务），先从Swoole开始写起。Swoole官方介绍如下：  Swoole是一个PHP的协程高性能网络通信引擎，使用 C/C++ 语言编写，提供了多种通信协议的网络">
+<meta name="keywords" content="Swoole">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安装Swoole扩展">
+<meta property="og:url" content="http://yoursite.com/2020/04/12/安装Swoole扩展/index.html">
 <meta property="og:site_name" content="Jabin&#39;s Blog">
-<meta property="og:description" content="Description">
+<meta property="og:description" content="在公司一直负责聊天室模块，我们的聊天室架构主要分为三部分，底层为C语言编写的长链接服务，中间层为PHP+Swoole编写的聊天室服务，上层为使用PHP+Yaf编写的api服务。现在准备花些时间整理一下自己负责的模块（聊天室服务+api服务），先从Swoole开始写起。Swoole官方介绍如下：  Swoole是一个PHP的协程高性能网络通信引擎，使用 C/C++ 语言编写，提供了多种通信协议的网络">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/swooleInstall/swoole_extension.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/swooleInstall/swoole_phpinfo.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/swooleInstall/swoole%20telnet.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/swooleInstall/swoole%20tcp%20server.png">
+<meta property="og:updated_time" content="2020-04-12T06:12:56.149Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jabin&#39;s Blog">
-<meta name="twitter:description" content="Description">
+<meta name="twitter:title" content="安装Swoole扩展">
+<meta name="twitter:description" content="在公司一直负责聊天室模块，我们的聊天室架构主要分为三部分，底层为C语言编写的长链接服务，中间层为PHP+Swoole编写的聊天室服务，上层为使用PHP+Yaf编写的api服务。现在准备花些时间整理一下自己负责的模块（聊天室服务+api服务），先从Swoole开始写起。Swoole官方介绍如下：  Swoole是一个PHP的协程高性能网络通信引擎，使用 C/C++ 语言编写，提供了多种通信协议的网络">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/swooleInstall/swoole_extension.png">
   
     <link rel="alternative" href="/atom.xml" title="Jabin&#39;s Blog" type="application/atom+xml">
   
@@ -196,125 +202,200 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-安装Swoole扩展" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/27/Mysql事务隔离级别/" class="archive-article-date">
-  	<time datetime="2019-10-27T08:13:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-27</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/27/Mysql事务隔离级别/">Mysql事务隔离级别</a>
+    <h1 class="article-title" itemprop="name">
+      安装Swoole扩展
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/04/12/安装Swoole扩展/" class="archive-article-date">
+  	<time datetime="2020-04-12T01:53:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在公司一直负责聊天室模块，我们的聊天室架构主要分为三部分，底层为C语言编写的<strong>长链接服务</strong>，中间层为PHP+Swoole编写的<strong>聊天室服务</strong>，上层为使用PHP+Yaf编写的<strong>api服务</strong>。现在准备花些时间整理一下自己负责的模块（聊天室服务+api服务），先从Swoole开始写起。<br>Swoole官方介绍如下：</p>
+<blockquote>
+<p>Swoole是一个PHP的协程高性能网络通信引擎，使用 C/C++ 语言编写，提供了多种通信协议的网络服务器和客户端模块。可以方便快速的实现 TCP/UDP服务、高性能Web、WebSocket服务、物联网、实时通讯、游戏、微服务等，使 PHP 不再局限于传统的Web领域。</p>
+</blockquote>
+<p>本文介绍如何在本地安装Swoole扩展，并演示使用Swoole编写Tcp服务器。</p>
+<a id="more"></a>
+<h3 id="安装Swoole扩展"><a href="#安装Swoole扩展" class="headerlink" title="安装Swoole扩展"></a>安装Swoole扩展</h3><p>官网安装教程</p>
+<blockquote>
+<p><a href="https://wiki.swoole.com/#/environment" target="_blank" rel="noopener">https://wiki.swoole.com/#/environment</a></p>
+</blockquote>
+<ul>
+<li>Clone Swoole源码</li>
+</ul>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">https:</span><span class="comment">//github.com/swoole/swoole-src/releases</span></span><br><span class="line">或者</span><br><span class="line"><span class="meta"># 国内镜像，clone速度较快</span></span><br><span class="line"><span class="symbol">http:</span><span class="comment">//git.oschina.net/swoole/swoole</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>编译安装swoole</li>
+</ul>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> swoole</span><br><span class="line">phpize</span><br><span class="line">./configure</span><br><span class="line"><span class="keyword">make</span> </span><br><span class="line"><span class="keyword">make</span> test</span><br><span class="line">sudo <span class="keyword">make</span> install</span><br></pre></td></tr></table></figure>
+<ul>
+<li>修改php.ini，启用扩展</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">extension</span>=swoole.so</span><br></pre></td></tr></table></figure>
+<p>配置如图所示。<br><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/swooleInstall/swoole_extension.png" alt="phpini swoole"></p>
+<ul>
+<li>重启php-fpm</li>
+</ul>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">killall php-fpm</span></span><br><span class="line"><span class="attribute">php-fpm</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>检查phpinfo查看swoole是否安装成功<br>安装成功后，phpinfo会显示Swoole相关的信息，如图所示。<br><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/swooleInstall/swoole_phpinfo.png" alt="phpinfo swoole"></li>
+</ul>
+<h3 id="编写Tcp服务"><a href="#编写Tcp服务" class="headerlink" title="编写Tcp服务"></a>编写Tcp服务</h3><p>使用Swoole编写Tcp服务，并使用telnet模拟客户端进行通讯。Tcp服务代码如下:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Jabin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>:   2020-04-10 09:53:47</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Email</span>:  yanjiapeng<span class="doctag">@dongqiudi</span>.com</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Server</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> $serv;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="comment">//创建Server对象，监听 127.0.0.1:9501端口</span></span><br><span class="line">		<span class="keyword">$this</span>-&gt;serv = <span class="keyword">new</span> Swoole\Server(<span class="string">"127.0.0.1"</span>, <span class="number">9501</span>); </span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">start</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="comment">//监听连接进入事件</span></span><br><span class="line">		<span class="keyword">$this</span>-&gt;serv-&gt;on(<span class="string">'Connect'</span>, <span class="function"><span class="keyword">function</span> <span class="params">($serv, $fd)</span> </span>&#123;  </span><br><span class="line">		    <span class="keyword">echo</span> <span class="string">"Client: Connect.\n"</span>;</span><br><span class="line">		&#125;);</span><br><span class="line">		<span class="comment">//监听数据接收事件</span></span><br><span class="line">		<span class="keyword">$this</span>-&gt;serv-&gt;on(<span class="string">'Receive'</span>, <span class="function"><span class="keyword">function</span> <span class="params">($serv, $fd, $from_id, $data)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">echo</span> <span class="string">"Receive Client Data:"</span> . $data . <span class="string">"\n"</span>;</span><br><span class="line">		    <span class="keyword">$this</span>-&gt;serv-&gt;send($fd, <span class="string">"Server: "</span>.$data);</span><br><span class="line">		&#125;);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//监听连接关闭事件</span></span><br><span class="line">		<span class="keyword">$this</span>-&gt;serv-&gt;on(<span class="string">'Close'</span>, <span class="function"><span class="keyword">function</span> <span class="params">($thisserv, $fd)</span> </span>&#123;</span><br><span class="line">		    <span class="keyword">echo</span> <span class="string">"Client: Close.\n"</span>;</span><br><span class="line">		&#125;);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//启动服务器</span></span><br><span class="line">		<span class="keyword">$this</span>-&gt;serv-&gt;start();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$server = <span class="keyword">new</span> Server();</span><br><span class="line">$server-&gt;start();</span><br></pre></td></tr></table></figure>
+<p>启动Tcp服务，用telnet模拟客户端向Tcp服务发送消息。telnet发送消息如下:<br><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/swooleInstall/swoole%20telnet.png" alt="client swoole"></p>
+<p>当客户端段连接、发送消息和断开连接时Tcp服务分别回调<strong>Connect</strong>、<strong>Receive</strong>、<strong>Close</strong>。Tcp服务响应消息如下:<br><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/swooleInstall/swoole%20tcp%20server.png" alt="tcp server swoole"></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Swoole</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/12/安装Swoole扩展/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/20/在定时任务中使用Redis做为锁/" class="archive-article-date">
-  	<time datetime="2019-10-20T06:40:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-20</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/04/06/Nginx-502-504-异常分析/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Nginx 502和504 异常分析</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/20/在定时任务中使用Redis做为锁/">在定时任务中使用Redis做为锁</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/13/cUrl应用/" class="archive-article-date">
-  	<time datetime="2019-10-13T08:52:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/13/cUrl应用/">cUrl应用</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -337,8 +418,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
