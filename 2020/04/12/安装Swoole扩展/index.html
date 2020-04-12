@@ -8,22 +8,22 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>安装Swoole扩展 | Jabin&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在公司一直负责聊天室模块，我们的聊天室架构主要分为三部分，底层为C语言编写的长链接服务，中间层为PHP+Swoole编写的聊天室服务，上层为使用PHP+Yaf编写的api服务。现在准备花些时间整理一下自己负责的模块（聊天室服务+api服务），先从Swoole开始写起。Swoole官方介绍如下：  Swoole是一个PHP的协程高性能网络通信引擎，使用 C/C++ 语言编写，提供了多种通信协议的网络">
+  <meta name="description" content="在公司一直负责聊天室模块，我们的聊天室架构主要分为三部分，底层为C语言编写的长链接服务，中间层为PHP+Swoole编写的聊天室服务，上层为使用PHP+Yaf编写的api服务。现在准备花些时间整理一下自己负责的模块（聊天室服务+api服务），先从Swoole开始写起。">
 <meta name="keywords" content="Swoole">
 <meta property="og:type" content="article">
 <meta property="og:title" content="安装Swoole扩展">
 <meta property="og:url" content="http://yoursite.com/2020/04/12/安装Swoole扩展/index.html">
 <meta property="og:site_name" content="Jabin&#39;s Blog">
-<meta property="og:description" content="在公司一直负责聊天室模块，我们的聊天室架构主要分为三部分，底层为C语言编写的长链接服务，中间层为PHP+Swoole编写的聊天室服务，上层为使用PHP+Yaf编写的api服务。现在准备花些时间整理一下自己负责的模块（聊天室服务+api服务），先从Swoole开始写起。Swoole官方介绍如下：  Swoole是一个PHP的协程高性能网络通信引擎，使用 C/C++ 语言编写，提供了多种通信协议的网络">
+<meta property="og:description" content="在公司一直负责聊天室模块，我们的聊天室架构主要分为三部分，底层为C语言编写的长链接服务，中间层为PHP+Swoole编写的聊天室服务，上层为使用PHP+Yaf编写的api服务。现在准备花些时间整理一下自己负责的模块（聊天室服务+api服务），先从Swoole开始写起。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/swooleInstall/swoole_extension.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/swooleInstall/swoole_phpinfo.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/swooleInstall/swoole%20telnet.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/swooleInstall/swoole%20tcp%20server.png">
-<meta property="og:updated_time" content="2020-04-12T06:12:56.149Z">
+<meta property="og:updated_time" content="2020-04-12T06:16:18.490Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安装Swoole扩展">
-<meta name="twitter:description" content="在公司一直负责聊天室模块，我们的聊天室架构主要分为三部分，底层为C语言编写的长链接服务，中间层为PHP+Swoole编写的聊天室服务，上层为使用PHP+Yaf编写的api服务。现在准备花些时间整理一下自己负责的模块（聊天室服务+api服务），先从Swoole开始写起。Swoole官方介绍如下：  Swoole是一个PHP的协程高性能网络通信引擎，使用 C/C++ 语言编写，提供了多种通信协议的网络">
+<meta name="twitter:description" content="在公司一直负责聊天室模块，我们的聊天室架构主要分为三部分，底层为C语言编写的长链接服务，中间层为PHP+Swoole编写的聊天室服务，上层为使用PHP+Yaf编写的api服务。现在准备花些时间整理一下自己负责的模块（聊天室服务+api服务），先从Swoole开始写起。">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/swooleInstall/swoole_extension.png">
   
     <link rel="alternative" href="/atom.xml" title="Jabin&#39;s Blog" type="application/atom+xml">
@@ -222,12 +222,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在公司一直负责聊天室模块，我们的聊天室架构主要分为三部分，底层为C语言编写的<strong>长链接服务</strong>，中间层为PHP+Swoole编写的<strong>聊天室服务</strong>，上层为使用PHP+Yaf编写的<strong>api服务</strong>。现在准备花些时间整理一下自己负责的模块（聊天室服务+api服务），先从Swoole开始写起。<br>Swoole官方介绍如下：</p>
+        <p>在公司一直负责聊天室模块，我们的聊天室架构主要分为三部分，底层为C语言编写的<strong>长链接服务</strong>，中间层为PHP+Swoole编写的<strong>聊天室服务</strong>，上层为使用PHP+Yaf编写的<strong>api服务</strong>。现在准备花些时间整理一下自己负责的模块（聊天室服务+api服务），先从Swoole开始写起。</p>
+<a id="more"></a>
+<p>Swoole官方介绍如下：</p>
 <blockquote>
 <p>Swoole是一个PHP的协程高性能网络通信引擎，使用 C/C++ 语言编写，提供了多种通信协议的网络服务器和客户端模块。可以方便快速的实现 TCP/UDP服务、高性能Web、WebSocket服务、物联网、实时通讯、游戏、微服务等，使 PHP 不再局限于传统的Web领域。</p>
 </blockquote>
 <p>本文介绍如何在本地安装Swoole扩展，并演示使用Swoole编写Tcp服务器。</p>
-<a id="more"></a>
 <h3 id="安装Swoole扩展"><a href="#安装Swoole扩展" class="headerlink" title="安装Swoole扩展"></a>安装Swoole扩展</h3><p>官网安装教程</p>
 <blockquote>
 <p><a href="https://wiki.swoole.com/#/environment" target="_blank" rel="noopener">https://wiki.swoole.com/#/environment</a></p>
@@ -492,11 +493,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
               </li>
              
               <li class="article-tag-list-item">
