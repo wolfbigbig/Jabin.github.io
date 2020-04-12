@@ -71,6 +71,8 @@
 	        
 				<li><a href="/tags/Nginx">Nginx</a></li>
 	        
+				<li><a href="/tags/Swoole">Swoole</a></li>
+	        
 				<li><a href="/tags/数据结构/">数据结构</a></li>
 	        
 				<li><a href="/tags/随笔/">随笔</a></li>
@@ -143,6 +145,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -161,21 +165,23 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 12.5%"><a href="/">主页</a></li>
+					<li style="width: 11.11111111111111%"><a href="/">主页</a></li>
 		        
-					<li style="width: 12.5%"><a href="/tags/设计模式/">设计模式</a></li>
+					<li style="width: 11.11111111111111%"><a href="/tags/设计模式/">设计模式</a></li>
 		        
-					<li style="width: 12.5%"><a href="/tags/数据库/">数据库</a></li>
+					<li style="width: 11.11111111111111%"><a href="/tags/数据库/">数据库</a></li>
 		        
-					<li style="width: 12.5%"><a href="/tags/Redis">Redis</a></li>
+					<li style="width: 11.11111111111111%"><a href="/tags/Redis">Redis</a></li>
 		        
-					<li style="width: 12.5%"><a href="/tags/HTTP">HTTP</a></li>
+					<li style="width: 11.11111111111111%"><a href="/tags/HTTP">HTTP</a></li>
 		        
-					<li style="width: 12.5%"><a href="/tags/Nginx">Nginx</a></li>
+					<li style="width: 11.11111111111111%"><a href="/tags/Nginx">Nginx</a></li>
 		        
-					<li style="width: 12.5%"><a href="/tags/数据结构/">数据结构</a></li>
+					<li style="width: 11.11111111111111%"><a href="/tags/Swoole">Swoole</a></li>
 		        
-					<li style="width: 12.5%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 11.11111111111111%"><a href="/tags/数据结构/">数据结构</a></li>
+		        
+					<li style="width: 11.11111111111111%"><a href="/tags/随笔/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -191,6 +197,86 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-安装Swoole扩展" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/12/安装Swoole扩展/">安装Swoole扩展</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/12/安装Swoole扩展/" class="archive-article-date">
+  	<time datetime="2020-04-12T01:53:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在公司一直负责聊天室模块，我们的聊天室架构主要分为三部分，底层为C语言编写的<strong>长链接服务</strong>，中间层为PHP+Swoole编写的<strong>聊天室服务</strong>，上层为使用PHP+Yaf编写的<strong>api服务</strong>。现在准备花些时间整理一下自己负责的模块（聊天室服务+api服务），先从Swoole开始写起。<br>Swoole官方介绍如下：</p>
+<blockquote>
+<p>Swoole是一个PHP的协程高性能网络通信引擎，使用 C/C++ 语言编写，提供了多种通信协议的网络服务器和客户端模块。可以方便快速的实现 TCP/UDP服务、高性能Web、WebSocket服务、物联网、实时通讯、游戏、微服务等，使 PHP 不再局限于传统的Web领域。</p>
+</blockquote>
+<p>本文介绍如何在本地安装Swoole扩展，并演示使用Swoole编写Tcp服务器。</p>
+        
+          <a class="article-more-a" href="/2020/04/12/安装Swoole扩展/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Swoole</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/12/安装Swoole扩展/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-Nginx-502-504-异常分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -876,84 +962,6 @@
 
 
   
-    <article id="post-Mysql-Explain初探" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/17/Mysql-Explain初探/">Mysql Explain初探</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/17/Mysql-Explain初探/" class="archive-article-date">
-  	<time datetime="2019-11-17T02:55:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在优化Mysql慢查询时，首先需要知道目前的SQL语句存在哪些问题？目前的SQL为什么是慢查询？这时我们可以执行Explain命令，来查看当前SQL语句的执行计划，然后可以根据explain的结果进行有的放矢的优化。explain可以对select语句进行分析，并输出select执行的详细信息。explain用法十分简单，只需要在select语句前加上explain即可。示例如下:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">EXPLAIN</span> <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> user_info <span class="keyword">WHERE</span> <span class="keyword">id</span> = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
-<p>本文将通过一些实例实操，对几个关键字段进行学习，记录。</p>
-        
-          <a class="article-more-a" href="/2019/11/17/Mysql-Explain初探/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/17/Mysql-Explain初探/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1055,11 +1063,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1068,6 +1076,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Swoole</a>
               </li>
              
               <li class="article-tag-list-item">

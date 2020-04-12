@@ -71,6 +71,8 @@
 	        
 				<li><a href="/tags/Nginx">Nginx</a></li>
 	        
+				<li><a href="/tags/Swoole">Swoole</a></li>
+	        
 				<li><a href="/tags/数据结构/">数据结构</a></li>
 	        
 				<li><a href="/tags/随笔/">随笔</a></li>
@@ -143,6 +145,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -161,21 +165,23 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 12.5%"><a href="/">主页</a></li>
+					<li style="width: 11.11111111111111%"><a href="/">主页</a></li>
 		        
-					<li style="width: 12.5%"><a href="/tags/设计模式/">设计模式</a></li>
+					<li style="width: 11.11111111111111%"><a href="/tags/设计模式/">设计模式</a></li>
 		        
-					<li style="width: 12.5%"><a href="/tags/数据库/">数据库</a></li>
+					<li style="width: 11.11111111111111%"><a href="/tags/数据库/">数据库</a></li>
 		        
-					<li style="width: 12.5%"><a href="/tags/Redis">Redis</a></li>
+					<li style="width: 11.11111111111111%"><a href="/tags/Redis">Redis</a></li>
 		        
-					<li style="width: 12.5%"><a href="/tags/HTTP">HTTP</a></li>
+					<li style="width: 11.11111111111111%"><a href="/tags/HTTP">HTTP</a></li>
 		        
-					<li style="width: 12.5%"><a href="/tags/Nginx">Nginx</a></li>
+					<li style="width: 11.11111111111111%"><a href="/tags/Nginx">Nginx</a></li>
 		        
-					<li style="width: 12.5%"><a href="/tags/数据结构/">数据结构</a></li>
+					<li style="width: 11.11111111111111%"><a href="/tags/Swoole">Swoole</a></li>
 		        
-					<li style="width: 12.5%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 11.11111111111111%"><a href="/tags/数据结构/">数据结构</a></li>
+		        
+					<li style="width: 11.11111111111111%"><a href="/tags/随笔/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -191,6 +197,84 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-Mysql-Explain初探" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/17/Mysql-Explain初探/">Mysql Explain初探</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/17/Mysql-Explain初探/" class="archive-article-date">
+  	<time datetime="2019-11-17T02:55:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在优化Mysql慢查询时，首先需要知道目前的SQL语句存在哪些问题？目前的SQL为什么是慢查询？这时我们可以执行Explain命令，来查看当前SQL语句的执行计划，然后可以根据explain的结果进行有的放矢的优化。explain可以对select语句进行分析，并输出select执行的详细信息。explain用法十分简单，只需要在select语句前加上explain即可。示例如下:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">EXPLAIN</span> <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> user_info <span class="keyword">WHERE</span> <span class="keyword">id</span> = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+<p>本文将通过一些实例实操，对几个关键字段进行学习，记录。</p>
+        
+          <a class="article-more-a" href="/2019/11/17/Mysql-Explain初探/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/17/Mysql-Explain初探/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-Mysql表锁和行锁" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -854,82 +938,6 @@
 
 
   
-    <article id="post-设计模式之策略模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/29/设计模式之策略模式/">设计模式之策略模式</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/29/设计模式之策略模式/" class="archive-article-date">
-  	<time datetime="2019-05-29T10:37:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>软件开发过程中，有时候完成一项工作的方法有多种，我们需要根据条件不同选择不同的方法。最简单直接的两种方法是为每一种方法封装一个接口或者通过if…else…进行条件判断，但是着两种方式都属于Hard Coding。如果有新的方法加入需要修改源代码，封装新的接口或者新增条件判断块儿，这样不符合“开闭原则”。此时可以通过策略模式进行解决。<br>策略模式是一种对象行为型模式。</p>
-        
-          <a class="article-more-a" href="/2019/05/29/设计模式之策略模式/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/29/设计模式之策略模式/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1031,11 +1039,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1044,6 +1052,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Swoole</a>
               </li>
              
               <li class="article-tag-list-item">
