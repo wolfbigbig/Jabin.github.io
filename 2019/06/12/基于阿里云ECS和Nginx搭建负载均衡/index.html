@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/%E9%98%BF%E9%87%8C%E4%BA%91ECS-Nginx%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/6067config.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/%E9%98%BF%E9%87%8C%E4%BA%91ECS-Nginx%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/ECS001.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/%E9%98%BF%E9%87%8C%E4%BA%91ECS-Nginx%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/ECS002.png">
-<meta property="og:updated_time" content="2020-04-12T06:34:26.956Z">
+<meta property="og:updated_time" content="2020-04-12T06:37:40.365Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于阿里云ECS和Nginx搭建负载均衡与反向代理">
 <meta name="twitter:description" content="本文通过三台服务器搭建负载均衡系统。其中本地Mac搭建Nginx环境，作为负载均衡服务器。另外购买两台阿里云ECS服务器作为应用服务器。">
@@ -294,9 +294,12 @@
 <ul>
 <li>最少连接数</li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">upstream ecsbackserver&#123;</span><br><span class="line">   <span class="built_in"> server </span>39.97.118.88:6067 <span class="attribute">weight</span>=1;</span><br><span class="line">   <span class="built_in"> server </span>39.97.122.199:6067 <span class="attribute">weight</span>=2;</span><br><span class="line">    least_conn;</span><br><span class="line">&#125;</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">* fair</span><br></pre></td></tr></table></figure>
-<p>upstream ecsbackserver{<br>    server 39.97.118.88:6067 weight=1;<br>    server 39.97.122.199:6067 weight=2;<br>    fair;<br>}<br><code>`</code>    </p>
-<p>以轮询为例，测试结果如图。</p>
+<pre><code>upstream ecsbackserver{
+    server 39.97.118.88:6067 weight=1;
+    server 39.97.122.199:6067 weight=2;
+    least_conn;
+}
+</code></pre><p>以轮询为例，测试结果如图。</p>
 <p><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/%E9%98%BF%E9%87%8C%E4%BA%91ECS-Nginx%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/ECS001.png" alt="ECS001"></p>
 <p><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/%E9%98%BF%E9%87%8C%E4%BA%91ECS-Nginx%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/ECS002.png" alt="ECS002"></p>
 
