@@ -6,25 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>安装Swoole扩展 | Jabin&#39;s Blog</title>
+  <title>Redis之Pipeline运用 | Jabin&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在公司一直负责聊天室模块，我们的聊天室架构主要分为三部分，底层为C语言编写的长链接服务，中间层为PHP+Swoole编写的聊天室服务，上层为使用PHP+Yaf编写的api服务。现在准备花些时间整理一下自己负责的模块（聊天室服务+api服务），先从Swoole开始写起。">
-<meta name="keywords" content="Swoole">
+  <meta name="description" content="近来在整理公司自己负责的业务，在整理总结聊天室服务时，发现大量运用Redis。众所周知聊天室服务是一个对性能要求极高的服务(尤其是我们的服务，大比赛时我们聊天室人数可以达到10w人同时在线，单机在线人数可以达到1w)，1w人同时在线拉取聊天室消息，此时对服务的压力可想而知。在整理聊天室服务时，我发现有几处使用了Redis管道，不太明白为何使用这项技术，决定找些资料一探究竟。">
+<meta name="keywords" content="Redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="安装Swoole扩展">
-<meta property="og:url" content="http://yoursite.com/2020/04/12/安装Swoole扩展/index.html">
+<meta property="og:title" content="Redis之Pipeline运用">
+<meta property="og:url" content="http://yoursite.com/2020/04/18/Redis之Pipeline运用/index.html">
 <meta property="og:site_name" content="Jabin&#39;s Blog">
-<meta property="og:description" content="在公司一直负责聊天室模块，我们的聊天室架构主要分为三部分，底层为C语言编写的长链接服务，中间层为PHP+Swoole编写的聊天室服务，上层为使用PHP+Yaf编写的api服务。现在准备花些时间整理一下自己负责的模块（聊天室服务+api服务），先从Swoole开始写起。">
+<meta property="og:description" content="近来在整理公司自己负责的业务，在整理总结聊天室服务时，发现大量运用Redis。众所周知聊天室服务是一个对性能要求极高的服务(尤其是我们的服务，大比赛时我们聊天室人数可以达到10w人同时在线，单机在线人数可以达到1w)，1w人同时在线拉取聊天室消息，此时对服务的压力可想而知。在整理聊天室服务时，我发现有几处使用了Redis管道，不太明白为何使用这项技术，决定找些资料一探究竟。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/swooleInstall/swoole_extension.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/swooleInstall/swoole_phpinfo.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/swooleInstall/swoole%20telnet.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/swooleInstall/swoole%20tcp%20server.png">
-<meta property="og:updated_time" content="2020-04-12T06:16:18.490Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/redis_pipeline/no_pipeline.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/redis_pipeline/pipeline.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/redis_pipeline/cost%20time.png">
+<meta property="og:updated_time" content="2020-04-18T07:07:27.523Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="安装Swoole扩展">
-<meta name="twitter:description" content="在公司一直负责聊天室模块，我们的聊天室架构主要分为三部分，底层为C语言编写的长链接服务，中间层为PHP+Swoole编写的聊天室服务，上层为使用PHP+Yaf编写的api服务。现在准备花些时间整理一下自己负责的模块（聊天室服务+api服务），先从Swoole开始写起。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/swooleInstall/swoole_extension.png">
+<meta name="twitter:title" content="Redis之Pipeline运用">
+<meta name="twitter:description" content="近来在整理公司自己负责的业务，在整理总结聊天室服务时，发现大量运用Redis。众所周知聊天室服务是一个对性能要求极高的服务(尤其是我们的服务，大比赛时我们聊天室人数可以达到10w人同时在线，单机在线人数可以达到1w)，1w人同时在线拉取聊天室消息，此时对服务的压力可想而知。在整理聊天室服务时，我发现有几处使用了Redis管道，不太明白为何使用这项技术，决定找些资料一探究竟。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/redis_pipeline/no_pipeline.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Jabin&#39;s Blog" type="application/atom+xml">
   
@@ -202,61 +201,42 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-安装Swoole扩展" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Redis之Pipeline运用" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      安装Swoole扩展
+      Redis之Pipeline运用
     </h1>
   
 
         
-        <a href="/2020/04/12/安装Swoole扩展/" class="archive-article-date">
-  	<time datetime="2020-04-12T01:53:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-12</time>
+        <a href="/2020/04/18/Redis之Pipeline运用/" class="archive-article-date">
+  	<time datetime="2020-04-18T05:52:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-18</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在公司一直负责聊天室模块，我们的聊天室架构主要分为三部分，底层为C语言编写的<strong>长链接服务</strong>，中间层为PHP+Swoole编写的<strong>聊天室服务</strong>，上层为使用PHP+Yaf编写的<strong>api服务</strong>。现在准备花些时间整理一下自己负责的模块（聊天室服务+api服务），先从Swoole开始写起。</p>
+        <p>近来在整理公司自己负责的业务，在整理总结聊天室服务时，发现大量运用Redis。众所周知聊天室服务是一个对性能要求极高的服务(尤其是我们的服务，大比赛时我们聊天室人数可以达到10w人同时在线，单机在线人数可以达到1w)，1w人同时在线拉取聊天室消息，此时对服务的压力可想而知。<br>在整理聊天室服务时，我发现有几处使用了Redis管道，不太明白为何使用这项技术，决定找些资料一探究竟。</p>
 <a id="more"></a>
-<p>Swoole官方介绍如下：</p>
-<blockquote>
-<p>Swoole是一个PHP的协程高性能网络通信引擎，使用 C/C++ 语言编写，提供了多种通信协议的网络服务器和客户端模块。可以方便快速的实现 TCP/UDP服务、高性能Web、WebSocket服务、物联网、实时通讯、游戏、微服务等，使 PHP 不再局限于传统的Web领域。</p>
-</blockquote>
-<p>本文介绍如何在本地安装Swoole扩展，并演示使用Swoole编写Tcp服务器。</p>
-<h3 id="安装Swoole扩展"><a href="#安装Swoole扩展" class="headerlink" title="安装Swoole扩展"></a>安装Swoole扩展</h3><p>官网安装教程</p>
-<blockquote>
-<p><a href="https://wiki.swoole.com/#/environment" target="_blank" rel="noopener">https://wiki.swoole.com/#/environment</a></p>
-</blockquote>
-<ul>
-<li>Clone Swoole源码</li>
-</ul>
-<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">https:</span><span class="comment">//github.com/swoole/swoole-src/releases</span></span><br><span class="line">或者</span><br><span class="line"><span class="meta"># 国内镜像，clone速度较快</span></span><br><span class="line"><span class="symbol">http:</span><span class="comment">//git.oschina.net/swoole/swoole</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>编译安装swoole</li>
-</ul>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> swoole</span><br><span class="line">phpize</span><br><span class="line">./configure</span><br><span class="line"><span class="keyword">make</span> </span><br><span class="line"><span class="keyword">make</span> test</span><br><span class="line">sudo <span class="keyword">make</span> install</span><br></pre></td></tr></table></figure>
-<ul>
-<li>修改php.ini，启用扩展</li>
-</ul>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">extension</span>=swoole.so</span><br></pre></td></tr></table></figure>
-<p>配置如图所示。<br><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/swooleInstall/swoole_extension.png" alt="phpini swoole"></p>
-<ul>
-<li>重启php-fpm</li>
-</ul>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">killall php-fpm</span></span><br><span class="line"><span class="attribute">php-fpm</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>检查phpinfo查看swoole是否安装成功<br>安装成功后，phpinfo会显示Swoole相关的信息，如图所示。<br><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/swooleInstall/swoole_phpinfo.png" alt="phpinfo swoole"></li>
-</ul>
-<h3 id="编写Tcp服务"><a href="#编写Tcp服务" class="headerlink" title="编写Tcp服务"></a>编写Tcp服务</h3><p>使用Swoole编写Tcp服务，并使用telnet模拟客户端进行通讯。Tcp服务代码如下:</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Jabin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>:   2020-04-10 09:53:47</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Email</span>:  yanjiapeng<span class="doctag">@dongqiudi</span>.com</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Server</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> $serv;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="comment">//创建Server对象，监听 127.0.0.1:9501端口</span></span><br><span class="line">		<span class="keyword">$this</span>-&gt;serv = <span class="keyword">new</span> Swoole\Server(<span class="string">"127.0.0.1"</span>, <span class="number">9501</span>); </span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">start</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="comment">//监听连接进入事件</span></span><br><span class="line">		<span class="keyword">$this</span>-&gt;serv-&gt;on(<span class="string">'Connect'</span>, <span class="function"><span class="keyword">function</span> <span class="params">($serv, $fd)</span> </span>&#123;  </span><br><span class="line">		    <span class="keyword">echo</span> <span class="string">"Client: Connect.\n"</span>;</span><br><span class="line">		&#125;);</span><br><span class="line">		<span class="comment">//监听数据接收事件</span></span><br><span class="line">		<span class="keyword">$this</span>-&gt;serv-&gt;on(<span class="string">'Receive'</span>, <span class="function"><span class="keyword">function</span> <span class="params">($serv, $fd, $from_id, $data)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">echo</span> <span class="string">"Receive Client Data:"</span> . $data . <span class="string">"\n"</span>;</span><br><span class="line">		    <span class="keyword">$this</span>-&gt;serv-&gt;send($fd, <span class="string">"Server: "</span>.$data);</span><br><span class="line">		&#125;);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//监听连接关闭事件</span></span><br><span class="line">		<span class="keyword">$this</span>-&gt;serv-&gt;on(<span class="string">'Close'</span>, <span class="function"><span class="keyword">function</span> <span class="params">($thisserv, $fd)</span> </span>&#123;</span><br><span class="line">		    <span class="keyword">echo</span> <span class="string">"Client: Close.\n"</span>;</span><br><span class="line">		&#125;);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//启动服务器</span></span><br><span class="line">		<span class="keyword">$this</span>-&gt;serv-&gt;start();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$server = <span class="keyword">new</span> Server();</span><br><span class="line">$server-&gt;start();</span><br></pre></td></tr></table></figure>
-<p>启动Tcp服务，用telnet模拟客户端向Tcp服务发送消息。telnet发送消息如下:<br><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/swooleInstall/swoole%20telnet.png" alt="client swoole"></p>
-<p>当客户端段连接、发送消息和断开连接时Tcp服务分别回调<strong>Connect</strong>、<strong>Receive</strong>、<strong>Close</strong>。Tcp服务响应消息如下:<br><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/swooleInstall/swoole%20tcp%20server.png" alt="tcp server swoole"></p>
+<h3 id="Redis通讯模型"><a href="#Redis通讯模型" class="headerlink" title="Redis通讯模型"></a>Redis通讯模型</h3><p>Redis是使用经典的C/S（客户端/服务器）模型，并遵循请求/响应模型的Tcp服务器。这也就意味着，客户端向Redis服务器发送一个请求时将会发生以下两个步骤。</p>
+<ol>
+<li>客户端向服务端发送请求，监听Socket返回，在等待服务器返回时处于一个阻塞状态</li>
+<li>服务器处理请求完毕后，将处理结果发送给客户端</li>
+</ol>
+<p>这也就意味着，后面的请求只能等到前一个请求结果返回后才能进行。如果客户端需要向服务器访问三个key（key1、key2、key3）时，请求执行流程示意图如下：<br><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/redis_pipeline/no_pipeline.jpg" alt="no pipeline flow"></p>
+<p>Redis传统的通讯模型有一个问题，就是客户端和服务器每次通讯是需要消耗时间的，这个时间被称为往返时延(RTT, Round Trip Time)。如果我们每秒发给Redis服务器的指令有限，就无法发挥Redis服务器的高性能特点了。管道可以完美解决RTT的问题。</p>
+<h3 id="什么是管道"><a href="#什么是管道" class="headerlink" title="什么是管道"></a>什么是管道</h3><p>管道可以一次性发送一批指令给Redis服务器，Pipeline通过减少Client和Server通讯次数的方法来减少RTT。而且Pipeline是基于队列实现的，可以保证指令的有序性。使用Pipeline访问三个key（key1、key2、key3）时，请求执行流程示意图如下：<br><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/redis_pipeline/pipeline.jpg" alt="pipeline flow"></p>
+<p>但是需要注意的是因为Redis服务器需要处理一批指令，在处理一个指令后不会发给客户端，而是先缓存在内存中，这样以来会是的内存的消耗变多。</p>
+<h3 id="什么情况下适合使用管道"><a href="#什么情况下适合使用管道" class="headerlink" title="什么情况下适合使用管道"></a>什么情况下适合使用管道</h3><p>既然Pipeline可以提升效率，那么是不是应该所有情景都是用Pipeline呐？其实并非如此。<br>有些系统对数据可靠性要求较高， 每次操作完毕后需要马上知道操作结果，这种情况就不合适来。<br>但是有些时候对数据的实时性或者安全性没有那么高，反而对性能有要求时，此时使用Pipeline就比较合适了。如果我们的聊天室服务中，需要定期刷新缓存，需要将有些消息（过期消息、反作弊拒绝的消息）清理掉。这是因为聊天室服务对性能要求很高，而且对可靠性要求没那么高，及时这次清理失败，下次再来一次便是。这种情况下就很适用Pipeline。</p>
+<h3 id="实验对比"><a href="#实验对比" class="headerlink" title="实验对比"></a>实验对比</h3><p>既然说Pipeline会提升效率，到底效率如何呐？是骡子是马，拉出来溜溜便是。本实验分别用使用Pipeline和不使用Pipeline对Redis某个key执行<strong>incr</strong>操作<strong>10000</strong>次，看一下耗时如何。实验代码如下:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Jabin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>:   2020-04-17 14:08:45</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Email</span>:  yanjiapeng<span class="doctag">@dongqiudi</span>.com</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">$redis = <span class="keyword">new</span> Redis();</span><br><span class="line">$redis-&gt;connect(<span class="string">'127.0.0.1'</span>, <span class="number">6379</span>);</span><br><span class="line">$experNum = <span class="number">100000</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"===========with pipeline==========="</span> . PHP_EOL;</span><br><span class="line">$pipe = $redis-&gt;pipeline();</span><br><span class="line">$st = microtime(<span class="keyword">true</span>);</span><br><span class="line"><span class="keyword">for</span> ($i=<span class="number">0</span>; $i &lt; $experNum; $i++) &#123;</span><br><span class="line">	$res = $redis-&gt;incr(<span class="string">'testPip'</span>);</span><br><span class="line">&#125;</span><br><span class="line">$pipe-&gt;exec();</span><br><span class="line">$et = microtime(<span class="keyword">true</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"with pipeline cost time:"</span> . ($et - $st) . PHP_EOL;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"============no pipeline============"</span> . PHP_EOL;</span><br><span class="line">$st = microtime(<span class="keyword">true</span>);</span><br><span class="line"><span class="keyword">for</span> ($i=<span class="number">0</span>; $i &lt; $experNum; $i++) &#123; </span><br><span class="line">	$res = $redis-&gt;incr(<span class="string">'testPip'</span>);</span><br><span class="line">&#125;</span><br><span class="line">$et = microtime(<span class="keyword">true</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"no pipeline cost time:"</span> . ($et - $st) . PHP_EOL;</span><br></pre></td></tr></table></figure>
+<p>实验结果如下：<br><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/redis_pipeline/cost%20time.png" alt="experiment result"></p>
+<p>可以发现使用Pipeline时操作100000次Redis操作只需要0.13秒，而不使用Pipeline时操作100000次Redis操作却需要了5.71秒。相比之下不使用Pipeline耗时是使用Pipeline耗时的接近44倍。可见使用Pipeline确实可以提升效率。</p>
 
       
 
@@ -291,7 +271,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Swoole</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
         		</li>
       		
 		</ul>
@@ -347,7 +327,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/12/安装Swoole扩展/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/18/Redis之Pipeline运用/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -361,18 +341,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/04/18/Redis之Pipeline运用/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Redis之Pipeline运用
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/04/06/Nginx-502-504-异常分析/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Nginx 502和504 异常分析</div>
+    <a href="/2020/04/12/安装Swoole扩展/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">安装Swoole扩展</div>
       <i class="icon-circle-right"></i>
     </a>
   
