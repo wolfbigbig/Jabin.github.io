@@ -75,6 +75,8 @@
 	        
 				<li><a href="/tags/数据结构/">数据结构</a></li>
 	        
+				<li><a href="/tags/问题排查总结/">问题排查总结</a></li>
+	        
 				<li><a href="/tags/随笔/">随笔</a></li>
 	        
 			</ul>
@@ -147,6 +149,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -165,23 +169,25 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 11.11111111111111%"><a href="/">主页</a></li>
+					<li style="width: 10%"><a href="/">主页</a></li>
 		        
-					<li style="width: 11.11111111111111%"><a href="/tags/设计模式/">设计模式</a></li>
+					<li style="width: 10%"><a href="/tags/设计模式/">设计模式</a></li>
 		        
-					<li style="width: 11.11111111111111%"><a href="/tags/数据库/">数据库</a></li>
+					<li style="width: 10%"><a href="/tags/数据库/">数据库</a></li>
 		        
-					<li style="width: 11.11111111111111%"><a href="/tags/Redis">Redis</a></li>
+					<li style="width: 10%"><a href="/tags/Redis">Redis</a></li>
 		        
-					<li style="width: 11.11111111111111%"><a href="/tags/HTTP">HTTP</a></li>
+					<li style="width: 10%"><a href="/tags/HTTP">HTTP</a></li>
 		        
-					<li style="width: 11.11111111111111%"><a href="/tags/Nginx">Nginx</a></li>
+					<li style="width: 10%"><a href="/tags/Nginx">Nginx</a></li>
 		        
-					<li style="width: 11.11111111111111%"><a href="/tags/Swoole">Swoole</a></li>
+					<li style="width: 10%"><a href="/tags/Swoole">Swoole</a></li>
 		        
-					<li style="width: 11.11111111111111%"><a href="/tags/数据结构/">数据结构</a></li>
+					<li style="width: 10%"><a href="/tags/数据结构/">数据结构</a></li>
 		        
-					<li style="width: 11.11111111111111%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 10%"><a href="/tags/问题排查总结/">问题排查总结</a></li>
+		        
+					<li style="width: 10%"><a href="/tags/随笔/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -197,6 +203,82 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-一次基于Flask的服务升级" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/27/一次基于Flask的服务升级/">一次基于Flask的服务升级</a>
+    </h1>
+  
+
+        
+        <a href="/2021/03/27/一次基于Flask的服务升级/" class="archive-article-date">
+  	<time datetime="2021-03-27T02:46:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前段时间自己负责的服务遇到了一些诡异的问题，主要表现在机器负载不高的情况下，整个请求链路耗时特别长，正常一次链路在1S内完成，但是经常性会出现耗时30S+，导致请求超时。因为我们中间有Kakfa作为消息队列，因为耗时+重试机制，导致队列堵塞比较严重。接下来就开始一系列的排查操作，最终解决问题不难，但是难在发现问题。</p>
+        
+          <a class="article-more-a" href="/2021/03/27/一次基于Flask的服务升级/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">问题排查总结</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/03/27/一次基于Flask的服务升级/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-常见Web安全攻防" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -882,82 +964,6 @@
 
 
   
-    <article id="post-防止Redis缓存击穿" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/23/防止Redis缓存击穿/">防止Redis缓存击穿</a>
-    </h1>
-  
-
-        
-        <a href="/2020/02/23/防止Redis缓存击穿/" class="archive-article-date">
-  	<time datetime="2020-02-23T07:33:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在高并发系统中，缓存的使用十分普遍，其中最常使用的就是Redis，在使用Redis的过程中，有几个问题需要注意，否则有可能带来致命性的灾难。本文主要就主要如何防止缓存击穿进行编码分析。</p>
-        
-          <a class="article-more-a" href="/2020/02/23/防止Redis缓存击穿/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/23/防止Redis缓存击穿/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -972,7 +978,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 Jabin
+    		&copy; 2021 Jabin
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -1063,15 +1069,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">问题排查总结</a>
               </li>
              
               <li class="article-tag-list-item">
