@@ -6,19 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: Redis | Jabin&#39;s Blog</title>
+  <title>Redis 分布式锁 | Jabin&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Description">
-<meta name="keywords" content="keywords">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jabin&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/tags/Redis/index.html">
+  <meta name="description" content="在实际开发中，如果遇到多个线程同时修改一份数据时，为了保证数据的准确性，往往需要请求的串行执行，在单机系统中，可以通过单机锁进行解决，比如Golang中的sync.Mutex、sync.RWMutex、sync.WaitGroup都可以做这件事情。但是在分布式系统中，每个进程独享资源，因此锁变量就需要一个共享存储系统来维护，也就说所谓的分布式锁。">
+<meta name="keywords" content="Redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis 分布式锁">
+<meta property="og:url" content="http://yoursite.com/2021/06/01/Redis-分布式锁/index.html">
 <meta property="og:site_name" content="Jabin&#39;s Blog">
-<meta property="og:description" content="Description">
+<meta property="og:description" content="在实际开发中，如果遇到多个线程同时修改一份数据时，为了保证数据的准确性，往往需要请求的串行执行，在单机系统中，可以通过单机锁进行解决，比如Golang中的sync.Mutex、sync.RWMutex、sync.WaitGroup都可以做这件事情。但是在分布式系统中，每个进程独享资源，因此锁变量就需要一个共享存储系统来维护，也就说所谓的分布式锁。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/step5succ1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/step5fail1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/step5fail.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/step5succ.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/step7go.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/step7redis.png">
+<meta property="og:updated_time" content="2021-06-01T10:01:30.919Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jabin&#39;s Blog">
-<meta name="twitter:description" content="Description">
+<meta name="twitter:title" content="Redis 分布式锁">
+<meta name="twitter:description" content="在实际开发中，如果遇到多个线程同时修改一份数据时，为了保证数据的准确性，往往需要请求的串行执行，在单机系统中，可以通过单机锁进行解决，比如Golang中的sync.Mutex、sync.RWMutex、sync.WaitGroup都可以做这件事情。但是在分布式系统中，每个进程独享资源，因此锁变量就需要一个共享存储系统来维护，也就说所谓的分布式锁。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/step5succ1.png">
   
     <link rel="alternative" href="/atom.xml" title="Jabin&#39;s Blog" type="application/atom+xml">
   
@@ -202,36 +210,115 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-Redis-分布式锁" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Redis 分布式锁
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/06/01/Redis-分布式锁/" class="archive-article-date">
+
+        
+        <a href="/2021/06/01/Redis-分布式锁/" class="archive-article-date">
   	<time datetime="2021-06-01T09:44:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-01</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/06/01/Redis-分布式锁/">Redis 分布式锁</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在实际开发中，如果遇到多个线程同时修改一份数据时，为了保证数据的准确性，往往需要请求的串行执行，在单机系统中，可以通过单机锁进行解决，比如Golang中的sync.Mutex、sync.RWMutex、sync.WaitGroup都可以做这件事情。但是在分布式系统中，每个进程独享资源，因此锁变量就需要一个共享存储系统来维护，也就说所谓的分布式锁。</p>
+<a id="more"></a>
+<p>常见的分布式锁实现方式有以下几种：</p>
+<ul>
+<li>基于数据库的分布式锁</li>
+<li>基于Redis的分布式锁</li>
+<li>基于Zookeeper的分布式锁<br>其中，基于Redis的分布式锁在我们项目中经常用到，本文就通过Golang + Redis逐步完善，最终实现一个相对安全的分布式锁</li>
+</ul>
+<h3 id="为什么用锁"><a href="#为什么用锁" class="headerlink" title="为什么用锁"></a>为什么用锁</h3><p>我们在处理数据时，一般是先读取数据，然后修改数据，最后写回数据。也就说所谓的RMW(Read-Modify-Write)。但是当多个客户端同时对一份数据进行RMW时，就需要对多个客户端请求进行串行管理，保证同一时刻只能有一个请求处理公共数据，从而保证并发的安全性。其中访问同一份数据的RMW操作代码成为临界区代码。也就说为了保证数据的安全性，同一时刻只能有一个客户端处理临界区代码，或者说对于<strong>临界区代码</strong>时必须<strong>串行</strong>操作。</p>
+<h3 id="服务的一个BadCase"><a href="#服务的一个BadCase" class="headerlink" title="服务的一个BadCase"></a>服务的一个BadCase</h3><p>在SD服务中，针对某些赛事，积分榜是我们在比赛结束之后根据比赛结果进行增量计算的。这样做有亮点好处。</p>
+<ul>
+<li>准确性：有些比赛，我们相对关注，但是数据源没有那么关注，数据源积分榜数据相对于比赛数据没有那么可信，通过比赛计算更能保证积分准确性</li>
+<li>及时性：比赛结束后可以及时更新积分榜，不需要依赖数据源<br>因为是增量计算，就存在一个问题，每场比赛必须只能计算一次，如果有场比赛重复计算或者没有计算，就会出现积分榜多分或者少分的情况。我们的触发任务是通过Cronsun调度的，但是遇到过积分重复计算的问题，Cronsun属于三方开源服务，有可能存在出现并发的情况，所以需要加分布式锁进行控制每次只能一个客户端处理逻辑，项目中使用了Redis作为锁。<br>第一版锁代码如下，这里存在一个问题，因为ExistInCache和PutToCache属于非原子操作，如果有并发请求过来，可能存在以下一种情况，客户端A先进入临界区代码检测ExistInCache为false继续执行逻辑，在客户端A检测ExistInCache后PutToCache前，客户端B也进入临界区检测ExistInCache同样为false，这时客户端A和客户端B都穿透到业务逻辑代码。存在积分重复计算的风险。</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(this *SoccerMatchService)</span> <span class="title">GetCalculationStandingMatch</span><span class="params">(ctx *cm.SoccerContext)</span> <span class="title">interface</span></span>&#123;&#125; &#123;</span><br><span class="line">    res := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">interface</span>&#123;&#125;)</span><br><span class="line">    lockKey := <span class="string">"soccer_data:calculation_standing:lock"</span></span><br><span class="line">    <span class="keyword">if</span> this.ExistInCache(lockKey, ctx) &#123;</span><br><span class="line">       <span class="keyword">return</span> res</span><br><span class="line">    &#125;</span><br><span class="line">    this.PutToCache(lockKey, <span class="number">1</span>, <span class="number">5</span>, ctx)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(this *SoccerService)</span> <span class="title">ExistInCache</span><span class="params">(key <span class="keyword">string</span>, ctx *cm.SoccerContext)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">   client := utils.GetRedisConn()</span><br><span class="line">   <span class="keyword">defer</span> client.Close()</span><br><span class="line">   exists := <span class="literal">false</span></span><br><span class="line">   ttl, _ := redis.Int64(client.Do(<span class="string">"TTL"</span>, key))</span><br><span class="line">   <span class="keyword">if</span> ttl &gt;= <span class="number">-1</span> &#123;</span><br><span class="line">      exists = <span class="literal">true</span></span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> exists</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(this *SoccerService)</span> <span class="title">PutToCache</span><span class="params">(key <span class="keyword">string</span>, data <span class="keyword">interface</span>&#123;&#125;, expire <span class="keyword">int</span>, ctx *cm.SoccerContext)</span></span> &#123;</span><br><span class="line">   client := utils.GetRedisConn()</span><br><span class="line">   <span class="keyword">defer</span> client.Close()</span><br><span class="line">   </span><br><span class="line">   <span class="keyword">if</span> data != <span class="literal">nil</span> &#123;</span><br><span class="line">      bytes, err := json.Marshal(data)</span><br><span class="line">      <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">         logs.Error(<span class="string">"base.Service, PutToCache, error, "</span>, key, data, err)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">         client.Do(<span class="string">"SET"</span>, key, bytes, <span class="string">"EX"</span>, expire)</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>第二版代码如下，主要通过原子操作解决并发穿透的问题。使用Redis的原子操作，控制每次进入临界区代码只能有一个客户端。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(this *SoccerMatchService)</span> <span class="title">GetCalculationStandingMatch</span><span class="params">(ctx *cm.SoccerContext)</span> <span class="title">interface</span></span>&#123;&#125; &#123;</span><br><span class="line">    res := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">interface</span>&#123;&#125;)</span><br><span class="line">    lockKey := <span class="string">"soccer_data:calculation_standing:lock"</span></span><br><span class="line">    <span class="keyword">if</span> !utils.LockByRedis(lockKey, <span class="number">50</span>) &#123;</span><br><span class="line">       <span class="keyword">return</span> res</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//do something</span></span><br><span class="line">    client.Do(<span class="string">"DEL"</span>, lockKey)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">LockByRedis</span><span class="params">(key <span class="keyword">string</span>, ttl <span class="keyword">int64</span>)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">   client := redisClient.Get()</span><br><span class="line">   <span class="keyword">defer</span> client.Close()</span><br><span class="line">   _, err := redis.String(client.Do(<span class="string">"SET"</span>, key, <span class="number">1</span>, <span class="string">"NX"</span>, <span class="string">"EX"</span>, ttl))</span><br><span class="line">   <span class="keyword">if</span> err == redis.ErrNil &#123;</span><br><span class="line">      <span class="comment">// The lock was not successful, it already exists.</span></span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">      <span class="comment">// redis fail</span></span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h3><h4 id="分布式锁特点"><a href="#分布式锁特点" class="headerlink" title="分布式锁特点"></a>分布式锁特点</h4><p>分布式需要有以下几个特点。</p>
+<ul>
+<li>互斥性：不同进程之间竞争锁具有互斥性，也就说同一时刻只能有一个进程获取到锁</li>
+<li>锁超时：锁需要设置超时，防止死锁</li>
+<li>高效、高可用：加锁、解锁需要高效，同时保证锁数据的安全状态</li>
+</ul>
+<h4 id="分布式锁核心点"><a href="#分布式锁核心点" class="headerlink" title="分布式锁核心点"></a>分布式锁核心点</h4><ul>
+<li>加锁：每个客户端处理临界区代码前，首先需要获取到锁，否则只能退出或者等待</li>
+<li>解锁：客户端处理完临界区代码后需要释放锁，以供后续客户端获取到锁进行临界区处理</li>
+<li>锁超时：每个客户端都有宕机的可能性，防止宕机后无法解锁，需要为每个锁设置一个超时，防止永久死锁</li>
+</ul>
+<h3 id="基于单Redis节点的分布式锁实现方案"><a href="#基于单Redis节点的分布式锁实现方案" class="headerlink" title="基于单Redis节点的分布式锁实现方案"></a>基于单Redis节点的分布式锁实现方案</h3><h4 id="SET-DEL"><a href="#SET-DEL" class="headerlink" title="SET+DEL"></a>SET+DEL</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">rlStep1</span><span class="params">(rdb *redis.Client, cacheKey, requestId <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">   rdb = getRedis()</span><br><span class="line">   resS, err := rdb.SetNX(ctx, cacheKey, <span class="string">"1"</span>, <span class="number">0</span>).Result()</span><br><span class="line">   <span class="comment">//panic("something error")</span></span><br><span class="line">   rdb.Expire(ctx, cacheKey, time.Second * <span class="number">5</span>)</span><br><span class="line">   log.Printf(<span class="string">"set key res:%t requestId:%s\n"</span>, resS, requestId)</span><br><span class="line">   <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">      <span class="built_in">panic</span>(err)</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//do something</span></span><br><span class="line">   time.Sleep(time.Second * <span class="number">3</span>)</span><br><span class="line">   <span class="comment">//panic("something error")</span></span><br><span class="line">   resD, _ := rdb.Del(ctx, cacheKey).Result()</span><br><span class="line">   log.Printf(<span class="string">"del key res:%s requestId:%s\n"</span>, strconv.Itoa(<span class="keyword">int</span>(resD)), requestId)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>常见的SETNX + EXPIRE + DEL方式，因为是非原子操作，所以中间因为某些原因触发panic时，就会导致锁无法释放或者及时释放。</p>
+<h4 id="原子操作-DEL"><a href="#原子操作-DEL" class="headerlink" title="原子操作+DEL"></a>原子操作+DEL</h4><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">func rlStep4(rdb *redis.Client, cacheKey, requestId <span class="built_in">string</span>) &#123;</span><br><span class="line">    rdb = getRedis()</span><br><span class="line">    <span class="built_in">args</span> := redis.SetArgs&#123;</span><br><span class="line">       Mode: <span class="string">"NX"</span>,</span><br><span class="line">       TTL:  <span class="built_in">time</span>.Second * <span class="number">10</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    resS, err := rdb.SetArgs(ctx, cacheKey, <span class="string">"1"</span>, <span class="built_in">args</span>).Result()</span><br><span class="line">    <span class="keyword">if</span> err == redis.Nil &#123;</span><br><span class="line">       <span class="built_in">return</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">       <span class="built_in">log</span>.Printf(<span class="string">"set key res:%s requestId:%s\n"</span>, resS, requestId)</span><br><span class="line">    &#125;</span><br><span class="line">    //<span class="keyword">do</span> something</span><br><span class="line">    <span class="built_in">time</span>.Sleep(<span class="built_in">time</span>.Second * <span class="number">2</span>)</span><br><span class="line">    resD, <span class="symbol">_</span> := rdb.Del(ctx, cacheKey).Result()</span><br><span class="line">    <span class="keyword">if</span> resD &gt; <span class="number">0</span> &#123;</span><br><span class="line">       <span class="built_in">log</span>.Printf(<span class="string">"del key res:%s requestId:%s\n"</span>, strconv.Itoa(int(resD)), requestId)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>SET时同时是这NX和EX整合为原子操作，可以保证不会出现死锁。但是还是存在两个问题。超时解锁和误解锁。</p>
+<h5 id="超时解锁"><a href="#超时解锁" class="headerlink" title="超时解锁"></a>超时解锁</h5><p>如代码所述，正常情况下如果锁的超时时间大于业务处理逻辑，并发是安全的，只能有一个客户端访问临界区，100并发结果如下。只有request获取到锁，执行业务逻辑。</p>
+<p><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/step5succ1.png" alt="lockok"></p>
+<p>但是如果锁在任务执行完成前释放。客户端A在执行业务逻辑时如果遇到阻塞或者其他异常情况，以至于锁的TTL到期时，临界区代码仍然没有执行完毕，这个时候客户端B就有机会获取到锁。<br>展示代码如下</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">func rlStep5(rdb *redis.Client, cacheKey, requestId <span class="built_in">string</span>) &#123;</span><br><span class="line">   rdb = getRedis()</span><br><span class="line">   <span class="built_in">args</span> := redis.SetArgs&#123;</span><br><span class="line">      Mode: <span class="string">"NX"</span>,</span><br><span class="line">      TTL:  <span class="built_in">time</span>.Millisecond * <span class="number">10</span>,</span><br><span class="line">   &#125;</span><br><span class="line">   resS, err := rdb.SetArgs(ctx, cacheKey, <span class="string">"1"</span>, <span class="built_in">args</span>).Result()</span><br><span class="line">   <span class="keyword">if</span> err == redis.Nil &#123;</span><br><span class="line">      <span class="built_in">return</span></span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">log</span>.Printf(<span class="string">"set key res:%s requestId:%s\n"</span>, resS, requestId)</span><br><span class="line">   &#125;</span><br><span class="line">   //<span class="keyword">do</span> something</span><br><span class="line">   <span class="built_in">time</span>.Sleep(<span class="built_in">time</span>.Millisecond * <span class="number">20</span>)</span><br><span class="line">   resD, <span class="symbol">_</span> := rdb.Del(ctx, cacheKey).Result()</span><br><span class="line">   <span class="keyword">if</span> resD &gt; <span class="number">0</span> &#123;</span><br><span class="line">      <span class="built_in">log</span>.Printf(<span class="string">"del key res:%s requestId:%s\n"</span>, strconv.Itoa(int(resD)), requestId)</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>100并发量，并发结果如下，其中requestId11、requestId30、requestId47、requestId64、requestId88，都获取到了锁，此时临界区存在并发问题。</p>
+<p><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/step5fail1.png" alt="lockok"></p>
+<h5 id="误解锁"><a href="#误解锁" class="headerlink" title="误解锁"></a>误解锁</h5><p>如果存在某个时刻，客户端A执行加锁命令后，因为超时客户端B也同时获取了锁，此时客户端A任务执行完毕，进行解锁，此时就会把属于客户端B的锁释放，新的客户端C就有可能获取锁，这时客户端B和客户端C就很有可能同时处理临界区代码了。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">rlStep6</span><span class="params">(rdb *redis.Client, cacheKey, requestId <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">   rdb = getRedis()</span><br><span class="line">   args := redis.SetArgs&#123;</span><br><span class="line">      Mode: <span class="string">"NX"</span>,</span><br><span class="line">      TTL:  time.Millisecond * <span class="number">10</span>,</span><br><span class="line">   &#125;</span><br><span class="line">   resS, err := rdb.SetArgs(ctx, cacheKey, requestId, args).Result()</span><br><span class="line">   <span class="keyword">if</span> err == redis.Nil &#123;</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      log.Printf(<span class="string">"set key res:%s requestId:%s\n"</span>, resS, requestId)</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//do something</span></span><br><span class="line">   time.Sleep(time.Millisecond * <span class="number">20</span>)</span><br><span class="line">   script := createDelScript()</span><br><span class="line">   resD := evalDelScript(rdb, cacheKey, requestId, script)</span><br><span class="line">   <span class="keyword">if</span> resD != <span class="string">""</span> &#123;</span><br><span class="line">      log.Printf(<span class="string">"del key res:%s requestId:%s\n"</span>, resD, requestId)</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>100并发量，并发结果如下，其中requestId6先获取到了锁，在执行业务逻辑时锁超时释放，requestId38获取锁，但是被request6解锁。<br><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/step5fail.png" alt="lockok"></p>
+<h4 id="Lua脚本-唯一ID"><a href="#Lua脚本-唯一ID" class="headerlink" title="Lua脚本+唯一ID"></a>Lua脚本+唯一ID</h4><p>目前进化的版本，仍存在两个问题。</p>
+<ul>
+<li>误解锁：删除了不属于自己的锁</li>
+<li>超时解锁：无法保证临界区安全</li>
+</ul>
+<h5 id="误解锁解决方案"><a href="#误解锁解决方案" class="headerlink" title="误解锁解决方案"></a>误解锁解决方案</h5><p>针对误解锁的问题，可以通过唯一ID进行解决。现在锁的Value都是1，无法确定该锁的拥有者，在解锁时也就无法校验该客户端是否为锁的拥有者。所以，在给锁设置值时可以根据不同的请求设置不同的值</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">func createScript() *redis.Script &#123;</span><br><span class="line">   script := redis.NewScript(`</span><br><span class="line">      <span class="keyword">local</span> cKey = <span class="keyword">tostring</span>(KEYS[1])</span><br><span class="line">      <span class="keyword">local</span> cValue = <span class="keyword">tostring</span>(ARGV[1])</span><br><span class="line">      <span class="keyword">local</span> existVal = <span class="keyword">tostring</span>(redis.call(<span class="string">"GET"</span>, cKey))</span><br><span class="line">      <span class="keyword">if</span> cValue == existVal then</span><br><span class="line">         redis.call(<span class="string">"DEL"</span>, cKey)</span><br><span class="line">         <span class="keyword">return</span> 1</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">         <span class="keyword">return</span> 0</span><br><span class="line">      end</span><br><span class="line">      `)</span><br><span class="line">   <span class="keyword">return</span> script</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func evalScript(rdb *redis.Client, cacheKey, requestId string) string &#123;</span><br><span class="line">   script := createScript()</span><br><span class="line">   sha, <span class="keyword">err</span> := script.Load(ctx, rdb).Result()</span><br><span class="line">   <span class="keyword">if</span> <span class="keyword">err</span> != nil &#123;</span><br><span class="line">      panic(<span class="keyword">err</span>)</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">ret</span> := rdb.EvalSha(ctx, sha, []string&#123;cacheKey&#125;, requestId, 300)</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> result, <span class="keyword">err</span> := <span class="keyword">ret</span>.Result(); <span class="keyword">err</span> != nil &#123;</span><br><span class="line">      panic(<span class="keyword">err</span>)</span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> int(result.(int64)) == 1 &#123;</span><br><span class="line">         <span class="keyword">return</span> requestId</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">         <span class="keyword">log</span>.Printf(<span class="string">"check lock val owner fail resquestId:%s"</span>, requestId)</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> <span class="string">""</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func rlStep6(rdb *redis.Client, cacheKey, requestId string) &#123;</span><br><span class="line">   rdb = getRedis()</span><br><span class="line">   <span class="keyword">args</span> := redis.SetArgs&#123;</span><br><span class="line">      Mode: <span class="string">"NX"</span>,</span><br><span class="line">      TTL:  time.Millisecond * 10,</span><br><span class="line">   &#125;</span><br><span class="line">   resS, <span class="keyword">err</span> := rdb.SetArgs(ctx, cacheKey, requestId, <span class="keyword">args</span>).Result()</span><br><span class="line">   <span class="keyword">if</span> <span class="keyword">err</span> == redis.Nil &#123;</span><br><span class="line">      <span class="built_in">return</span></span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">log</span>.Printf(<span class="string">"set key res:%s requestId:%s\n"</span>, resS, requestId)</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//do something</span></span><br><span class="line">   time.<span class="keyword">Sleep</span>(time.Millisecond * 20)</span><br><span class="line">   resD := evalScript(rdb, cacheKey, requestId)</span><br><span class="line">   <span class="keyword">if</span> resD != <span class="string">""</span> &#123;</span><br><span class="line">      <span class="keyword">log</span>.Printf(<span class="string">"del key res:%s requestId:%s\n"</span>, resD, requestId)</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>100并发量，并发结果如下。首先request7获取锁，随后锁超时，request33获取锁，此时request7任务执行完毕，执行释放锁，因为此时锁的拥有者为request33所以，request7释放锁失败。实现了，只有锁的拥有者才可以释放锁。</p>
+<p><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/step5succ.png" alt="lockok"></p>
+<h5 id="超时锁解决方案"><a href="#超时锁解决方案" class="headerlink" title="超时锁解决方案"></a>超时锁解决方案</h5><p>目前为止，大部分问题都已经解决，但是超时解锁的问题依然存在。因为网络因素或者其他异常情况还是有可能出现锁超时释放，但是业务逻辑尚未完成的情况，此时还是会出现多个客户端同时触达临界区代码。因此锁的超时时间设置就显得尤为重要，但是设置长或者短都会有些缺点。</p>
+<ul>
+<li>锁超时设置的过短：出现锁超时释放的几率增大，临界区出现不安全并发的几率加大</li>
+<li>锁超时设置的过长：虽然减少锁超时释放的几率，但是如果持有锁的客户端宕机，释放无主锁的时间将会增加，业务不可用时间也会增加<br>为了解决锁释放的问题，可以在给锁设置合适超时时间的同时，可以启用的新的线程/协程进行锁存活时间检测，如果发现当锁的生存时间触及某个阈值时，就再次给该锁延长生存时间。其中检测锁生存时间和延长存活时间仍然需要采用原子操作，所以还是使用Lua脚本的方式。实现代码如下</li>
+</ul>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">createDelScript</span><span class="params">()</span> *<span class="title">redis</span>.<span class="title">Script</span> &#123;</span></span><br><span class="line">   script := redis.NewScript(`</span><br><span class="line">      <span class="keyword">local</span> cKey = tostring(KEYS[<span class="number">1</span>])</span><br><span class="line">      <span class="keyword">local</span> cValue = tostring(ARGV[<span class="number">1</span>])</span><br><span class="line">      <span class="keyword">local</span> existVal = tostring(redis.<span class="built_in">call</span>(<span class="string">"GET"</span>, cKey))</span><br><span class="line">      <span class="keyword">if</span> cValue == existVal <span class="keyword">then</span></span><br><span class="line">         redis.<span class="built_in">call</span>(<span class="string">"DEL"</span>, cKey)</span><br><span class="line">         <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">         <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">      end</span><br><span class="line">      `)</span><br><span class="line">   <span class="keyword">return</span> script</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">extendLockTimeScript</span><span class="params">()</span> *<span class="title">redis</span>.<span class="title">Script</span> &#123;</span></span><br><span class="line">   script := redis.NewScript(`</span><br><span class="line">      <span class="keyword">local</span> cKey = tostring(KEYS[<span class="number">1</span>])</span><br><span class="line">      <span class="keyword">local</span> cValue = tostring(ARGV[<span class="number">1</span>])</span><br><span class="line">      <span class="keyword">local</span> eTime = tonumber(ARGV[<span class="number">2</span>])</span><br><span class="line">      <span class="keyword">local</span> existVal = tostring(redis.<span class="built_in">call</span>(<span class="string">"GET"</span>, cKey))</span><br><span class="line">      <span class="keyword">if</span> cValue == existVal <span class="keyword">then</span></span><br><span class="line">         redis.<span class="built_in">call</span>(<span class="string">"SET"</span>, cKey, cValue, <span class="string">"EX"</span>, eTime)</span><br><span class="line">         <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">         <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">      end</span><br><span class="line">      `)</span><br><span class="line">   <span class="keyword">return</span> script</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">checkAndExtendLockTime</span><span class="params">(ctx context.Context, rdb *redis.Client, cacheKey, requestId string, eTime time.Duration)</span> &#123;</span></span><br><span class="line">   <span class="built_in">log</span>.Printf(<span class="string">"checkAndExtendLockTime touch requestId:%s\n"</span>, requestId)</span><br><span class="line">   <span class="keyword">for</span> &#123;</span><br><span class="line">      <span class="keyword">select</span> &#123;</span><br><span class="line">      <span class="keyword">case</span> &lt;-ctx.Done():</span><br><span class="line">         <span class="built_in">log</span>.Printf(<span class="string">"checkAndExtendLockTime work done\n"</span>)</span><br><span class="line">         <span class="keyword">return</span></span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">         script := extendLockTimeScript()</span><br><span class="line">         <span class="built_in">log</span>.Printf(<span class="string">"checkAndExtendLockTime working\n"</span>)</span><br><span class="line">         resE := evalExtendScript(rdb, cacheKey, requestId, int64(eTime/time.Second), script)</span><br><span class="line">         <span class="keyword">if</span> resE != <span class="string">""</span> &#123;</span><br><span class="line">            <span class="built_in">log</span>.Printf(<span class="string">"extend expire time requestId:%s\n"</span>, requestId)</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      time.<span class="built_in">Sleep</span>(eTime * <span class="number">2</span> / <span class="number">3</span>)</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">rlStep7</span><span class="params">(rdb *redis.Client, cacheKey, requestId string)</span> &#123;</span></span><br><span class="line">   rdb = getRedis()</span><br><span class="line">   ctx, cancelFunc := context.WithCancel(context.TODO())</span><br><span class="line">   expireTime := time.Second * <span class="number">4</span></span><br><span class="line">   args := redis.SetArgs&#123;</span><br><span class="line">      Mode: <span class="string">"NX"</span>,</span><br><span class="line">      TTL:  expireTime,</span><br><span class="line">   &#125;</span><br><span class="line">   resS, err := rdb.SetArgs(ctx, cacheKey, requestId, args).Result()</span><br><span class="line">   <span class="keyword">if</span> err == redis.Nil &#123;</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">log</span>.Printf(<span class="string">"set key res:%s requestId:%s\n"</span>, resS, requestId)</span><br><span class="line">   &#125;</span><br><span class="line">   //<span class="keyword">do</span> something</span><br><span class="line">   go checkAndExtendLockTime(ctx, rdb, cacheKey, requestId, expireTime)</span><br><span class="line">   time.<span class="built_in">Sleep</span>(time.Second * <span class="number">16</span>)</span><br><span class="line">   cancelFunc()</span><br><span class="line">   script := createDelScript()</span><br><span class="line">   resD := evalDelScript(rdb, cacheKey, requestId, script)</span><br><span class="line">   <span class="keyword">if</span> resD != <span class="string">""</span> &#123;</span><br><span class="line">      <span class="built_in">log</span>.Printf(<span class="string">"del key res:%s requestId:%s\n"</span>, resD, requestId)</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在获得锁的同时，启用一个协程进行存活时间检测，为了防止CPU空转，检测时可以先sleep，等到达到存活时间阈值时，延长存活时间。等到任务完成后，通过context将检测协程销毁。<br>示例中，锁超时时间为4s，任务执行时间为16s，每间隔存活时间的2/3对锁进行存活期延长。通过日志可以看到requestId8获取到锁后，会轮训延长存活时间，直到任务完成，锁被主动删除，延活协程退出。redis monitor结果显示不断轮训将存活时间设置为4s，直至任务完成，锁被删除。<br>100并发量，并发结果和redis monitor结果如下。</p>
+<p><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/step7go.png" alt="lockok"></p>
+<p><img src="https://raw.githubusercontent.com/Dev-Jabin/Dev-Jabin.github.io/master/img/blogImgs/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/step7redis.png" alt="lockok"></p>
+<h3 id="优化空间和建议"><a href="#优化空间和建议" class="headerlink" title="优化空间和建议"></a>优化空间和建议</h3><p>现在的分布式锁是基于单Redis节点实现的，存在单点的风险。如果存储锁的Redis实例宕机，分布式锁就会失效。目前比较常用的解决办法是采用集群Redis节点和RedLock算法解决单点的问题。<br>因为很多时候我们实际项目中，对分布式锁没有特别强的安全性要求，所以另起线程续活的场景就显得没有必要。但是一旦不进行续活，锁设置的超时时间就很重要。过长过短都有缺点，尤其是过短就会引发并发不安全。所以有个建议就是针对业务逻辑处理耗时较长的任务，慎用分布式锁。</p>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -243,229 +330,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2021/06/01/Redis-分布式锁/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2021/03/27/一次基于Flask的服务升级/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">一次基于Flask的服务升级</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/18/Redis之Pipeline运用/" class="archive-article-date">
-  	<time datetime="2020-04-18T05:52:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-18</time>
-</a>
-        </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/18/Redis之Pipeline运用/">Redis之Pipeline运用</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/29/Redis持久化/" class="archive-article-date">
-  	<time datetime="2020-03-29T08:40:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/29/Redis持久化/">Redis持久化</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/21/Redis过期策略/" class="archive-article-date">
-  	<time datetime="2020-03-21T10:42:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/21/Redis过期策略/">Redis键过期策略</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/23/防止Redis缓存击穿/" class="archive-article-date">
-  	<time datetime="2020-02-23T07:33:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/23/防止Redis缓存击穿/">防止Redis缓存击穿</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/20/在定时任务中使用Redis做为锁/" class="archive-article-date">
-  	<time datetime="2019-10-20T06:40:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/20/在定时任务中使用Redis做为锁/">在定时任务中使用Redis做为锁</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -488,9 +452,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
